@@ -19,12 +19,12 @@ library(stringr)
 library(micropan)
 library(ggpubr)
 library(highcharter)
-load("D:/jazz/data.RData")
+load("D:/jazz/Jazz_visual/data.RData")
 ```
 
 ****
 
-![Network plot by Linked Jazz wedsite](D:/jazz/linked_jazz.jpg)
+![Network plot by Linked Jazz wedsite](D:/jazz/Jazz_visual/fig/linked_jazz.jpg)
 
 ****
 
