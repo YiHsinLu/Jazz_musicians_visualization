@@ -1,1 +1,1 @@
-# Jazz_visual
+# Jazz_visualization

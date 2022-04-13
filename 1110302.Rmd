@@ -1,0 +1,68 @@
+---
+title: "**【Jazz Musicians Data Visualization】**"
+subtitle: " **Data collection** "
+author: " *Yi-Hsin Lu* "
+date: "March 3 2022"
+output: html_document
+---
+
+
+![Network plot by Linked Jazz wedsite](D:/jazz/linked_jazz.jpg)
+
+[LINKED JAZZ](https://linkedjazz.org/network/)
+
+## **Collecting the data from DBpedia**
+
+### DBpedia website
+
+[Wynton Marsalis](https://dbpedia.org/page/Wynton_Marsalis)
+
+![Wynton Marsalis](D:/jazz/WM.jpg)
+
+### (1) Start with [Wynton Marsalis](https://dbpedia.org/page/Wynton_Marsalis) and [Roy Hargrove](https://dbpedia.org/page/Roy_Hargrove) until the second layer.
+
+### (2) Variable
+  * abstract
+  * yearsActive
+  * genre
+  * recordLabel
+  * instrument
+  * occupation
+  
+### (3)Collect and clean
+
+#### Problems
+  * Data is too dirty.
+  * Different "Property"
+  * Data is empty
+  * Bad coding ability
+  
+  
+### (4) Data matrix
+
+```{r include=FALSE}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+M_table=read.csv('D:/jazz/Musician_table.csv',row.names = 1, header= TRUE)
+```
+
+```{r echo=FALSE}
+kbl(M_table[182:190,],align = "l") %>%
+  kable_paper() %>%
+  kable_classic(full_width = F) %>%
+  scroll_box(width = "100%", height = "400px")
+```
+## **Remark(Recap)**
+
+  * Web crawler is a great way for data collecting
+  * Learn how does website work
+  * html + css + javascripe = website
+
+## **What's next ?**
+
+  * Text mining
+  * [Music-map](https://www.music-map.com/)
+  

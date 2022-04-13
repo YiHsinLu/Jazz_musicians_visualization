@@ -1,0 +1,143 @@
+---
+title: '**【Jazz Musicians Data Visualization】**'
+author: "*Sam Lu*"
+date: "2022/4/13"
+output: html_document
+---
+
+```{r include=FALSE}
+#packages
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+load("D:/jazz/data.RData")
+```
+
+****
+
+![Network plot by Linked Jazz wedsite](D:/jazz/linked_jazz.jpg)
+
+****
+
+### **Recap**
+* Data collection
+* Cleaning
+
+****
+### **Text Mining on abstract**
+
+* Abstract 
+* Tokens(n_grams)
+* One-hot encoding
+* Distance matrix
+* MDS
+
+****
+
+#### **Abstract**
+
+```{r echo=FALSE}
+kbl(abstract[182:192,],align = "l", row.names = FALSE) %>%
+  kable_paper() %>%
+  kable_classic(full_width = F) %>%
+  scroll_box(width = "100%", height = "400px")
+```
+
+#### **Tokens**
+
+**One-gram**
+
+```{r echo=FALSE}
+kbl(abstract_1gram,align = "l") %>%
+  kable_paper() %>%
+  kable_classic(full_width = T) %>%
+  scroll_box(width = "100%", height = "400px")%>%
+  kable_styling(font_size = 18)
+```
+
+****
+
+**token**
+
+```{r echo=FALSE}
+kable(tokens[1:10,],format = "markdown", digits = 3, align = "l")
+
+```
+
+****
+
+**Two-grams**
+
+```{r echo=FALSE}
+kbl(abstract_2gram,align = "l") %>%
+  kable_paper() %>%
+  kable_classic(full_width = T) %>%
+  scroll_box(width = "100%", height = "400px")%>%
+  kable_styling(font_size = 18)
+```
+
+****
+
+**token**
+
+```{r echo=FALSE}
+kable(tokens_2gram[1:10,],format = "markdown", digits = 3, align = "l")
+```
+
+****
+
+### **One-Hot Encoding**
+```{r echo=FALSE}
+kbl(token_matrix,align = "c") %>%
+  kable_paper() %>%
+  kable_classic(full_width = F) %>%
+  scroll_box(width = "100%", height = "600px")
+```
+
+****
+
+#### **MDS(by jaccard distance matrix)**
+
+```{r echo=FALSE}
+hchart(mds_musicians, "scatter", hcaes(x = Dim.1, y = Dim.2, group = musicians))
+```
+
+****
+
+**Color by Instrument**
+
+```{r echo=FALSE}
+hchart(mds_musicians, "scatter", hcaes(x = Dim.1, y = Dim.2, group = instrument))
+```
+
+****
+
+### **Remark**
+
+* Text mining 
+  + tokens
+  + n-grams
+
+* Prelim MDS
+
+
+****
+
+### **What's Next?**
+* Visualization
+  + t-SNE
+  + st-SNE(supervised t-SNE)
+  + UMAP
+* plot by different "Y" information
+
+
+****
