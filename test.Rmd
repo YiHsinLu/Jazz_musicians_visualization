@@ -1,0 +1,42 @@
+---
+title: "Untitled"
+author: "Sam Lu"
+date: "2022/5/6"
+output: html_document
+---
+
+
+Yi-Hsin Lu [04.05.22 15:51]
+ -Next meeting[11.05.22 13:10]
+
+****
+
+Discussion
+
+1. Discuss the way out for multi-value classification.
+ * LDA
+ * PCA/MDS on the affinity matrix
+  + take "Y" information as data matrix (n by p-instrument)
+  + use Jaccard on the data matrix, then it will become an affinity matrix (n by n)
+  + do PCA/MDS, and we have a PCA matrix (n by q)
+ * logistic regression on data matrix
+  + data matrix: $\{y_j\}_{j=1}^p , \{x_i\}_{i=1}^q$
+  + logistic regression $y_j ~ x_1, ..., x_q \forall j=1, ..., p$
+
+2. How to paint the color on maps.
+
+****
+
+To-do
+
+1. Try to compress the "Y" information.
+ * take "Y" information as data matrix (n by p-instrument)
+ * use Jaccard on data matrix, then it will become an affinity matrix (n by n)
+ * do PCA/MDS, and we have a PCA matix (n by q)
+2. There is a dataframe and PCA matrix:
+ * dataframe: $\{x_i\}_{i=1}^p, \forall x_i\in\mathbb{R}^n$
+ * the PCA matrix: $(J_1, J_2) , J_{1,2}\in\mathbb{R}^n$
+  + compute the correlation coefficient between $J_1$/$J_2$ and $x_i$ for each i from 1 to p, the result would explain $J_1, J_2$'s meaning.
+  + regression $J_1$/$J_2$ ~ $x_1,\cdots ,x_p$, finding the coefficients of $x_i$ maybe shows the relations on $x_i$
+
+Link/Reference
