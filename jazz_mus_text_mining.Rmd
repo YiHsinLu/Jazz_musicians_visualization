@@ -40,8 +40,8 @@ library(highcharter)
 #### **Abstract**
 
 ```{r echo=FALSE}
-M_table=read.csv('D:/jazz/Musician_table.csv',row.names = 1, header= TRUE)
-abstract = read.csv('D:/jazz/Mus_abstract.csv')
+M_table=read.csv('D:/jazz/Jazz_visual/csv/Musician_table.csv',row.names = 1, header= TRUE)
+abstract = read.csv('D:/jazz/Jazz_visual/csv/Mus_abstract.csv')
 
 kbl(abstract[182:192,],align = "l") %>%
   kable_paper() %>%
@@ -135,7 +135,38 @@ for(mu_n in musicians){
 ```
 
 ```{r include=FALSE}
-token_sel = rbind(read.csv('D:/jazz/tokens_1gram.csv', header = TRUE)[1],read.csv('D:/jazz/token_2gram.csv', header = TRUE)[1])
+token_sel_1 = read.csv('D:/jazz/Jazz_visual/csv/tokens_1gram.csv', header = TRUE)[1]
+token_sel_1 = token_sel_1$word
+token_matrix_1 = as.data.frame(matrix(data = 0, nrow = length(musicians), ncol = length(token_sel_1)))
+rownames(token_matrix_1) = musicians
+colnames(token_matrix_1) = token_sel_1
+```
+
+```{r include=FALSE}
+token_in = read.csv('D:/jazz/Jazz_visual/csv/instrument.csv', header = TRUE)[1]
+colnames(token_in)='word'
+token_in = token_in$word
+token_matrix_in = as.data.frame(matrix(data = 0, nrow = length(musicians), ncol = length(token_in)))
+rownames(token_matrix_in) = musicians
+colnames(token_matrix_in) = token_in
+
+#token
+for(tokens_i in token_in){
+  for(mu_i in 1:length(musicians)){
+    if(grepl(tokens_i, token_list[[mu_i]])==TRUE){
+      token_matrix_in[mu_i, tokens_i]=1
+    }
+  }
+}
+```
+
+```{r}
+write.csv(token_matrix_in,"D:/jazz/jazz_visual/csv/token_matrix_in.csv")
+```
+
+
+```{r include=FALSE}
+token_sel = rbind(read.csv('D:/jazz/Jazz_visual/csv/tokens_1gram.csv', header = TRUE)[1],read.csv('D:/jazz/Jazz_visual/csv/token_2gram.csv', header = TRUE)[1])
 token_sel = token_sel$word
 token_matrix = as.data.frame(matrix(data = 0, nrow = length(musicians), ncol = length(token_sel)))
 rownames(token_matrix) = musicians
@@ -152,6 +183,17 @@ for(tokens_i in token_sel){
 }
 ```
 
+
+```{r include=FALSE}
+for(tokens_i in token_sel_1){
+  for(mu_i in 1:length(musicians)){
+    if(grepl(tokens_i, token_list[[mu_i]])==TRUE){
+      token_matrix_1[mu_i, tokens_i]=1
+    }
+  }
+}
+```
+
 ```{r echo=FALSE}
 kbl(token_matrix,align = "c") %>%
   kable_paper() %>%
@@ -160,6 +202,19 @@ kbl(token_matrix,align = "c") %>%
 ```
 
 #### **MDS(by jaccard distance matrix)**
+
+```{r include=FALSE}
+library(micropan)
+mus_dist_jac_1 = distJaccard(token_matrix_1)
+mds_musicians_1 <- mus_dist_jac_1 %>%      
+  cmdscale() %>%
+  as_tibble()
+colnames(mds_musicians_1) <- c("Dim.1", "Dim.2")
+```
+
+```{r echo=FALSE}
+hchart(mds_musicians_1, "scatter", hcaes(x = Dim.1, y = Dim.2, group = musicians))
+```
 
 ```{r include=FALSE}
 library(micropan)
