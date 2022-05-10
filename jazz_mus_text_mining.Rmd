@@ -59,11 +59,7 @@ abstract_1gram = abstract%>%
 
 **One-gram**
 ```{r echo=FALSE}
-kbl(abstract_1gram,align = "l") %>%
-  kable_paper() %>%
-  kable_classic(full_width = T) %>%
-  scroll_box(width = "100%", height = "400px")%>%
-  kable_styling(font_size = 18)
+                     
 ```
 token
 ```{r include=FALSE}

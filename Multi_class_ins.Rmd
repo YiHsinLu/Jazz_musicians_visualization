@@ -1,0 +1,116 @@
+---
+title: "**【Jazz Musicians Data Visualization】**"
+subtitle: " **Multivalue Classification in Instrument** "
+author: " *Yi-Hsin Lu* "
+date: "May 11 2022"
+output: html_document
+---
+
+
+```{r include=FALSE}
+#packages
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+load("D:/jazz/Jazz_visual/0510.RData")
+```
+
+****
+
+### Recap
+
+* Data collection
+* Text mining on abstract
+* Token matrix
+
+****
+
+### Compress $\mathcal{Y}$ information
+
+* $\mathcal{Y}$ info.
+* Jaccard
+* PCA
+* Correlation coefficient
+* Regression
+
+****
+
+####   $\mathcal{Y}$  *info. matrix*
+
+* empty rows
+* similar tokens
+
+```{r echo=FALSE}
+kbl(token_matrix_ins,align = "c") %>%
+  scroll_box(width = "100%", height = "700px")%>%
+  kable_material(c("striped", "hover"))
+```
+
+****
+
+####  *Jaccard*
+
+* affinity matrix (n * n)
+
+```{r echo=FALSE}
+kbl(ins_jac,align = "c") %>%
+  scroll_box(width = "100%", height = "700px")%>%
+  kable_material(c("striped", "hover"))
+```
+
+****
+
+####  *PCA* (p -> 2-dim.)
+* PC1(J1)
+* PC2(J2)
+
+```{r echo=FALSE}
+kbl(ins_PC12,align = "c") %>%
+  kable_material(c("striped", "hover"))%>%
+  scroll_box(width = "100%", height = "400px")
+```
+
+****
+
+#### **Correlation Coefficient**
+
+  * $(J_1, J_2) , J_{1,2}\in\mathbb{R}^n.$ 
+  * $\{x_i\}_{i=1}^p, \forall x_i\in\mathbb{R}^n.$
+
+```{r echo=FALSE}
+kbl(cor_coe,align = "c") %>%
+  kable_material(c("striped", "hover"))%>%
+  scroll_box(width = "100%", height = "900px")
+```
+
+****
+
+#### **Regrssion**
+
+* $J_1$ ~ $x_1,\cdots ,x_p$
+
+```{r echo=FALSE}
+summary(J1_lm)
+```
+
+****
+
+* $J_2$ ~ $x_1,\cdots ,x_p$
+
+```{r echo=FALSE}
+summary(J1_lm)
+```
+
+****
+
+### Remark
