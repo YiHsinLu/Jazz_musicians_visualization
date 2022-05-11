@@ -6,6 +6,11 @@ date: "May 11 2022"
 output: html_document
 ---
 
+****
+
+### $\mathcal{Multi}\;\mathcal{Instrumentalist}$
+
+![Multi instrumentalists](https://themusicnetwork.com/wp-content/uploads/Screen-Shot-2018-07-30-at-11.47.24-am-e1532915295448.png)
 
 ```{r include=FALSE}
 #packages
