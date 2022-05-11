@@ -111,7 +111,7 @@ dis_jac = function(M){
   library("jaccard")
   n = nrow(M)
   # n*n matrix
-  af_matrix = matrix(data = 0, nrow = n, ncol = n)
+  af_matrix = matrix(data = 1, nrow = n, ncol = n)
   for(i in 1:(n-1)){
     for(j in (i+1):n){
       jac = jaccard(M[i,],M[j,])
