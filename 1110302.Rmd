@@ -46,7 +46,7 @@ library(dplyr)
 library(flextable)
 library(magrittr)
 library(kableExtra)
-M_table=read.csv('D:/jazz/Musician_table.csv',row.names = 1, header= TRUE)
+M_table=read.csv('D:/jazz/jazz_visual/csv/Musician_table.csv',row.names = 1, header= TRUE)
 ```
 
 ```{r echo=FALSE}

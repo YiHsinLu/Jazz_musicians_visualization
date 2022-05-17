@@ -1,0 +1,179 @@
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+#packages
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+```
+
+```{r}
+token_split = function(df, g, id=rownames(df)){
+#parameters
+  n = nrow(df) #numbers of row
+  colnames(df) = c("id", "word") 
+  
+#g=1
+#text mining to take the tokens from column--"word" for each row
+df_1g = df%>%
+  unnest_tokens(words,word)#turn a block into few tokens
+colnames(df_1g)=c("id","word")
+data(stop_words)
+df_1g = df_1g%>%
+  anti_join(stop_words)#delete the stop words
+
+#token list for one-gram
+token1 = df_1g%>%
+  group_by()%>%
+  count(word,sort=TRUE)%>%
+  ungroup()#count the number of the token showed
+
+#g=2
+df_2g <- df %>%
+  unnest_tokens(words, word, token = "ngrams", n = 2)
+colnames(df_2g)=c("id","word")
+data(stop_words)
+df_2g = df_2g%>%
+  anti_join(stop_words)#delete the stop words
+
+#token list for two-grams
+token2 = df_2g%>%
+  group_by()%>%
+  count(word,sort=TRUE)%>%
+  ungroup()#count the number of the token showed
+
+#list function
+lappend <- function (lst, ...){
+  lst <- c(lst, list(...))
+  return(lst)
+}
+
+#list of token in each musicians(one-gram)
+token_list_1g = list()
+for(i in id){
+  token_pr = subset(df_1g,id==i)[2]
+  token_list_1g = lappend(token_list_1g, token_pr)
+  token_pr = c()
+}
+
+#list of token in each musicians(two-grams)
+token_list_2g = list()
+for(i in id){
+  token_pr = rbind(subset(df_1g,id==i)[2], subset(df_2g,id==i)[2])
+  token_list_2g = lappend(token_list_2g, token_pr)
+  token_pr = c()
+}
+
+if(g==1){
+  return(list(id=id, token_list1=token1$word, df_token_lst=token_list_1g))
+}else{
+  return(list(id=id, token_list1=token1$word, token_list2=token2$word, df_token_lst=token_list_2g))
+}
+}
+```
+
+
+```{r}
+oh_encoding = function(df,id=rownames(df),tok=c(),g=1){
+  tok_slt = token_split(df=df,g=g,id=id)
+  n = nrow(df)
+  token_matrix = matrix(data = 0, nrow = n, ncol = length(tok))
+  rownames(token_matrix) = id
+  colnames(token_matrix) = tok
+  for(t in tok){
+    for (i in 1:n){
+      if(grepl(t, tok_slt$df_token_lst[[i]])==TRUE){
+        token_matrix[i, t]=1
+        }
+      }
+    }
+token_matrix = as.data.frame(token_matrix)
+return(list(id=id, token_list=tok, df=tok_slt$df_token_lst, token_matrix=token_matrix))
+}
+```
+
+```{r}
+M_table = read.csv('D:/jazz/Jazz_visual/csv/Musician_table.csv',row.names = 1, header= TRUE)
+abstract = read.csv('D:/jazz/Jazz_visual/csv/Mus_abstract.csv',row.names = 1, header= TRUE)
+instrument = read.csv('D:/jazz/Jazz_visual/csv/instrument.csv', header= TRUE)[1]
+colnames(instrument)="word"
+instrument = instrument$word
+musician = rownames(M_table)
+```
+
+```{r}
+abst = as.data.frame(cbind(musician,abstract))
+inst = as.data.frame(cbind(musician,M_table$instrument))
+ocup = as.data.frame(cbind(musician,M_table$occupation))
+```
+
+```{r}
+tl_abst = token_split(abst,g=2,id=musician)
+tl_inst = token_split(inst,g=2,id=musician)
+tl_ocup = token_split(ocup,g=2,id=musician)
+```
+
+```{r}
+tm_abst_oe = oh_encoding(abst, id=musician, tok=instrument, g=2)
+tm_inst_oe = oh_encoding(inst, id=musician, tok=instrument, g=2)
+tm_ocup_oe = oh_encoding(ocup, id=musician, tok=instrument, g=2)
+```
+
+```{r}
+tm_abst = as.matrix(tm_abst_oe$token_matrix)
+tm_inst = as.matrix(tm_inst_oe$token_matrix)
+tm_ocup = as.matrix(tm_ocup_oe$token_matrix)
+```
+
+```{r}
+tm_in = as.data.frame(tm_abst+tm_inst+tm_ocup)
+```
+
+```{r}
+#same instrument into one column
+token_matrix_ins = tm_in
+col_pair = matrix(data = c(3,16,
+                           4,12,
+                           5,13,
+                           6,15,
+                           8,14,
+                           9,11,
+                           18,17), nrow = 7, ncol = 2, byrow = T)
+col_pair = as.data.frame(col_pair)
+
+for(i in 1:7){
+  i1 = col_pair$V1[i]
+  i2 = col_pair$V2[i]
+  token_matrix_ins[,i1] = token_matrix_ins[,i1]+token_matrix_ins[,i2]
+}
+
+token_matrix_ins = token_matrix_ins%>%
+  select(1:10, 18:23)
+
+
+
+for(i in 1:236){
+  for(j in 1:16){
+    if(token_matrix_ins[i,j]>=2){
+      token_matrix_ins[i,j] = 1
+    }
+  }
+}
+
+
+
+for(i in 1:236){
+  sum_ins = sum(token_matrix_ins[i,])
+  if(sum_ins==0){
+    print(c(i,musician[i]))
+  }
+}
+
+```
