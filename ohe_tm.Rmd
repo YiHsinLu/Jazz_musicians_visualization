@@ -105,40 +105,36 @@ abstract = read.csv('D:/jazz/Jazz_visual/csv/Mus_abstract.csv',row.names = 1, he
 instrument = read.csv('D:/jazz/Jazz_visual/csv/instrument.csv', header= TRUE)[1]
 colnames(instrument)="word"
 instrument = instrument$word
-musician = rownames(M_table)
+musicians = rownames(M_table)
 ```
 
 ```{r}
-abst = as.data.frame(cbind(musician,abstract))
-inst = as.data.frame(cbind(musician,M_table$instrument))
-ocup = as.data.frame(cbind(musician,M_table$occupation))
+abst = as.data.frame(cbind(musicians,abstract))
+inst = as.data.frame(cbind(musicians,M_table$instrument))
 ```
 
 ```{r}
-tl_abst = token_split(abst,g=2,id=musician)
-tl_inst = token_split(inst,g=2,id=musician)
-tl_ocup = token_split(ocup,g=2,id=musician)
+tl_abst = token_split(abst,g=2,id=musicians)
+tl_inst = token_split(inst,g=2,id=musicians)
 ```
 
 ```{r}
-tm_abst_oe = oh_encoding(abst, id=musician, tok=instrument, g=2)
-tm_inst_oe = oh_encoding(inst, id=musician, tok=instrument, g=2)
-tm_ocup_oe = oh_encoding(ocup, id=musician, tok=instrument, g=2)
+tm_abst_oe = oh_encoding(abst, id=musicians, tok=instrument, g=2)
+tm_inst_oe = oh_encoding(inst, id=musicians, tok=instrument, g=2)
 ```
 
 ```{r}
 tm_abst = as.matrix(tm_abst_oe$token_matrix)
 tm_inst = as.matrix(tm_inst_oe$token_matrix)
-tm_ocup = as.matrix(tm_ocup_oe$token_matrix)
 ```
 
 ```{r}
-tm_in = as.data.frame(tm_abst+tm_inst+tm_ocup)
+tm_in = as.data.frame(tm_abst+tm_inst)
 ```
 
 ```{r}
 #same instrument into one column
-token_matrix_ins = tm_in
+token_matrix_inst = tm_in
 col_pair = matrix(data = c(3,16,
                            4,12,
                            5,13,
@@ -151,29 +147,22 @@ col_pair = as.data.frame(col_pair)
 for(i in 1:7){
   i1 = col_pair$V1[i]
   i2 = col_pair$V2[i]
-  token_matrix_ins[,i1] = token_matrix_ins[,i1]+token_matrix_ins[,i2]
+  token_matrix_inst[,i1] = token_matrix_inst[,i1]+token_matrix_inst[,i2]
 }
 
-token_matrix_ins = token_matrix_ins%>%
+token_matrix_inst = token_matrix_inst%>%
   select(1:10, 18:23)
 
 
 
 for(i in 1:236){
   for(j in 1:16){
-    if(token_matrix_ins[i,j]>=2){
-      token_matrix_ins[i,j] = 1
+    if(token_matrix_inst[i,j]>=2){
+      token_matrix_inst[i,j] = 1
     }
   }
 }
 
 
-
-for(i in 1:236){
-  sum_ins = sum(token_matrix_ins[i,])
-  if(sum_ins==0){
-    print(c(i,musician[i]))
-  }
-}
 
 ```

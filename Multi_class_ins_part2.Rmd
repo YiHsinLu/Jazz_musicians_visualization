@@ -127,11 +127,11 @@ summary(J1_lm)
 ```
 
 ****
-****
 
+### **【Remark】**
 
+* Saxophonist and composer have the highest correlation to J1(PC1), J2(PC2). 
 
-****
 ****
 
 ### **【Contents】**

@@ -92,16 +92,16 @@ for(i in 1:236){
 ```{r}
 
 for(i in 1:236){
-  sum_ins = sum(token_matrix_ins[i,])
+  sum_ins = sum(token_matrix_inst[i,])
   if(sum_ins==0){
-    print(c(i,musicians[i]))
+    print(c(i,musician[i]))
   }
 }
 
 ```
 
 ```{r}
-token_matrix_ins = token_matrix_ins[c(-5,-65,-72,-107,-109,-182,-205,-219,-224),]
+token_matrix_ins = token_matrix_inst[c(-72,-107,-182,-205,-219,-224),]
 ```
 
 ```{r}
