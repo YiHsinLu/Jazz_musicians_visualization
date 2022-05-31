@@ -16,6 +16,7 @@ This repository is the research of master life. Music topic is my favorite, so I
   + the function of split tokens and one-hot encoding
   + multi-value classification in instruments
   + [contents of paper](https://yihsinlu.github.io/yhlu.io/Contents.html)
-
-
-
+* [20220601](https://yihsinlu.github.io/Jazz.io/Multi_class_ins_part3.html)
+  + affinity matrix in musicians and instrument
+  + PCA
+  + plot by PC1 to PC3
