@@ -14,7 +14,7 @@ output:
 
 * PCA, got PCA1 and PC2
 * correlation coefficient
-* linear model
+* regression
 
 ****
 
@@ -51,7 +51,7 @@ load("D:/Jazz_visual/PCA.RData")
 
 ## **1.1 Affinity Matrix**
 ```{r echo=FALSE}
-kbl(AffinityMatrix_ins,align = "c") %>%
+kbl(AffinityMatrix_mus,align = "c") %>%
   scroll_box(width = "100%", height = "700px")%>%
   kable_material(c("striped", "hover"))
 ```
