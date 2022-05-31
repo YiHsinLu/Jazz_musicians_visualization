@@ -1,0 +1,113 @@
+---
+title: "**【Jazz Musicians Data Visualization】**"
+subtitle: " **Multivalue Classification** "
+author: '*Sam Lu*'
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+****
+
+### **Recap**
+
+* PCA, got PCA1 and PC2
+* correlation coefficient
+* linear model
+
+****
+
+# **Contents**
+
+* Affinity Matrix
+  + musicians
+  + instrument
+
+* PCA
+* Plot by PC1~PC3
+
+****
+
+```{r include=FALSE}
+#packages
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+load("D:/Jazz_visual/PCA.RData")
+```
+
+# **1. Musicians**
+
+## **1.1 Affinity Matrix**
+```{r echo=FALSE}
+kbl(AffinityMatrix_ins,align = "c") %>%
+  scroll_box(width = "100%", height = "700px")%>%
+  kable_material(c("striped", "hover"))
+```
+
+****
+
+## **1.2 PC1 vs PC2**
+```{r echo=FALSE}
+hchart(mus_PC, "scatter", hcaes(x=PC1, y=PC2, group = musicians))
+```
+
+****
+
+## **1.3 PC2 vs PC3**
+```{r echo=FALSE}
+hchart(mus_PC, "scatter", hcaes(x=PC2, y=PC3, group = musicians))
+```
+
+****
+
+## **1.4 PC1 vs PC3**
+```{r echo=FALSE}
+hchart(mus_PC, "scatter", hcaes(x=PC1, y=PC3, group = musicians))
+```
+
+****
+
+# **2. Instruments**
+
+## **2.1 Affinity Matrix**
+
+```{r echo=FALSE}
+kbl(AffinityMatrix_ins,align = "c") %>%
+  scroll_box(width = "100%", height = "700px")%>%
+  kable_material(c("striped", "hover"))
+```
+
+****
+
+## **1.2 PC1 vs PC2**
+```{r echo=FALSE}
+hchart(ins_PC, "scatter", hcaes(x=PC1, y=PC2, group = instrument))
+```
+
+****
+
+## **1.3 PC2 vs PC3**
+```{r echo=FALSE}
+hchart(ins_PC, "scatter", hcaes(x=PC2, y=PC3, group = instrument))
+```
+
+****
+
+## **1.4 PC1 vs PC3**
+```{r echo=FALSE}
+hchart(ins_PC, "scatter", hcaes(x=PC1, y=PC3, group = instrument))
+```
+
+****

@@ -1,0 +1,79 @@
+```{r include=FALSE}
+#packages
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(plotrix)
+```
+
+# instrument token matrix
+
+```{r}
+TokenMatrix_inst = read.csv('D:/jazz_visual/csv/token_matrix_instrument_del_emp.csv', row.names = 1)
+TokenMatrix_inst.t = as.data.frame(t(TokenMatrix_inst))
+musicians = rownames(TokenMatrix_inst)
+instrument = colnames(TokenMatrix_inst)
+```
+
+#jaccard function
+```{r}
+# Jaccard function
+dis_jac = function(M){
+  M = as.matrix(M)
+  library("jaccard")
+  n = nrow(M)
+  # n*n matrix
+  af_matrix = matrix(data = 1, nrow = n, ncol = n)
+  for(i in 1:(n-1)){
+    for(j in (i+1):n){
+      jac = jaccard(M[i,],M[j,])
+      af_matrix[i,j] = af_matrix[j,i] = jac
+    }
+  }
+  return(as.data.frame(af_matrix))
+}
+```
+
+#affinity matrix by Jaccard
+
+```{r}
+AfinityMatrix_mus = dis_jac(TokenMatrix_inst)
+rownames(AfinityMatrix_mus) = colnames(AfinityMatrix_mus) = musicians
+
+AfinityMatrix_ins = dis_jac(TokenMatrix_inst.t)
+rownames(AfinityMatrix_ins) = colnames(AfinityMatrix_ins) = instrument
+```
+
+#PCA
+```{r}
+mus_PCA = prcomp(AfinityMatrix_mus, center = TRUE,scale. = TRUE)
+ins_PCA = prcomp(AfinityMatrix_ins, center = TRUE,scale. = TRUE)
+```
+
+#plot PC1~PC3
+
+```{r}
+ins_PC = as.data.frame(ins_PCA$x)
+
+hchart(ins_PC, "scatter", hcaes(x=PC1, y=PC2, group = instrument))
+hchart(ins_PC, "scatter", hcaes(x=PC2, y=PC3, group = instrument))
+hchart(ins_PC, "scatter", hcaes(x=PC1, y=PC3, group = instrument))
+```
+
+```{r}
+mus_PC = as.data.frame(mus_PCA$x)
+
+hchart(mus_PC, "scatter", hcaes(x=PC1, y=PC2, group = musicians))
+hchart(mus_PC, "scatter", hcaes(x=PC2, y=PC3, group = musicians))
+hchart(mus_PC, "scatter", hcaes(x=PC1, y=PC3, group = musicians))
+```
