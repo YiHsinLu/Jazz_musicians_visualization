@@ -1,0 +1,209 @@
+---
+title: "**【Visualizing Jazz Musicians】**"
+author: '*Sam Lu*'
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+```{r include=FALSE}
+#packages
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+load("D:/jazz/Jazz_visual/0608.RData")
+```
+
+****
+
+# **1. Introduction**
+
+![](D:/jazz/jazz_visual/fig/linked_jazz.jpg){width=100%}
+
+* [Linked Jazz Network](https://linkedjazz.org/network/)
+* [DBpedia](https://www.dbpedia.org/about/)
+* Musicians Selection
+  + [Wynton Marsalis](https://dbpedia.org/page/Wynton_Marsalis)
+  + [Roy Hargrove](https://dbpedia.org/page/Roy_Hargrove)
+  
+****
+
+# **2. Data set**
+
+* abstract
+* yearsActive
+* genre
+* recordLabel
+* instrument
+* occupation
+
+## 2.1 Data Matrix
+
+```{r echo=FALSE}
+M_table[,2:6]
+```
+
+****
+
+## 2.2 Abstract
+
+```{r echo=FALSE}
+abstract
+```
+
+****
+
+# **3. Text Mining**
+
+## 3.1 Abstract{.tabset}
+
+### one-gram
+
+```{r echo=FALSE}
+abstract_1gram
+```
+
+### one-gram token
+
+```{r echo=FALSE}
+tokens
+```
+
+### two-grams
+
+```{r echo=FALSE}
+abstract_2gram
+```
+
+### two-grams token
+
+```{r echo=FALSE}
+tokens_2gram
+```
+
+****
+
+## 3.2 Token Matrix
+
+```{r echo=FALSE}
+set.seed(19970608)
+wordcloud2(data=tokens, size=1.2, color='random-dark')
+```
+
+* tokens: 94 from 23070
+
+```{r echo=FALSE}
+token_matrix
+```
+
+****
+
+# **4. Multi-value Classification**
+
+![](https://themusicnetwork.com/wp-content/uploads/Screen-Shot-2018-07-30-at-11.47.24-am-e1532915295448.png)
+
+[image from](https://themusicnetwork.com/15-year-old-multi-instrumentalist-wins-top-state-music-award-for-the-second-time/)
+
+## 4.1 Compress $\mathcal{Y}$ information{.tabset}
+
+### Y-info.
+
+```{r echo=FALSE}
+token_matrix_ins
+```
+
+### Musicians
+
+```{r echo=FALSE}
+AffinityMatrix_mus
+```
+
+### Instruments
+
+```{r echo=FALSE}
+AffinityMatrix_ins
+```
+
+****
+
+## 4.2 PCA on Instrument Affinity Matrix{.tabset}
+
+### 4.2.1 PC1 vs PC2
+
+```{r echo=FALSE}
+ggplot(ins_PC, aes(x=PC1, y=PC2)) +
+  geom_point() + 
+  geom_text(label=instrument, nudge_y = 0.2)
+```
+
+
+### 4.2.2 PC2 vs PC3
+
+```{r echo=FALSE}
+ggplot(ins_PC, aes(x=PC2, y=PC3)) +
+  geom_point() + 
+  geom_text(label=instrument, nudge_y = 0.2)
+```
+
+### 4.2.3 PC1 vs PC3
+
+```{r echo=FALSE}
+ggplot(ins_PC, aes(x=PC1, y=PC3)) +
+  geom_point() + 
+  geom_text(label=instrument, nudge_y = 0.2)
+```
+
+****
+
+## 4.3 Correlation{.tabset}
+
+### Instrument
+
+```{r echo=FALSE}
+plot(w[,1],-w[,2],type="n",xlab="W[,1]",ylab="W[,2]",main="Instrument",cex.axis=1.2,cex.lab=1.2,cex.main=1.6,xlim=c(-0.5,1),ylim=c(-0.5,1))
+text(w[,1],-w[,2],namew,xpd=NA)
+abline(h=0,v=0,lwd=1.2)
+```
+
+```{r echo=FALSE}
+w
+```
+
+### Musicians
+
+```{r echo=FALSE}
+plot(z[,1],-z[,2],type="n",xlim=c(-1,1.5),ylim=c(-1,1.5),xlab="Z[,1]",ylab="Z[,2]",main="Musicians",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(z[,1],-z[,2],namez,xpd=NA)
+abline(h=0,v=0,lwd=1.2)
+```
+
+```{r echo=FALSE}
+z
+```
+
+# **5. Remark**
+
+* The way out of multi-value classification
+* Group by PCA on instrument
+
+# **6. Reference**
+
+* 1.[Textbook_AMSA pdf download](https://link.springer.com/book/10.1007/978-3-662-45171-7)
+* 2.[DBpedia_Wynton_Marsalis](https://dbpedia.org/page/Wynton_Marsalis)

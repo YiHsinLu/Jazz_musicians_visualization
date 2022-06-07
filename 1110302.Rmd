@@ -7,7 +7,7 @@ output: html_document
 ---
 
 
-![Network plot by Linked Jazz wedsite](D:/jazz/linked_jazz.jpg)
+![Network plot by Linked Jazz wedsite](D:/jazz/jazz_visual/fig/linked_jazz.jpg){width=100%}
 
 [LINKED JAZZ](https://linkedjazz.org/network/)
 

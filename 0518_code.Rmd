@@ -1,0 +1,111 @@
+```{r}
+
+for(i in 1:236){
+  sum_ins = sum(token_matrix_inst[i,])
+  if(sum_ins==0){
+    print(c(i,musicians[i]))
+  }
+}
+
+```
+
+```{r}
+token_matrix_ins = token_matrix_inst[c(-5,-72,-107,-182,-205,-219,-224),]
+```
+
+```{r}
+# Jaccard function
+dis_jac = function(M){
+  M = as.matrix(M)
+  library("jaccard")
+  n = nrow(M)
+  # n*n matrix
+  af_matrix = matrix(data = 1, nrow = n, ncol = n)
+  for(i in 1:(n-1)){
+    for(j in (i+1):n){
+      jac = jaccard(M[i,],M[j,])
+      af_matrix[i,j] = af_matrix[j,i] = jac
+    }
+  }
+  return(as.data.frame(af_matrix))
+}
+```
+
+```{r}
+ins_jac = as.data.frame(dis_jac(token_matrix_ins))
+rownames(ins_jac) = colnames(ins_jac) = rownames(token_matrix_ins)
+```
+
+```{r}
+in_PCA = prcomp(ins_jac[,1:16], center = TRUE,scale. = TRUE)
+```
+
+```{r}
+summary(in_PCA)
+```
+
+```{r}
+ins_PC12 = cbind(in_PCA$x[,1], in_PCA$x[,2])
+ins_PC12 = as.data.frame(ins_PC12)
+colnames(ins_PC12)=c('J1', 'J2')
+```
+
+```{r}
+p = length(colnames(token_matrix_ins))
+
+cor_coe = matrix(data = 0, nrow = p, ncol = 2)
+
+for(j in 1:2){
+  for(i in 1:p){
+    cor_coe_val = cor(ins_PC12[,j], token_matrix_ins[,i])
+    cor_coe[i,j] = cor_coe_val
+  }
+}
+
+```
+
+```{r}
+cor_coe = as.data.frame(cor_coe)
+colnames(cor_coe) = colnames(ins_PC12)
+rownames(cor_coe) = colnames(token_matrix_ins)
+```
+
+```{r}
+inst = colnames(token_matrix_ins)
+tm_ins_j1 = as.data.frame(cbind(token_matrix_ins, ins_PC12$J1))
+colnames(tm_ins_j1)[17] = 'J1'
+tm_ins_j2 = as.data.frame(cbind(token_matrix_ins, ins_PC12$J2))
+colnames(tm_ins_j2)[17] = 'J2'
+```
+
+```{r}
+dist_jac = as.matrix(ins_jac)
+```
+
+```{r}
+J1_lm = lm(J1 ~. , data = tm_ins_j1)
+J2_lm = lm(J2 ~. , data = tm_ins_j2)
+
+```
+
+```{r}
+summary(J1_lm)
+```
+
+```{r}
+mds_inst = cmdscale(ins_jac)
+mds_inst = as.data.frame(mds_inst)
+hchart(mds_inst, "scatter", hcaes(x = V1, y = V2))
+```
+
+```{r}
+ggscatter(mds_inst, x = "V1", y = "V2", 
+          label = rownames(mds_inst),
+          size = 1,
+          repel = TRUE)
+```
+
+
+```{r}
+hchart(cor_coe, "scatter", hcaes(x = J1, y = J2, group = rownames(cor_coe)))
+```

@@ -46,7 +46,7 @@ load("D:/jazz/Jazz_visual/data.RData")
 #### **Abstract**
 
 ```{r echo=FALSE}
-kbl(abstract[182:192,],align = "l", row.names = FALSE) %>%
+kbl(abst[181:190,],align = "l", row.names = FALSE) %>%
   kable_paper() %>%
   kable_classic(full_width = F) %>%
   scroll_box(width = "100%", height = "400px")
