@@ -1,12 +1,23 @@
 ---
 title: "**【Visualizing Jazz Musicians】**"
-author: '*Sam Lu*'
+date: 2022 June 8
 output: 
   html_document:
     toc: true
     toc_float: true
     df_print: paged
 ---
+
+**$\mathcal{YiHsin}\;\mathcal{Lu}$**
+
+****
+
+![](https://www.strathmore.org/media/nkwc1jum/jazz-at-lincoln-center.jpg){width=100%}
+
+[image from](https://www.strathmore.org/what-s-on/archived-edps/21-22-season/jazz-at-lincoln-center-orchestra-with-wynton-marsalis/)
+
+****
+
 
 ```{r include=FALSE}
 #packages
@@ -31,6 +42,16 @@ library(wordcloud2)
 load("D:/jazz/Jazz_visual/0608.RData")
 ```
 
+# **Outline**
+
+* Introduction
+* Data set
+* Text Mining
+* Multi-value Classification
+* Contents
+* Remark
+* Reference
+
 ****
 
 # **1. Introduction**
@@ -47,6 +68,8 @@ load("D:/jazz/Jazz_visual/0608.RData")
 
 # **2. Data set**
 
+6 variables, 236 musicians
+
 * abstract
 * yearsActive
 * genre
@@ -54,18 +77,18 @@ load("D:/jazz/Jazz_visual/0608.RData")
 * instrument
 * occupation
 
-## 2.1 Data Matrix
+## 2.1 Abstract
 
 ```{r echo=FALSE}
-M_table[,2:6]
+abstract
 ```
 
 ****
 
-## 2.2 Abstract
+## 2.2 Data Matrix
 
 ```{r echo=FALSE}
-abstract
+M_table[,2:6]
 ```
 
 ****
@@ -80,17 +103,23 @@ abstract
 abstract_1gram
 ```
 
+****
+
 ### one-gram token
 
 ```{r echo=FALSE}
 tokens
 ```
 
+****
+
 ### two-grams
 
 ```{r echo=FALSE}
 abstract_2gram
 ```
+
+****
 
 ### two-grams token
 
@@ -129,11 +158,15 @@ token_matrix
 token_matrix_ins
 ```
 
+****
+
 ### Musicians
 
 ```{r echo=FALSE}
 AffinityMatrix_mus
 ```
+
+****
 
 ### Instruments
 
@@ -153,6 +186,7 @@ ggplot(ins_PC, aes(x=PC1, y=PC2)) +
   geom_text(label=instrument, nudge_y = 0.2)
 ```
 
+****
 
 ### 4.2.2 PC2 vs PC3
 
@@ -161,6 +195,8 @@ ggplot(ins_PC, aes(x=PC2, y=PC3)) +
   geom_point() + 
   geom_text(label=instrument, nudge_y = 0.2)
 ```
+
+****
 
 ### 4.2.3 PC1 vs PC3
 
@@ -186,6 +222,8 @@ abline(h=0,v=0,lwd=1.2)
 w
 ```
 
+****
+
 ### Musicians
 
 ```{r echo=FALSE}
@@ -198,12 +236,60 @@ abline(h=0,v=0,lwd=1.2)
 z
 ```
 
-# **5. Remark**
+
+****
+
+# **5. Contents**
+
+#### *Title: Visualizing Jazz Musicians*
+
+* Abstract
+* Introduction
+  + motivation
+  + linked jazz
+  + jazz musicians
+* Data matrix
+  + collection
+  + text mining
+* Multi-value Classification
+  + "Y" information
+  + method
+    - PCA
+    - correlation
+* Visualization
+  + method
+    - t-SNE
+    - St-SNE
+    - LDA
+  + visualizing
+    - (fig) color by instrument
+    - (fig) color by genre
+    - (fig) color by yearActive
+* Conclusion and future work
+* Discussion
+* Reference
+* Appendix
+  + python code
+  + R code
+
+****
+
+# **6. Remark**
 
 * The way out of multi-value classification
 * Group by PCA on instrument
 
-# **6. Reference**
+****
 
-* 1.[Textbook_AMSA pdf download](https://link.springer.com/book/10.1007/978-3-662-45171-7)
-* 2.[DBpedia_Wynton_Marsalis](https://dbpedia.org/page/Wynton_Marsalis)
+# **7. Reference**
+
+* (1)[Textbook_AMSA pdf download](https://link.springer.com/book/10.1007/978-3-662-45171-7)
+* (2)[DBpedia_Wynton_Marsalis](https://dbpedia.org/page/Wynton_Marsalis)
+* (3)Meeting Record
+  + [20220302](https://yihsinlu.github.io/Jazz.io/1110302.html)
+  + [20220413](https://yihsinlu.github.io/Jazz.io/1110413.html)
+  + [20220511](https://yihsinlu.github.io/Jazz.io/Multi_class_ins.html)
+  + [20220518](https://yihsinlu.github.io/Jazz.io/Multi_class_ins_part2.html)
+  + [20220601](https://yihsinlu.github.io/Jazz.io/Multi_class_ins_part3.html)
+* (4)[Text Mining with R](https://www.tidytextmining.com/)
+* (5)[Note for "Text Mining with R"](https://bookdown.org/Maxine/tidy-text-mining/)

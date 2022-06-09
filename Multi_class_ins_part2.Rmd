@@ -27,7 +27,7 @@ library(micropan)
 library(ggpubr)
 library(highcharter)
 library(ggpubr)
-load("D:/Jazz_visual/0518.RData")
+load("D:/jazz/jazz_visual/0518.RData")
 ```
 
 ****
