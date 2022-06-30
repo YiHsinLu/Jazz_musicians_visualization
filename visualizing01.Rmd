@@ -84,5 +84,8 @@ hchart(mds_1stinst, "scatter", hcaes(x = D1, y = D2, group = class))
 
 ****
 
-### **Remark**
+### **Next**
 
+* LDA, t-SNE
+* multi-value classification
+* color by genre and yearActive
