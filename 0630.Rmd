@@ -1,0 +1,35 @@
+#package 
+```{r}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+```
+
+```{r}
+table_inst = read.csv("D:/jazz/Jazz_visual/csv/table_inst.csv", row.names = 1)
+```
+
+# 3 classes
+```{r}
+inst = colnames(table_inst)
+musicians = rownames(table_inst)
+
+for (i in 1:16) {
+  print(c(i, inst[i]))
+}
+```
