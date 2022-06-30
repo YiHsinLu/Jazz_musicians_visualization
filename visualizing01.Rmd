@@ -1,0 +1,88 @@
+---
+title: "**【Visualizing Jazz Musicians】**"
+date: 'July 01, 2022'
+output: 
+  html_document:
+    df_print: paged
+---
+
+```{r include=FALSE}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+load("D:/jazz/Jazz_visual/0701.RData")
+```
+
+****
+
+### **Recap**
+3 classes in instrument
+
+* Beats
+  + drummer
+  + bassist
+  + percussionist
+  + keyboardist
+* Wind
+  + pianist
+  + composer
+  + saxophonist
+  + flute
+  + trumpeter
+  + trombonist
+  + horn
+* vocal
+  + vocalist
+  + singer
+  + songwriter
+  + guitarist
+  + producer
+
+****
+
+```{r echo=FALSE}
+Mtable_instclass
+```
+
+****
+
+### **MDS**
+
+* tokens matrix
+* affinity matrix(by Jaccard)
+* MDS
+* color by first instrument
+
+****
+
+```{r echo=FALSE}
+hchart(mds_1stinst, "scatter", hcaes(x = D1, y = D2, group = instrument))
+```
+
+****
+
+### **MDS (3 classes)**
+
+```{r echo=FALSE}
+hchart(mds_1stinst, "scatter", hcaes(x = D1, y = D2, group = class))
+```
+
+****
+
+### **Remark**
+
