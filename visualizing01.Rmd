@@ -31,7 +31,7 @@ load("D:/jazz/Jazz_visual/0701.RData")
 ****
 
 ### **Recap**
-3 classes in instrument
+3 classes in instrument.
 
 * Beats
   + drummer
@@ -46,7 +46,7 @@ load("D:/jazz/Jazz_visual/0701.RData")
   + trumpeter
   + trombonist
   + horn
-* vocal
+* Vocal
   + vocalist
   + singer
   + songwriter
