@@ -3,6 +3,8 @@ title: "**【Visualizing Jazz Musicians】**"
 date: 'July 01, 2022'
 output: 
   html_document:
+    toc: true
+    toc_float: true
     df_print: paged
 ---
 
