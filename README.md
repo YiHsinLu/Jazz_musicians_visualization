@@ -20,3 +20,5 @@ This repository is the research of master life. Music topic is my favorite, so I
   + affinity matrix in musicians and instrument
   + PCA
   + plot by PC1 to PC3
+* [20220701](https://yihsinlu.github.io/Jazz.io/visualizing01.html)
+  + 16 instrument to 3 class
