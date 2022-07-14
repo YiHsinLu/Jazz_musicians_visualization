@@ -1,0 +1,118 @@
+---
+title: "**【Visualizing Color Problem】**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+**$\mathcal{YiHsin}\;\mathcal{Lu}$**
+
+![Figure1: CMYK (left) and RGB (right)](https://www.pogodesign.co.nz/wp-content/uploads/2021/03/Color-CMYK-RGB-1500x750.jpg){width=100%}
+
+
+[image from](https://www.pogodesign.co.nz/graphic-design/colour-cmyk-vs-rgb/)
+
+****
+
+```{r include=FALSE}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+load("D:/jazz/Jazz_visual/0714.RData")
+```
+
+
+## **Color System**
+
+```{r echo=FALSE}
+color_system
+```
+
+****
+
+### **CMYK**
+
+![](D:/jazz/jazz_visual/fig/cyan.png){width=10%} ![](D:/jazz/jazz_visual/fig/Magenta.png){width=10%} ![](D:/jazz/jazz_visual/fig/Yellow.png){width=10%} ![](D:/jazz/jazz_visual/fig/Black.png){width=10%}
+
+* C： Cyan
+* M： Magenta
+* Y： Yellow
+* K： Black
+
+****
+
+### **RGB**
+
+![](D:/jazz/jazz_visual/fig/red.png){width=10%} ![](D:/jazz/jazz_visual/fig/green.png){width=10%} ![](D:/jazz/jazz_visual/fig/blue.png){width=10%}
+
+* R： Red
+* G： Green
+* B： Blue
+
+****
+
+## **Data Matrix**
+
+****
+
+### **Token Matrix**
+
+```{r echo=FALSE}
+Mtable_token
+```
+
+****
+
+### **Affinity Matrix** (jaccard)
+
+```{r echo=FALSE}
+Mtable_jac
+```
+
+****
+
+## **t-SNE**
+
+****
+
+### **CMYK**
+
+```{r echo=FALSE}
+ggplot(Mtable_tsnergb, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = Mtable_tsnergb$hex)
+```
+
+****
+
+### **RGB**
+
+```{r echo=FALSE}
+ggplot(Mtable_tsnecmyk, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = Mtable_tsnecmyk$hex)
+```
+
+****
+
+## **Remark**
+
+* Two type of color system 
+* t-SNE 

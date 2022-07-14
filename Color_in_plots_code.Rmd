@@ -1,0 +1,156 @@
+#package 
+```{r}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+```
+
+color
+```{r}
+color_system = matrix(data = c('#000000', 0, 0, 0, 1, 0, 0, 0,
+                               '#FFFFFF', 0, 0, 0, 0, 255, 255, 255,
+                               '#00FFFF', 1, 0, 0, 0, 0, 255, 255,
+                               '#FF00FF', 0, 1, 0, 0, 255, 0, 255,
+                               'FFFF00', 0, 0, 1, 0, 255, 255, 0,
+                               '#FF0000', 0,1,1,0,255,0,0,
+                               '#00FF00', 1,0,1,0,0,255,0,
+                               '#0000FF', 1,1,0,0,0,0,255), ncol=8, nrow=8, byrow = T)
+colnames(color_system) = c('hex', 'C', 'M', 'Y', 'K', 'R', 'G', 'B')
+rownames(color_system)=c('Black','White','Cyan','Magenta','Yellow','Red','Green','Blue')
+color_system = as.data.frame(color_system)
+```
+
+```{r}
+Mtable_token = read.csv("D:/jazz/Jazz_visual/csv/table_token.csv", row.names = 1)[c(-5,-72,-107,-182,-205,-219,-224),]
+Mtable_inst = read.csv("D:/jazz/Jazz_visual/csv/table_inst.csv", row.names = 1)
+```
+
+
+```{r}
+Mtable_instclass = matrix(data = 0, nrow = 229, ncol = 3)
+beats = c(3,6,12,14)
+wind = c(4,5,16,1,8,15,13)
+vocal = c(11,2,7,9,10)
+instclass_id = list(beats, wind, vocal)
+
+musicians = rownames(Mtable_inst)
+instclass = list(beats = c("drummer",
+                           "bassist",
+                           "percussionist",
+                           "keyboardist"),
+                 wind = c("pianist",
+                          "composer",
+                          "saxophonist",
+                          "flute",
+                          "trumpeter",
+                          "trombonist",
+                          "horn"),
+                 vocal = c("vocalist",
+                           "singer",
+                           "songwriter",
+                           "guitarist",
+                           "producer"))
+
+for(cl in 1:3){
+  for(m in instclass[[cl]]){
+    Mtable_instclass[,cl] = Mtable_instclass[,cl]+Mtable_inst[,m]
+  }
+}
+
+Mtable_instclass = as.data.frame(Mtable_instclass)
+colnames(Mtable_instclass) = c("beats", "wind", "vocal")
+rownames(Mtable_instclass) = musicians
+```
+
+```{r}
+# Jaccard function
+dis_jac = function(M){
+  M = as.matrix(M)
+  library("jaccard")
+  n = nrow(M)
+  # n*n matrix
+  af_matrix = matrix(data = 1, nrow = n, ncol = n)
+  for(i in 1:(n-1)){
+    for(j in (i+1):n){
+      jac = jaccard(M[i,],M[j,])
+      af_matrix[i,j] = af_matrix[j,i] = jac
+    }
+  }
+  return(as.data.frame(af_matrix))
+}
+
+Mtable_jac = dis_jac(Mtable_token)
+colnames(Mtable_jac)=rownames(Mtable_jac)=musicians
+```
+
+
+classes percentage
+```{r}
+Mtable_inst_cmyk = as.matrix(Mtable_instclass)
+
+for(i in 1:nrow(Mtable_inst_cmyk)){
+  Mtable_inst_cmyk[i,] = Mtable_inst_cmyk[i,]/sum(Mtable_inst_cmyk[i,])
+}
+#Mtable_inst_cmyk = as.data.frame(Mtable_inst_cmyk)
+
+Mtable_inst_rgb = 1-Mtable_inst_cmyk
+
+colnames(Mtable_inst_cmyk) = c("c","m","y")
+colnames(Mtable_inst_rgb) = c("r","g","b")
+
+Mtable_inst_rgb=as.data.frame(Mtable_inst_rgb)
+Mtable_inst_cmyk = as.data.frame(Mtable_inst_cmyk)
+
+Mtable_inst_rgb = cbind(Mtable_inst_rgb, rgb(Mtable_inst_rgb))
+
+colnames(Mtable_inst_rgb) = c("r","g","b","hex")
+
+Mtable_inst_cmyk = cbind(Mtable_inst_cmyk, rgb(Mtable_inst_cmyk))
+
+colnames(Mtable_inst_cmyk) = c("c","m","y","hex")
+```
+
+```{r}
+Mtable_tsne = Rtsne(Mtable_jac, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+Mtable_tsnergb = cbind(Mtable_tsne$Y, Mtable_inst_rgb$hex)
+
+
+colnames(Mtable_tsnergb) = c('tsne1', 'tsne2', 'hex')
+rownames(Mtable_tsnergb) = musicians
+Mtable_tsnergb = as.data.frame(Mtable_tsnergb)
+
+Mtable_tsnergb = transform(Mtable_tsnergb, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(Mtable_tsnergb, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = Mtable_tsnergb$hex)
+```
+```{r}
+Mtable_tsnecmyk = cbind(Mtable_tsne$Y, Mtable_inst_cmyk$hex)
+
+colnames(Mtable_tsnecmyk) = c('tsne1', 'tsne2', 'hex')
+rownames(Mtable_tsnecmyk) = musicians
+Mtable_tsnecmyk = as.data.frame(Mtable_tsnecmyk)
+
+Mtable_tsnecmyk = transform(Mtable_tsnecmyk, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(Mtable_tsnecmyk, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = Mtable_tsnecmyk$hex)
+```
