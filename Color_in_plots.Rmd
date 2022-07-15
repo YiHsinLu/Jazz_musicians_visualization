@@ -1,5 +1,5 @@
 ---
-title: "**【Visualizing Color Problem】**"
+title: "**【Color Problem of Visualizing】**"
 output: 
   html_document:
     toc: true
@@ -70,6 +70,44 @@ color_system
 
 ****
 
+### **Classes to RGB/CMYK**
+
+****
+
+#### **Instrument Matrix**
+
+```{r echo=FALSE}
+Mtable_instclass
+```
+
+****
+
+#### **Classes to RGB (percentage)**
+
+* $\large{r=\cfrac{beat}{beat+wind+vocal}}$
+
+* $\large{g=\cfrac{wind}{beat+wind+vocal}}$
+
+* $\large{b=\cfrac{vocal}{beat+wind+vocal}}$
+
+```{r echo=FALSE}
+Mtable_inst_rgb
+```
+
+****
+
+#### **RGB to CMYK**
+
+* $\large{c=1-r}$
+
+* $\large{m=1-g}$
+
+* $\large{y=1-b}$
+
+```{r echo=FALSE}
+Mtable_inst_cmyk
+```
+
 ## **Data Matrix**
 
 ****
@@ -94,15 +132,6 @@ Mtable_jac
 
 ****
 
-### **CMYK**
-
-```{r echo=FALSE}
-ggplot(Mtable_tsnergb, aes(x=tsne1, y=tsne2)) +
-  geom_point(color = Mtable_tsnergb$hex)
-```
-
-****
-
 ### **RGB**
 
 ```{r echo=FALSE}
@@ -112,7 +141,18 @@ ggplot(Mtable_tsnecmyk, aes(x=tsne1, y=tsne2)) +
 
 ****
 
+### **CMYK**
+
+```{r echo=FALSE}
+ggplot(Mtable_tsnergb, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = Mtable_tsnergb$hex)
+```
+
+****
+
+
+
 ## **Remark**
 
 * Two type of color system 
-* t-SNE 
+* Weight in token matrix
