@@ -1,5 +1,5 @@
 ---
-title: "**【Color Problem of Visualizing】**"
+title: "**【Visualization for Affinity Matrices】**"
 output: 
   html_document:
     toc: true
@@ -9,7 +9,6 @@ output:
 
 **$\mathcal{YiHsin}\;\mathcal{Lu}$**
 
-****
 
 ```{r include=FALSE}
 library(knitr)
@@ -42,7 +41,7 @@ load("D:/jazz_visual/0721.RData")
 ##### **Recap**
 
 * Color system: cmyk
-* tsne for affinity matrix (jaccard on token matrix)
+* t-SNE for affinity matrix (jaccard on token matrix)
 
 ##### **Mistake in last presentation**
 
@@ -58,7 +57,7 @@ Mtable_inst_rgb
 Mtable_inst_cmyk
 ```
 
-## **Square root on cmyk color system**
+## **Square root of cmyk matrix**
 
 ```{r echo=FALSE}
 Mtable_inst_cmyk_sqrt
