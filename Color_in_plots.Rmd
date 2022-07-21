@@ -37,7 +37,7 @@ library("RColorBrewer")
 library(wordcloud2)
 library(viridisLite)
 library(Rtsne)
-load("D:/jazz/Jazz_visual/0714.RData")
+load("D:/Jazz_visual/0714.RData")
 ```
 
 
@@ -51,7 +51,7 @@ color_system
 
 ### **CMYK**
 
-![](D:/jazz/jazz_visual/fig/cyan.png){width=10%} ![](D:/jazz/jazz_visual/fig/Magenta.png){width=10%} ![](D:/jazz/jazz_visual/fig/Yellow.png){width=10%} ![](D:/jazz/jazz_visual/fig/Black.png){width=10%}
+![](D:/jazz_visual/fig/cyan.png){width=10%} ![](D:/jazz_visual/fig/Magenta.png){width=10%} ![](D:/jazz_visual/fig/Yellow.png){width=10%} ![](D:/jazz_visual/fig/Black.png){width=10%}
 
 * C： Cyan
 * M： Magenta
@@ -62,7 +62,7 @@ color_system
 
 ### **RGB**
 
-![](D:/jazz/jazz_visual/fig/red.png){width=10%} ![](D:/jazz/jazz_visual/fig/green.png){width=10%} ![](D:/jazz/jazz_visual/fig/blue.png){width=10%}
+![](D:/jazz_visual/fig/red.png){width=10%} ![](D:/jazz_visual/fig/green.png){width=10%} ![](D:/jazz_visual/fig/blue.png){width=10%}
 
 * R： Red
 * G： Green

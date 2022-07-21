@@ -1,0 +1,92 @@
+---
+title: "**【Color Problem of Visualizing】**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+**$\mathcal{YiHsin}\;\mathcal{Lu}$**
+
+****
+
+```{r include=FALSE}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+load("D:/jazz_visual/0721.RData")
+```
+
+****
+
+##### **Recap**
+
+* Color system: cmyk
+* tsne for affinity matrix (jaccard on token matrix)
+
+##### **Mistake in last presentation**
+
+* RGB
+
+```{r echo=FALSE}
+Mtable_inst_rgb
+```
+
+* CMYK
+
+```{r echo=FALSE}
+Mtable_inst_cmyk
+```
+
+## **Square root on cmyk color system**
+
+```{r echo=FALSE}
+Mtable_inst_cmyk_sqrt
+```
+
+## **t-SNE**
+
+****
+
+### **Token Matrix**
+
+```{r echo=FALSE}
+ggplot(visualTsne_token, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_instJac$hex)
+```
+
+### **Affinity Matrix** (jaccard on token matrix)
+
+```{r echo=FALSE}
+ggplot(visualTsne_tokenJac, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_instJac$hex)
+```
+
+### **Affinity Matrix** (jaccard on instrument matrix)
+
+```{r echo=FALSE}
+ggplot(visualTsne_instJac, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_instJac$hex)
+```
+
+****

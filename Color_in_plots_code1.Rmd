@@ -130,30 +130,66 @@ colnames(Mtable_inst_cmyk) = c("c","m","y","r","g", "b","hex")
 ```
 
 ```{r}
-set.seed(19970608)
-Mtable_tsne = Rtsne(Mtable_jac, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+Mtable_inst_cmyk_sqrt = as.matrix(Mtable_inst_rgb[,1:3])
 
-Mtable_tsnergb = cbind(Mtable_tsne$Y, Mtable_inst_rgb$hex)
+Mtable_inst_cmyk_sqrt = cbind(sqrt(Mtable_inst_cmyk_sqrt), 1-sqrt(Mtable_inst_cmyk_sqrt))
+
+colnames(Mtable_inst_cmyk_sqrt) = c("c","m","y", "r", "g", "b")
+
+Mtable_inst_cmyk_sqrt = as.data.frame(Mtable_inst_cmyk_sqrt)
+
+Mtable_inst_cmyk_sqrt = cbind(Mtable_inst_cmyk_sqrt, rgb(Mtable_inst_cmyk_sqrt[,4:6]))
+
+colnames(Mtable_inst_cmyk_sqrt) = c("c","m","y","r","g", "b","hex")
 
 
-colnames(Mtable_tsnergb) = c('tsne1', 'tsne2', 'hex')
-rownames(Mtable_tsnergb) = musicians
-Mtable_tsnergb = as.data.frame(Mtable_tsnergb)
-
-Mtable_tsnergb = transform(Mtable_tsnergb, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
-
-ggplot(Mtable_tsnergb, aes(x=tsne1, y=tsne2)) +
-  geom_point(color = Mtable_tsnergb$hex)
 ```
+
 ```{r}
-Mtable_tsnecmyk = cbind(Mtable_tsne$Y, Mtable_inst_cmyk$hex)
+set.seed(19970608)
+tsne_token = Rtsne(Mtable_token, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
 
-colnames(Mtable_tsnecmyk) = c('tsne1', 'tsne2', 'hex')
-rownames(Mtable_tsnecmyk) = musicians
-Mtable_tsnecmyk = as.data.frame(Mtable_tsnecmyk)
+visualTsne_token = cbind(tsne_token$Y, Mtable_inst_cmyk_sqrt$hex)
 
-Mtable_tsnecmyk = transform(Mtable_tsnecmyk, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+colnames(visualTsne_token) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_token) = musicians
+visualTsne_token = as.data.frame(visualTsne_token)
 
-ggplot(Mtable_tsnecmyk, aes(x=tsne1, y=tsne2)) +
-  geom_point(color = Mtable_tsnecmyk$hex)
+visualTsne_token = transform(visualTsne_token, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_token, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_token$hex)
+```
+
+```{r}
+set.seed(19970608)
+tsne_tokenJac = Rtsne(Mtable_jac, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_tokenJac = cbind(tsne_tokenJac$Y, Mtable_inst_cmyk_sqrt$hex)
+
+colnames(visualTsne_tokenJac) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_tokenJac) = musicians
+visualTsne_tokenJac = as.data.frame(visualTsne_tokenJac)
+
+visualTsne_tokenJac = transform(visualTsne_tokenJac, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_tokenJac, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_tokenJac$hex)
+```
+
+```{r}
+set.seed(19970608)
+Mtable_instJac = dis_jac(Mtable_inst)
+tsne_inst = Rtsne(Mtable_instJac, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_instJac = cbind(tsne_inst$Y, Mtable_inst_cmyk_sqrt$hex)
+
+colnames(visualTsne_instJac) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_instJac) = musicians
+visualTsne_instJac = as.data.frame(visualTsne_instJac)
+
+visualTsne_instJac = transform(visualTsne_instJac, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_instJac, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_instJac$hex)
 ```
