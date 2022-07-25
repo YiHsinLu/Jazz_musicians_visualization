@@ -22,3 +22,8 @@ This repository is the research of master life. Music topic is my favorite, so I
   + plot by PC1 to PC3
 * [20220701](https://yihsinlu.github.io/Jazz.io/visualizing01.html)
   + 16 instrument to 3 class
+* [20220715](https://yihsinlu.github.io/Jazz.io/Color_in_plots.html)
+  + color system: cmyk and rgb
+  + simple t-SNE
+* [20220722](https://yihsinlu.github.io/Jazz.io/Color_in_plots_tsne.html)
+  + t-SNE for different affinity matrix
