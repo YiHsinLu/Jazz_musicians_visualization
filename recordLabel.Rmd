@@ -1,0 +1,30 @@
+```{r}
+Mtable = read.csv("D:/Jazz_visual/csv/Musician_table.csv", row.names = 1)[c(-5,-72,-107,-182,-205,-219,-224),]
+write.csv(Mtable, 'D:/jazz_visual/csv/Mtable229.csv', na = '')
+```
+
+```{r}
+recordLabel = as.data.frame(Mtable$recordLabel)
+colnames(recordLabel) = 'recordLabel'
+rownames(recordLabel) = rownames(Mtable)
+```
+
+# Genre
+```{r}
+recordLabel_split = token_split(recordLabel, g=1)
+```
+
+```{r}
+recordLabel_ohe = oh_encoding(recordLabel, tok = recordLabel_split$token_list1)
+```
+
+```{r}
+recordLabel_matrix = recordLabel_ohe$token_matrix
+
+for(i in 1:nrow(recordLabel_matrix)){
+  sum_mu = sum(recordLabel_matrix[i,])
+  if(sum_mu>1){
+    print(sprintf("Multivalue in %s, value: %s", i, sum_mu))
+  }
+}
+```

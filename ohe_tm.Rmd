@@ -17,6 +17,7 @@ library(highcharter)
 ```{r}
 token_split = function(df, g, id=rownames(df)){
 #parameters
+  df = cbind(id, df)
   n = nrow(df) #numbers of row
   colnames(df) = c("id", "word") 
   
@@ -77,10 +78,6 @@ if(g==1){
   return(list(id=id, token_list1=token1$word, token_list2=token2$word, df_token_lst=token_list_2g))
 }
 }
-```
-
-
-```{r}
 oh_encoding = function(df,id=rownames(df),tok=c(),g=1){
   tok_slt = token_split(df=df,g=g,id=id)
   n = nrow(df)

@@ -1,0 +1,30 @@
+```{r}
+Mtable = read.csv("D:/Jazz_visual/csv/Musician_table.csv", row.names = 1)[c(-5,-72,-107,-182,-205,-219,-224),]
+write.csv(Mtable, 'D:/jazz_visual/csv/Mtable229.csv', na = '')
+```
+
+```{r}
+yearsActive = as.data.frame(as.character(Mtable$yearsActive_first))
+colnames(yearsActive) = 'yearsActive'
+rownames(yearsActive) = rownames(Mtable)
+```
+
+# Genre
+```{r}
+yearsActive_split = token_split(yearsActive, g=1)
+```
+
+```{r}
+yearsActive_ohe = oh_encoding(yearsActive, tok = yearsActive_split$token_list1[-1])
+```
+
+```{r}
+yearsActive_matrix = yearsActive_ohe$token_matrix
+
+for(i in 1:nrow(yearsActive_matrix)){
+  sum_mu = sum(yearsActive_matrix[i,])
+  if(sum_mu>1){
+    print(sprintf("Multivalue in %s, value: %s", i, sum_mu))
+  }
+}
+```

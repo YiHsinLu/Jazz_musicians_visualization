@@ -1,0 +1,40 @@
+#package 
+```{r}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+load("D:/jazz_visual/0803-1.RData")
+```
+
+```{r}
+musicians = rownames(Mtable)
+
+jac_inst = dis_jac(instrument_matrix)
+jac_genre = dis_jac(genre_matrix)
+jac_rec = dis_jac(recordLabel_matrix)
+jac_year = dis_jac(yearsActive_matrix)
+colnames(jac_inst)=rownames(jac_inst)=musicians
+colnames(jac_genre)=rownames(jac_genre)=musicians
+colnames(jac_rec)=rownames(jac_rec)=musicians
+colnames(jac_year)=rownames(jac_year)=musicians
+
+```
