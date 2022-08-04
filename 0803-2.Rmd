@@ -195,9 +195,12 @@ ggplot(visualTsne_pssInst, aes(x=tsne1, y=tsne2)) +
 
 ```{r}
 set.seed(19970608)
-jac_inst = Rtsne(jac_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+jac_inst = dis_jac(instrument_matrix)
+colnames(jac_inst) = rownames(jac_inst) = musicians
 
-visualTsne_jacInst = cbind(jac_inst$Y, color_inst$hex)
+tsne_jacInst = Rtsne(jac_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_jacInst = cbind(tsne_jacInst$Y, color_inst$hex)
 
 colnames(visualTsne_jacInst) = c('tsne1', 'tsne2', 'hex')
 rownames(visualTsne_jacInst) = musicians
