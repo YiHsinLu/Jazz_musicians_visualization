@@ -22,7 +22,7 @@ library(viridisLite)
 library(Rtsne)
 library(qvalue)
 library(jaccard)
-load("D:/jazz_visual/0803-1.RData")
+load("D:/jazz_visual/0803-3.RData")
 ```
 
 ```{r}
@@ -37,4 +37,174 @@ colnames(jac_genre)=rownames(jac_genre)=musicians
 colnames(jac_rec)=rownames(jac_rec)=musicians
 colnames(jac_year)=rownames(jac_year)=musicians
 
+color_inst = read.csv("D:/jazz_visual/csv/color_instclass_sqrt.csv", row.names = 1)
+```
+
+## Inst
+```{r}
+comjac_InstYear = sqrt((jac_inst^2+jac_year^2/2))
+
+set.seed(19970608)
+tsne_JY = Rtsne(comjac_InstYear, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_JY = cbind(tsne_JY$Y, color_inst$hex)
+
+colnames(visualTsne_JY) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_JY) = musicians
+visualTsne_JY = as.data.frame(visualTsne_JY)
+
+visualTsne_JY = transform(visualTsne_JY, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_JY, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_JY$hex)
+```
+
+```{r}
+cosSim_inst = cos_sim(instrument_matrix)
+colnames(cosSim_inst)=rownames(cosSim_inst)=musicians
+```
+
+```{r}
+set.seed(19970608)
+tsne_csInst = Rtsne(cosSim_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_csInst = cbind(tsne_csInst$Y, color_inst$hex)
+
+colnames(visualTsne_csInst) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_csInst) = musicians
+visualTsne_csInst = as.data.frame(visualTsne_csInst)
+
+visualTsne_csInst = transform(visualTsne_csInst, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_csInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_csInst$hex)
+```
+
+```{r}
+TA_inst = TA(instrument_matrix)
+colnames(TA_inst)=rownames(TA_inst)=musicians
+
+set.seed(19970608)
+tsne_taInst = Rtsne(TA_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_taInst = cbind(tsne_taInst$Y, color_inst$hex)
+
+colnames(visualTsne_taInst) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_taInst) = musicians
+visualTsne_taInst = as.data.frame(visualTsne_taInst)
+
+visualTsne_taInst = transform(visualTsne_taInst, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_taInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_taInst$hex)
+```
+
+```{r}
+CosJ_inst = cosSim_inst*jac_inst
+colnames(CosJ_inst)=rownames(CosJ_inst)=musicians
+
+set.seed(19970608)
+tsne_csjInst = Rtsne(CosJ_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_csjInst = cbind(tsne_csjInst$Y, color_inst$hex)
+
+colnames(visualTsne_csjInst) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_csjInst) = musicians
+visualTsne_csjInst = as.data.frame(visualTsne_csjInst)
+
+visualTsne_csjInst = transform(visualTsne_csjInst, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_csjInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_csjInst$hex)
+```
+
+```{r}
+TAJ_inst = TA_inst*jac_inst
+colnames(TAJ_inst)=rownames(TAJ_inst)=musicians
+
+set.seed(19970608)
+tsne_tajInst = Rtsne(TAJ_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_tajInst = cbind(tsne_tajInst$Y, color_inst$hex)
+
+colnames(visualTsne_tajInst) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_tajInst) = musicians
+visualTsne_tajInst = as.data.frame(visualTsne_tajInst)
+
+visualTsne_tajInst = transform(visualTsne_tajInst, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_tajInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_tajInst$hex)
+```
+```{r}
+pear_inst = pear(instrument_matrix)
+colnames(pear_inst)=rownames(pear_inst)=musicians
+
+set.seed(19970608)
+tsne_pearInst = Rtsne(pear_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_pearInst = cbind(tsne_pearInst$Y, color_inst$hex)
+
+colnames(visualTsne_pearInst) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_pearInst) = musicians
+visualTsne_pearInst = as.data.frame(visualTsne_pearInst)
+
+visualTsne_pearInst = transform(visualTsne_pearInst, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_pearInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_pearInst$hex)
+```
+
+```{r}
+pearJ_inst = pear_inst*jac_inst
+colnames(pearJ_inst)=rownames(pearJ_inst)=musicians
+
+set.seed(19970608)
+tsne_pearJInst = Rtsne(pearJ_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_pearJInst = cbind(tsne_pearJInst$Y, color_inst$hex)
+
+colnames(visualTsne_pearJInst) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_pearJInst) = musicians
+visualTsne_pearJInst = as.data.frame(visualTsne_pearJInst)
+
+visualTsne_pearJInst = transform(visualTsne_pearJInst, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_pearJInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_pearJInst$hex)
+```
+```{r}
+pss_inst = pss(instrument_matrix)
+colnames(pss_inst)=rownames(pss_inst)=musicians
+
+set.seed(19970608)
+tsne_pssInst = Rtsne(pss_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_pssInst = cbind(tsne_pssInst$Y, color_inst$hex)
+
+colnames(visualTsne_pssInst) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_pssInst) = musicians
+visualTsne_pssInst = as.data.frame(visualTsne_pssInst)
+
+visualTsne_pssInst = transform(visualTsne_pssInst, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_pssInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_pssInst$hex)
+```
+
+
+```{r}
+set.seed(19970608)
+jac_inst = Rtsne(jac_inst, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_jacInst = cbind(jac_inst$Y, color_inst$hex)
+
+colnames(visualTsne_jacInst) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_jacInst) = musicians
+visualTsne_jacInst = as.data.frame(visualTsne_jacInst)
+
+visualTsne_jacInst = transform(visualTsne_jacInst, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_jacInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_jacInst$hex)
 ```

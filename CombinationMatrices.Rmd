@@ -1,0 +1,116 @@
+---
+title: "**【t-SNE for Combination with Jaccard】**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+**$\mathcal{YiHsin}\;\mathcal{Lu}$**
+
+```{r include=FALSE}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+library(lsa)
+load("D:/jazz_visual/0804-2.RData")
+```
+
+## **Similarity Methods**
+
+* Jaccard
+* Cosine
+* Triangle Area (TA)
+* Pearson
+* PSS (Proximity, Significance and Singularity)
+
+****
+
+### **【Jaccard】**
+
+```{r echo=FALSE}
+ggplot(visualTsne_jacInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_jacInst$hex)
+```
+
+****
+
+### **【Cosine Similarity】**
+
+```{r echo=FALSE}
+ggplot(visualTsne_csInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_csInst$hex)
+```
+
+****
+
+### **【Pearson Correlation】**
+
+```{r echo=FALSE}
+ggplot(visualTsne_pearInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_pearInst$hex)
+```
+
+****
+
+### **【Triangle Area measure】**
+
+```{r echo=FALSE}
+ggplot(visualTsne_taInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_taInst$hex)
+```
+
+****
+
+## **Combination of methods**
+
+* CosineJ = Cosine*Jaccard
+* PearsonJ = Pearson*Jaccard
+* TAJ = TA*Jaccard
+
+### **【CosineJ】**
+
+```{r echo=FALSE}
+ggplot(visualTsne_csjInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_csjInst$hex)
+```
+
+****
+
+### **【PearsonJ】**
+
+```{r echo=FALSE}
+ggplot(visualTsne_pearJInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_pearJInst$hex)
+```
+
+****
+
+### **【TAJ】**
+
+```{r echo=FALSE}
+ggplot(visualTsne_tajInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_tajInst$hex)
+```
+
+****

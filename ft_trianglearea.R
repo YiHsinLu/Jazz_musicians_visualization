@@ -1,4 +1,4 @@
-# Jaccard function
+# Triangle Area measure function
 dis_jac = function(M){
   M = as.matrix(M)
   library("jaccard")
