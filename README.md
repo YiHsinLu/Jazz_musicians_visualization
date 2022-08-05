@@ -29,3 +29,6 @@ This repository is the research of master life. Music topic is my favorite, so I
   + simple t-SNE
 * [20220722](https://yihsinlu.github.io/Jazz.io/Color_in_plots_tsne.html)
   + t-SNE for different affinity matrix
+* [20220805](https://yihsinlu.github.io/Jazz.io/CombinationMatrices.html)
+  + similarity methods
+  + combination of similarity methods
