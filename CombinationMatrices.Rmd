@@ -35,7 +35,7 @@ library(Rtsne)
 library(qvalue)
 library(jaccard)
 library(lsa)
-load("D:/jazz_visual/0804-2.RData")
+load("D:/jazz_visual/0808-1.RData")
 ```
 
 ## **Similarity Methods**
@@ -82,12 +82,20 @@ ggplot(visualTsne_taInst, aes(x=tsne1, y=tsne2)) +
   geom_point(color = visualTsne_taInst$hex)
 ```
 
+### **【PSS】**
+
+```{r echo=FALSE}
+ggplot(visualTsne_pssInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_pssInst$hex)
+```
+
 ****
 
 ## **Combination of methods**
 
 * CosineJ = Cosine*Jaccard
 * PearsonJ = Pearson*Jaccard
+* PSSJ = PSS*Jaccard
 * TAJ = TA*Jaccard
 
 ### **【CosineJ】**
@@ -104,6 +112,15 @@ ggplot(visualTsne_csjInst, aes(x=tsne1, y=tsne2)) +
 ```{r echo=FALSE}
 ggplot(visualTsne_pearJInst, aes(x=tsne1, y=tsne2)) +
   geom_point(color = visualTsne_pearJInst$hex)
+```
+
+****
+
+### **【PSSJ】**
+
+```{r echo=FALSE}
+ggplot(visualTsne_pssJInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_pssJInst$hex)
 ```
 
 ****

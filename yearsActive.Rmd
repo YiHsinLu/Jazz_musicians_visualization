@@ -1,30 +1,117 @@
 ```{r}
-Mtable = read.csv("D:/Jazz_visual/csv/Musician_table.csv", row.names = 1)[c(-5,-72,-107,-182,-205,-219,-224),]
-write.csv(Mtable, 'D:/jazz_visual/csv/Mtable229.csv', na = '')
+Mtable = read.csv("D:/jazz_visual/csv/Mtable229.csv", row.names = 1)
 ```
 
 ```{r}
-yearsActive = as.data.frame(as.character(Mtable$yearsActive_first))
-colnames(yearsActive) = 'yearsActive'
-rownames(yearsActive) = rownames(Mtable)
-```
+YA = as.data.frame(as.character(Mtable$yearsActive_first))
+colnames(YA) = 'year'
+rownames(YA) = rownames(Mtable)
 
-# Genre
-```{r}
-yearsActive_split = token_split(yearsActive, g=1)
-```
-
-```{r}
-yearsActive_ohe = oh_encoding(yearsActive, tok = yearsActive_split$token_list1[-1])
+YA_nu = YA
+YA_nu[,1] = sapply(YA_nu[,1], as.numeric)
 ```
 
 ```{r}
-yearsActive_matrix = yearsActive_ohe$token_matrix
+YA_matrix = YA_matrix %>% select(sort(colnames(YA_matrix)))
 
-for(i in 1:nrow(yearsActive_matrix)){
-  sum_mu = sum(yearsActive_matrix[i,])
+YsA = YA_nu
+
+YsA = floor(YsA/10)*10
+```
+
+# yearsActive
+```{r}
+YA_split = token_split(YA, g=1)
+YA_ohe = oh_encoding(YA, tok = YA_split$token_list1[-1])
+YA_matrix = YA_ohe$token_matrix
+
+
+YsA[,1] = sapply(YsA[,1], as.character)
+YsA_split = token_split(YsA, g=1)
+YsA_ohe = oh_encoding(YsA, tok = YsA_split$token_list1[-1])
+YsA_matrix = YsA_ohe$token_matrix
+YsA_matrix = YsA_matrix %>% select(sort(colnames(YsA_matrix)))
+
+for(i in 1:nrow(YA_matrix)){
+  sum_mu = sum(YA_matrix[i,])
   if(sum_mu>1){
     print(sprintf("Multivalue in %s, value: %s", i, sum_mu))
   }
 }
+```
+
+
+
+```{r}
+YA %>% 
+  filter(!is.na(year)) %>% 
+  count(year) %>% 
+  hchart('areaspline', hcaes(x = 'year', y = 'n'))
+```
+
+```{r}
+YA %>% 
+  filter(!is.na(year)) %>% 
+  count(year) %>% 
+  hchart('column', hcaes(x = 'year', y = 'n')) %>% 
+  hc_title(text = "YearsActive")
+```
+
+
+```{r}
+YsA %>% 
+  filter(!is.na(year)) %>% 
+  count(year) %>% 
+  hchart('areaspline', hcaes(x = 'year', y = 'n'))
+```
+
+```{r}
+YsA %>% 
+  filter(!is.na(year)) %>% 
+  count(year) %>% 
+  hchart('column', hcaes(x = 'year', y = 'n')) %>% 
+  hc_title(text = "YearsActive")
+```
+
+```{r}
+musicians = rownames(YsA_matrix)
+
+YsA_jac = dis_jac(YsA_matrix)
+colnames(YsA_jac) = rownames(YsA_jac) = rownames(YsA_matrix)
+
+set.seed(19970608)
+tsne_YsA = Rtsne(YsA_jac, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_YsA = cbind(tsne_YsA$Y, YsA$year)
+
+colnames(visualTsne_YsA) = c('tsne1', 'tsne2', 'years')
+rownames(visualTsne_YsA) = musicians
+visualTsne_YsA = as.data.frame(visualTsne_YsA)
+
+visualTsne_YsA = transform(visualTsne_YsA, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+#ggplot(visualTsne_YsA, aes(x=tsne1, y=tsne2))
+hchart(visualTsne_YsA, 'scatter', hcaes(x=tsne1, y=tsne2, group = years))
+```
+
+```{r}
+musicians = rownames(YsA_matrix)
+
+YA_jac = dis_jac(YA_matrix)
+colnames(YA_jac) = rownames(YA_jac) = rownames(YA_matrix)
+
+set.seed(19970608)
+tsne_YA = Rtsne(YA_jac, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+visualTsne_YA = cbind(tsne_YA$Y, YA$year, YsA$year)
+
+colnames(visualTsne_YA) = c('tsne1', 'tsne2', 'year', 'years')
+rownames(visualTsne_YA) = musicians
+visualTsne_YA = as.data.frame(visualTsne_YA)
+
+visualTsne_YA = transform(visualTsne_YA, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+#ggplot(visualTsne_YsA, aes(x=tsne1, y=tsne2))
+hchart(visualTsne_YA, 'scatter', hcaes(x=tsne1, y=tsne2, group = year))
+hchart(visualTsne_YA, 'scatter', hcaes(x=tsne1, y=tsne2, group = years))
 ```

@@ -1,0 +1,123 @@
+---
+title: "**【Data Matrices: Genre, Record Label, Years Active】**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+**$\mathcal{YiHsin}\;\mathcal{Lu}$**
+
+
+```{r include=FALSE}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+load("D:/jazz_visual/0809-1.RData")
+```
+
+# **Recap**
+
+* Combination with Jaccard
+* t-SNE for the matrices
+
+# **Explanation**
+
+* Jaccard: vector with many "0"
+* Other method: vector without any "0"
+* Mixed two kind of method
+
+# **Data Matrices**
+
+* genre
+  + drop the "once" data
+  + hand-pick
+* record label
+  + drop the "once" data
+* years active
+  + year to years
+  + t-SNE
+  
+****  
+
+## **1. Genre**
+
+```{r echo=FALSE}
+genre_matrix1
+```
+
+****
+
+## **2. Record Label**
+
+```{r echo=FALSE}
+RL_matrix1
+```
+
+****
+
+## **3. Years Active**
+
+### **3.1 Year**
+
+```{r echo=FALSE}
+YA_matrix
+```
+
+****
+
+### **3.2 Years**
+
+```{r echo=FALSE}
+YsA_matrix
+```
+
+****
+
+### **3.3 Visualization**
+
+* data: years
+* color: years
+```{r echo=FALSE}
+hchart(visualTsne_YsA, 'scatter', hcaes(x=tsne1, y=tsne2, group = years))
+```
+* data: year
+* color: year
+```{r echo=FALSE}
+hchart(visualTsne_YA, 'scatter', hcaes(x=tsne1, y=tsne2, group = year))
+```
+* data: year
+* color: years
+```{r echo=FALSE}
+hchart(visualTsne_YA, 'scatter', hcaes(x=tsne1, y=tsne2, group = years))
+```
+
+****
+
+# **Main Plot**
+
+```{r echo=FALSE}
+load("D:/jazz_visual/0808-1.RData")
+ggplot(visualTsne_jacInst, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_jacInst$hex)
+```

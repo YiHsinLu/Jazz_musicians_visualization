@@ -1,38 +1,63 @@
 # PSS function (proximity, significance, singularity)
 
-#proxim = function(x,y){
-#  expvalue = exp(-abs(x-y))
-#  z = 1-(1/(1+expvalue))
-#  return(z)
-#}
-#
-#
-#singular = function(x,y){
-#  z = x
-#  for(k in 1:length(x)){
-#    muj = mean(M[,k])
-#    expvalue = 0
-#    xi = x[k]
-#    yi = y[k]
-#    rm = median(c(xi,yi))
-#    expvalue = exp(-abs((xi-yi)/2-muj))
-#    z[k] = 1/(1+expvalue)
-#  }
-#  return(z)
-#}
-#
-#signific = function(x,y){
-#  z = x
-#  for(k in 1:length(x)){
-#    expvalue = 0
-#    xi = x[k]
-#    yi = y[k]
-#    rm = median(M[,k])
-#    expvalue = exp(-abs(xi-rm)*abs(yi-rm))
-#    z[k] = 1/(1+expvalue)
-#  }
-#  return(z)
-#}
+proxim = function(x,y){
+  expvalue = exp(-abs(x-y))
+  z = 1-(1/(1+expvalue))
+  return(z)
+}
+
+
+signific = function(x,y,rm){
+  expvalue = exp(-abs(x-rm)*abs(y-rm))
+  z = (1/(1+expvalue))
+  return(z)
+}
+
+singular = function(x,y,muj){
+  expvalue = exp(-abs((x+y)/2-muj))
+  z = 1-(1/(1+expvalue))
+  return(z)
+}
+
+median_vector = function(M, take = 'column'){
+  M = as.matrix(M)
+  n = nrow(M)
+  p = ncol(M)
+  if(take == 'column'){
+    mv = c()
+    for(i in 1:p){
+      mv = cbind(mv, median(M[,i]))
+    }
+  }else if(take == 'row'){
+    mv = c()
+    for(i in 1:n){
+      mv = rbind(mv, median(M[i,]))
+    }
+  }else{
+    stop('Error in take: parameter incorrect.')
+  }
+  return(as.matrix(mv))
+}
+
+mean_vector = function(M, take = 'column'){
+  M = as.matrix(M)
+  n = nrow(M)
+  p = ncol(M)
+  if(take == 'column'){
+    mv = c()
+    for(i in 1:p){
+      mv = cbind(mv, mean(M[,i]))
+    }
+  }else if(take == 'row'){
+    mv = c()
+    for(i in 1:n){
+      mv = rbind(mv, mean(M[i,]))
+    }
+  }else{
+    stop('Error in take: parameter incorrect.')
+  }
+  return(as.matrix(mv))
+}
 
 pss = function(M){
   M = as.matrix(M)
@@ -47,22 +72,9 @@ pss = function(M){
       }else{
         ui = M[i,]
         uj = M[j,]
-        prox = 1-(1/(1+exp(-abs(ui-uj))))
-        signific = c()
-        for(k in 1:length(ui)){
-          rm = median(M[,k])
-          signific_k = 1/(1+exp(-abs(ui[k]-rm)*abs(uj[k]-rm)))
-          signific = rbind(signific, signific_k)
-        }
-        signific = as.matrix(signific)
-        singular = c()
-        for(k in 1:length(ui)){
-          muj = mean(M[,k])
-          singular_k = 1-1/(1+exp(-abs((ui[k]-uj[k])/2-muj)))
-          singular = rbind(singular, singular_k)
-        }
-        singular = as.matrix(singular)
-        pss = prox%*%signific[,1]%*%singular[,1]
+        rm = median_vector(M, take = 'column')
+        muj = mean_vector(M, take = 'column')
+        pss = sum(proxim(ui, uj)*signific(ui, uj, rm = rm)*singular(ui, uj, muj = muj))
         af_matrix[i,j] = af_matrix[j,i] = pss
       }
     }

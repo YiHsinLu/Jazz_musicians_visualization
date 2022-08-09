@@ -1,30 +1,44 @@
 ```{r}
-Mtable = read.csv("D:/Jazz_visual/csv/Musician_table.csv", row.names = 1)[c(-5,-72,-107,-182,-205,-219,-224),]
-write.csv(Mtable, 'D:/jazz_visual/csv/Mtable229.csv', na = '')
+Mtable = read.csv("D:/Jazz_visual/csv/Mtable229.csv", row.names = 1)
 ```
 
 ```{r}
 genre = as.data.frame(Mtable$genre)
-colnames(genre) = 'genre'
+colnames(genre) = 'genre_cat'
 rownames(genre) = rownames(Mtable)
 ```
 
 # Genre
 ```{r}
 genre_split = token_split(genre, g=1)
-```
-
-```{r}
 genre_ohe = oh_encoding(genre, tok = genre_split$token_list1)
 ```
 
 ```{r}
 genre_matrix = genre_ohe$token_matrix
 
-for(i in 1:nrow(genre_matrix)){
-  sum_mu = sum(genre_matrix[i,])
+del_col = c()
+for(i in 1:ncol(genre_matrix)){
+  sum_mu = sum(genre_matrix[,i])
+  if(sum_mu==1){
+    print(sprintf("%s:%s", i, colnames(genre_matrix)[i]))
+    del_col = cbind(del_col, i)
+  }
+}
+
+genre_matrix1 = genre_matrix[,-del_col]
+genre_list = colnames(genre_matrix1)
+for(i in 1:nrow(genre_matrix1)){
+  sum_mu = sum(genre_matrix1[i,])
   if(sum_mu>1){
-    print(sprintf("Multivalue in %s, value: %s", i, sum_mu))
+    print(sprintf("Multivlaue in %s: %s", i, rownames(genre_matrix1)[i]))
+  }
+}
+
+for(i in 1:ncol(genre_matrix1)){
+  sum_mu = sum(genre_matrix1[,i])
+  if(sum_mu==2){
+    print(sprintf("%s:%s", i, colnames(genre_matrix1)[i]))
   }
 }
 ```

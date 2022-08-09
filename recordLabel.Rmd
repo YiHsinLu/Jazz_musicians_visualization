@@ -1,30 +1,39 @@
 ```{r}
-Mtable = read.csv("D:/Jazz_visual/csv/Musician_table.csv", row.names = 1)[c(-5,-72,-107,-182,-205,-219,-224),]
-write.csv(Mtable, 'D:/jazz_visual/csv/Mtable229.csv', na = '')
+Mtable = read.csv('D:/jazz_visual/csv/Mtable229.csv', row.names = 1)
+
+RL = as.data.frame(Mtable$recordLabel)
+colnames(RL) = 'record_label'
+rownames(RL) = rownames(Mtable)
 ```
 
+# record label
 ```{r}
-recordLabel = as.data.frame(Mtable$recordLabel)
-colnames(recordLabel) = 'recordLabel'
-rownames(recordLabel) = rownames(Mtable)
-```
+RL_split = token_split(RL, g=1)
+RL_ohe = oh_encoding(RL, tok = RL_split$token_list1)
+RL_matrix = RL_ohe$token_matrix
 
-# Genre
-```{r}
-recordLabel_split = token_split(recordLabel, g=1)
-```
-
-```{r}
-recordLabel_ohe = oh_encoding(recordLabel, tok = recordLabel_split$token_list1)
-```
-
-```{r}
-recordLabel_matrix = recordLabel_ohe$token_matrix
-
-for(i in 1:nrow(recordLabel_matrix)){
-  sum_mu = sum(recordLabel_matrix[i,])
-  if(sum_mu>1){
-    print(sprintf("Multivalue in %s, value: %s", i, sum_mu))
+RL_del_col = c()
+for(i in 1:ncol(RL_matrix)){
+  sum_mu = sum(RL_matrix[,i])
+  if(sum_mu==1){
+    print(sprintf("%s:%s", i, colnames(RL_matrix)[i]))
+    RL_del_col = cbind(RL_del_col, i)
   }
 }
+```
+
+```{r}
+# Multivalue check
+RL_matrix1 = RL_matrix[,-RL_del_col]
+RL_list = colnames(RL_matrix1)
+for(i in 1:nrow(RL_matrix1)){
+  sum_mu = sum(RL_matrix1[i,])
+  if(sum_mu>1){
+    print(sprintf("Multivlaue in %s: %s", i, rownames(RL_matrix1)[i]))
+  }
+}
+```
+
+```{r}
+
 ```
