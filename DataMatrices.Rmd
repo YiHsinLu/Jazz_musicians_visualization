@@ -84,6 +84,14 @@ RL_matrix1
 YA_matrix
 ```
 
+```{r echo=FALSE}
+YA %>% 
+  filter(!is.na(year)) %>% 
+  count(year) %>% 
+  hchart('column', hcaes(x = 'year', y = 'n')) %>% 
+  hc_title(text = "YearsActive")
+```
+
 ****
 
 ### **3.2 Years**
@@ -91,6 +99,15 @@ YA_matrix
 ```{r echo=FALSE}
 YsA_matrix
 ```
+
+```{r echo=FALSE}
+YsA %>% 
+  filter(!is.na(year)) %>% 
+  count(year) %>% 
+  hchart('column', hcaes(x = 'year', y = 'n')) %>% 
+  hc_title(text = "YearsActive")
+```
+
 
 ****
 

@@ -32,3 +32,7 @@ This repository is the research of master life. Music topic is my favorite, so I
 * [20220805](https://yihsinlu.github.io/Jazz.io/CombinationMatrices.html)
   + similarity methods
   + combination of similarity methods
+* [20220811](https://yihsinlu.github.io/Jazz.io/DataMatrices.html)
+  + explain why use product of each value in two matrices
+  + genre, recordLabel, yearsActive
+  + main plot in paper
