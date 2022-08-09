@@ -1,0 +1,44 @@
+```{r}
+Mtable = read.csv("D:/Jazz_visual/csv/Mtable229.csv", row.names = 1)
+```
+
+```{r}
+genre = as.data.frame(Mtable$genre)
+colnames(genre) = 'genre_cat'
+rownames(genre) = rownames(Mtable)
+```
+
+# Genre
+```{r}
+genre_split = token_split(genre, g=1)
+genre_ohe = oh_encoding(genre, tok = genre_split$token_list1)
+```
+
+```{r}
+genre_matrix = genre_ohe$token_matrix
+
+del_col = c()
+for(i in 1:ncol(genre_matrix)){
+  sum_mu = sum(genre_matrix[,i])
+  if(sum_mu==1){
+    print(sprintf("%s:%s", i, colnames(genre_matrix)[i]))
+    del_col = cbind(del_col, i)
+  }
+}
+
+genre_matrix1 = genre_matrix[,-del_col]
+genre_list = colnames(genre_matrix1)
+for(i in 1:nrow(genre_matrix1)){
+  sum_mu = sum(genre_matrix1[i,])
+  if(sum_mu>1){
+    print(sprintf("Multivlaue in %s: %s", i, rownames(genre_matrix1)[i]))
+  }
+}
+
+for(i in 1:ncol(genre_matrix1)){
+  sum_mu = sum(genre_matrix1[,i])
+  if(sum_mu==2){
+    print(sprintf("%s:%s", i, colnames(genre_matrix1)[i]))
+  }
+}
+```

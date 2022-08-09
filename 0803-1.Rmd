@@ -1,0 +1,24 @@
+```{r}
+Mtable = read.csv("D:/Jazz_visual/csv/Musician_table.csv", row.names = 1)[c(-5,-72,-107,-182,-205,-219,-224),]
+write.csv(Mtable, 'D:/jazz_visual/csv/Mtable229.csv', na = '')
+```
+
+```{r}
+yearActive = as.data.frame(Mtable$yearsActive)
+yearActive_first = as.data.frame(Mtable$yearsActive_first)
+genre = as.data.frame(Mtable$genre)
+recordLabel = as.data.frame(Mtable$recordLabel)
+
+colnames(yearActive) = 'yearActive'
+colnames(yearActive_first) = 'yearActive_first'
+colnames(genre) = 'genre'
+colnames(recordLabel) = 'recordLabel'
+
+
+
+```
+
+# Genre
+```{r}
+genre_split = token_split(genre, g=1)
+```

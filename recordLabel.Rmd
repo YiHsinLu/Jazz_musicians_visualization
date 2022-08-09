@@ -1,0 +1,39 @@
+```{r}
+Mtable = read.csv('D:/jazz_visual/csv/Mtable229.csv', row.names = 1)
+
+RL = as.data.frame(Mtable$recordLabel)
+colnames(RL) = 'record_label'
+rownames(RL) = rownames(Mtable)
+```
+
+# record label
+```{r}
+RL_split = token_split(RL, g=1)
+RL_ohe = oh_encoding(RL, tok = RL_split$token_list1)
+RL_matrix = RL_ohe$token_matrix
+
+RL_del_col = c()
+for(i in 1:ncol(RL_matrix)){
+  sum_mu = sum(RL_matrix[,i])
+  if(sum_mu==1){
+    print(sprintf("%s:%s", i, colnames(RL_matrix)[i]))
+    RL_del_col = cbind(RL_del_col, i)
+  }
+}
+```
+
+```{r}
+# Multivalue check
+RL_matrix1 = RL_matrix[,-RL_del_col]
+RL_list = colnames(RL_matrix1)
+for(i in 1:nrow(RL_matrix1)){
+  sum_mu = sum(RL_matrix1[i,])
+  if(sum_mu>1){
+    print(sprintf("Multivlaue in %s: %s", i, rownames(RL_matrix1)[i]))
+  }
+}
+```
+
+```{r}
+
+```
