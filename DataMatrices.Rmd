@@ -45,7 +45,7 @@ load("D:/jazz_visual/0809-1.RData")
 
 * Jaccard: vector with many "0"
 * Other method: vector without any "0"
-* Mixed two kind of method
+* Mixed two kind of methods
 
 # **Data Matrices**
 
