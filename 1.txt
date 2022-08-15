@@ -1,46 +1,44 @@
-Yi-Hsin Lu [ July 22, 2022  12:20]
- -Next meeting[ August 5, 2022 10:10 ]
-
-《研究生完全求生手冊》
-	* 章節安排：
-		+ 第一章：君儫
-		+ 第二章：承翰
-		+ 第四章：一昕
-		+ 第五章：君儫
-		+ 第六章：一昕
-		+ 第七章：承翰
-		+ 第八章：承翰
-		+ 附錄一：一昕
-
-	* 1. Formulation在問題上不唯一。
-	* 2. Formulation;Heuristics, google page rank (eigenvalue, eigenvector problem)
-	* 3. 橡皮擦計畫
-	* 4. Simpson's paradox 問題思考
+Yi-Hsin Lu [ August 11, 2022, 14:02 ]
+ -Next meeting[ August 19, 2022, 10:10 ]
 
 Discussion
 
-	* 1. Mistake fixed last presentation
-	* 2. t-SNE for different data matrix
-	* 3. Other method of visualization
+* 1. Explain why use product of each value in two matrices for combination with jaccard
+	+ Jaccard: vector with many "0"
+	+ Other method: vector without any "0"
+	+ Mixed two kind of methods
+* 2. Data Matrices
+	+ genre
+	+ yearsActive
+ 	+ recordLabel
+* 3. Main Plot
+
+
 
 To-do
 
-	* 1. 《研究生完全求生手冊》章節中可能有更適合的做法或找出和自身想法有出入的內容，並闡述自身想法
-	* 2. Affinity matrix
-		+ a. Jaccard in genre
-		+ b. Jaccard in yearActive
-		+ c. Jaccard in recordLabel
-		+ d. combination of a.~c. and jaccard in instrument
-		+ e. d. with given weight
-	* 3. Visualization versus t-SNE
-		+ a. Umap
-		+ b. isomap
-		+ c. LDA
-		+ d. network plot
-		+ e. others
-	
+* 1. Data matrices
+	+ genre
+		- classes in PCA
+		- color
+	+ recordLabel
+		- classes in PCA
+		- color
+
+* 2. Paper work
+	+ visualization method
+		- PCA/MDS
+		- t-SNE
+	+ Plot
+		- main plot: combind instrument, genre, recordLabel, yearsActive
+		- weight on instrument
+		- weight on genre
+		- weight on recordLabel
+		- weight on yearsActive
+		- zoom-in for the main plot
+
 Link/References
-* 1. [RGB and CMYK](https://www.rapidtables.com/convert/color/rgb-to-cmyk.html)
+* 1. [Similarity functions](hhttps://github.com/YiHsinLu/Similarity_function)
 * 2. A state-of-the-art survey on recommendation systems and prospective extensions (https://www.sciencedirect.com/science/article/abs/pii/S016816992031629X)
 * 3. A Review of Movie Recommendation System: Limitations, Survey, and Challenges
 (https://ddd.uab.cat/record/232276)

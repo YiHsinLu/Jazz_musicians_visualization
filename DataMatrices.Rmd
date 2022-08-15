@@ -1,5 +1,6 @@
 ---
-title: "**【Data Matrices: Genre, Record Label, Years Active】**"
+title: "**【Data Matrices】**"
+subtitle: "**Genre, Record Label, Years Active**"
 output: 
   html_document:
     toc: true
@@ -43,6 +44,7 @@ load("D:/jazz_visual/0809-1.RData")
 
 # **Explanation**
 
+* [Combinations of Jaccard with Numerical Measures for Collaborative Filtering](https://arxiv.org/ftp/arxiv/papers/2111/2111.12202.pdf)
 * Jaccard: vector with many "0"
 * Other method: vector without any "0"
 * Mixed two kind of methods
