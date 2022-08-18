@@ -1,0 +1,149 @@
+---
+title: "**【Visualizing Jazz Musicians】**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+**$\mathcal{YiHsin}\;\mathcal{Lu}$**
+
+****
+
+## **Recap**
+
+  * explain combination of jaccard
+  * plot color by instrument
+
+```{r include=FALSE}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+library(lsa)
+library(patchwork)
+load("D:/jazz_visual/0818.RData")
+```
+
+# **1. Data Matrices**
+
+****
+
+## 1.1 Genres
+
+```{r echo=FALSE}
+plot(cor_genre$w[,1],-cor_genre$w[,2],type="n",xlab="W[,1]",ylab="W[,2]",main="Genre",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(cor_genre$w[,1],-cor_genre$w[,2],cor_genre$namew)
+abline(h=0,v=0,lwd=1.2)
+```
+
+****
+
+## 1.2 Record Label
+
+```{r echo=FALSE}
+plot(cor_rl$w[,1],-cor_rl$w[,2],type="n",xlab="W[,1]",ylab="W[,2]",main="Record Label",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(cor_rl$w[,1],-cor_rl$w[,2],cor_rl$namew)
+abline(h=0,v=0,lwd=1.2)
+```
+
+****
+
+# **2. Visualization**
+
+```{r echo=FALSE}
+visualpca_plot+visualTsne_plot
+```
+
+****
+
+# **3. Main Plots**
+
+****
+
+## 3.1 Entire combination
+
+* $\mathcal{X}_i$: affinity matrix for each information
+* for $i$:
+  + instrument
+  + yearsActive
+  + genre
+  + recordLabel
+* $\large{\mathcal{X}_{entire} =\sqrt{\mathcal{X}_{instrument}^2+\mathcal{X}_{yearsActive}^2+\mathcal{X}_{genre}^2+\mathcal{X}_{recordLabel}^2}}$
+
+```{r echo=FALSE}
+ggplot(visualTsne_ComAll, aes(x=tsne1, y=tsne2, label=name))+
+  geom_point() +geom_text(hjust=0, vjust=0)
+
+hchart(visualTsne_ComAll, 'scatter', hcaes(x=tsne1, y=tsne2, group=name))
+```
+
+****
+
+## 3.2 Zoom in{.tabset}
+
+### 3.2.1 Wynton Marsalis
+
+```{r echo=FALSE,warning=FALSE}
+Wynton
+```
+
+****
+
+### 3.2.2 Roy Hargrove
+
+```{r echo=FALSE,warning=FALSE}
+Roy
+```
+
+****
+
+### 3.2.3 Miles Davis
+
+```{r echo=FALSE,warning=FALSE}
+Miles
+```
+
+
+****
+
+## 3.3 Weight{.tabset}
+
+### 3.3.1 Instrument
+
+* $\large{\mathcal{X}_{entire} =\sqrt{7\cdot\mathcal{X}_{instrument}^2+\mathcal{X}_{yearsActive}^2+\mathcal{X}_{genre}^2+\mathcal{X}_{recordLabel}^2}}$
+
+```{r echo=FALSE}
+ggplot(visualTsne_ComAll.inst, aes(x=tsne1, y=tsne2))+
+  geom_point(color = visualTsne_ComAll.inst$hex)
+```
+
+****
+
+### 3.3.2 Years Active
+
+* $\large{\mathcal{X}_{entire} =\sqrt{\mathcal{X}_{instrument}^2+7\cdot\mathcal{X}_{yearsActive}^2+\mathcal{X}_{genre}^2+\mathcal{X}_{recordLabel}^2}}$
+
+```{r echo=FALSE}
+ggplot(visualTsne_ComAll.ysa, aes(x=tsne1, y=tsne2, colour = ysa$year))+
+  geom_point()
+```

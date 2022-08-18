@@ -16,7 +16,6 @@ genre_ohe = oh_encoding(genre, tok = genre_split$token_list1)
 
 ```{r}
 genre_matrix = genre_ohe$token_matrix
-
 del_col = c()
 for(i in 1:ncol(genre_matrix)){
   sum_mu = sum(genre_matrix[,i])
@@ -41,4 +40,6 @@ for(i in 1:ncol(genre_matrix1)){
     print(sprintf("%s:%s", i, colnames(genre_matrix1)[i]))
   }
 }
+
+write.csv(genre_matrix1, 'D:/jazz_visual/csv/matrix_genre.csv', na="")
 ```

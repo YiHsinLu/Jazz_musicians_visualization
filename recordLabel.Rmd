@@ -35,5 +35,5 @@ for(i in 1:nrow(RL_matrix1)){
 ```
 
 ```{r}
-
+write.csv(RL_matrix1, 'D:/jazz_visual/csv/matrix_recordLabel.csv', na="")
 ```

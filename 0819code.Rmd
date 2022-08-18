@@ -1,0 +1,37 @@
+```{r}
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(micropan)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+library(lsa)
+```
+
+```{r}
+Mtable = read.csv("D:/jazz_visual/csv/Mtable229.csv", row.names = 1)
+M_inst = read.csv("D:/jazz_visual/csv/matrix_instrument.csv", row.names = 1)
+M_genre = read.csv("D:/jazz_visual/csv/matrix_genre.csv", row.names = 1)
+M_ysa = read.csv("D:/jazz_visual/csv/matrix_yearsActive.csv", row.names = 1)
+M_rl = read.csv("D:/jazz_visual/csv/matrix_recordLabel.csv", row.names = 1)
+```
+
+```{r}
+
+```

@@ -83,7 +83,7 @@ token_split = function(df, g, id=rownames(df)){
 #########################################################################################
 
 oh_encoding = function(df,id=rownames(df),tok=c(),g=1){
-  tok_slt = token_split(df=df,g=g,id=id)
+  tok_slt = suppressMessages(token_split(df=df,g=g,id=id))
   n = nrow(df)
   token_matrix = matrix(data = 0, nrow = n, ncol = length(tok))
   rownames(token_matrix) = id

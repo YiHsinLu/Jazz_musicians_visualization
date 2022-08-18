@@ -115,3 +115,7 @@ visualTsne_YA = transform(visualTsne_YA, tsne1 = as.numeric(tsne1), tsne2 = as.n
 hchart(visualTsne_YA, 'scatter', hcaes(x=tsne1, y=tsne2, group = year))
 hchart(visualTsne_YA, 'scatter', hcaes(x=tsne1, y=tsne2, group = years))
 ```
+
+```{r}
+write.csv(YsA_matrix, 'D:/jazz_visual/csv/matrix_yearsActive.csv', na="")
+```

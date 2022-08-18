@@ -16,5 +16,6 @@ dis_jac = function(M){
       }
     }
   }
+  colnames(af_matrix) = rownames(af_matrix) = rownames(M)
   return(as.data.frame(af_matrix))
 }
