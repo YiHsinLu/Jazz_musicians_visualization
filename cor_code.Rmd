@@ -101,6 +101,7 @@ cor = function(x){
 }
 ```
 
+
 ```{r}
 x_cor = cor(x)
 ```

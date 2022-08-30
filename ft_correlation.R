@@ -1,5 +1,4 @@
 cor = function(x){
-  #x      = x[,3:ncol(x)] 
   n      = nrow(x)
   p      = ncol(x)
   one    = matrix(1,n,n)

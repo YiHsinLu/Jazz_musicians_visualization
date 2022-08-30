@@ -42,4 +42,116 @@ for(i in 1:ncol(genre_matrix1)){
 }
 
 write.csv(genre_matrix1, 'D:/jazz_visual/csv/matrix_genre.csv', na="")
+write.csv(colnames(M_genre), 'D:/jazz_visual/csv/list_genre.csv')
+```
+
+```{r}
+jac_genre = dis_jac(M_genre)
+```
+
+```{r}
+cor_genreHP = cor(M_genreHP)
+```
+
+```{r}
+plot(cor_genreHP$w[,1],-cor_genreHP$w[,2],type="n",xlab="W[,1]",ylab="W[,2]",main="Genre",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(cor_genreHP$w[,1],-cor_genreHP$w[,2],cor_genreHP$namew,xpd=NA)
+abline(h=0,v=0,lwd=1.2)
+
+
+
+```
+
+```{r}
+
+
+for(i in 1:nrow(M_genre_clean)){
+  if(sum(M_genre_clean[i,])==0){
+    print(c(rownames(M_genre_clean)[i], sum(M_genre_clean[i,])))
+  }
+}
+```
+```{r}
+M_genre_sim = M_genre
+genre_col_pair = matrix(data = c(2, 39,
+                           2, 53,
+                           10, 15,
+                           10, 19,
+                           13, 23,
+                           28, 37,
+                           4, 42,
+                           9, 52,
+                           11, 54,
+                           25, 56,
+                           6, 17,
+                           7, 58,
+                           46, 63,
+                           24, 65,
+                           45, 62,
+                           44, 61,
+                           12, 43), nrow = 17, ncol = 2, byrow = T)
+genre_col_pair = as.data.frame(genre_col_pair)
+
+for(i in 1:16){
+  i1 = genre_col_pair$V1[i]
+  i2 = genre_col_pair$V2[i]
+  M_genre_sim[,i1] = M_genre_sim[,i1]+M_genre_sim[,i2]
+}
+
+#M_genre_sim = M_genre_sim%>%
+#  select(1:10, 18:23)
+del_genre = c(1, 27,31:36, 40, 41, 47, 49, 57, 64, 66:69)
+del_genre = sort(cbind(del_genre, genre_col_pair$V2))
+```
+
+```{r}
+M_genre_clean = M_genre_sim[,-del_genre]
+for(i in 1:nrow(M_genre_clean)){
+  for(j in 1:ncol(M_genre_clean)){
+    if(M_genre_clean[i,j]>=2){
+      M_genre_clean[i,j] = 1
+    }
+  }
+}
+```
+
+```{r}
+for(i in 1:nrow(M_genre_clean)){
+  if(sum(M_genre_clean[i,])>1){
+    print(c(rownames(M_genre_clean)[i], sum(M_genre_clean[i,])))
+  }
+}
+```
+
+```{r}
+pca_genre = prcomp(M_genre_clean, center = TRUE,scale. = TRUE)
+
+plot(pca_genre$rotation[,1],pca_genre$rotation[,2],type="n",xlab="PC1",ylab="PC2",main="Genre",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(pca_genre$rotation[,1],pca_genre$rotation[,2],genre)
+abline(h=0,v=0,lwd=1.2)
+
+```
+
+```{r}
+write.csv(M_genre_clean, 'D:/jazz_visual/csv/matrix_genre1.csv')
+M_genre = read.csv("D:/jazz_visual/csv/matrix_genre1.csv", row.names = 1)
+```
+
+```{r}
+M_genreHP = read.csv("D:/jazz_visual/csv/matrix_genre1hp.csv", row.names = 1)
+cor_genreHP = cor(M_genreHP)
+
+plot(cor_genreHP$w[,1],-cor_genreHP$w[,2],type="n",xlab="W[,1]",ylab="W[,2]",main="Genre",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(cor_genreHP$w[,1],-cor_genreHP$w[,2],cor_genreHP$namew)
+abline(h=0,v=0,lwd=1.2)
+
+
+```
+
+```{r}
+for(i in 1:nrow(M_genreHP)){
+  if(sum(M_genreHP[i,])>1){
+    print(c(rownames(M_genreHP)[i], sum(M_genreHP[i,])))
+  }
+}
 ```

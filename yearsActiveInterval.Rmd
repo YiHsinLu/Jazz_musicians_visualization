@@ -1,0 +1,50 @@
+```{r}
+Mtable_ya = read.csv("D:/jazz_visual/csv/Mtable_yearsActive.csv", row.names = 1)[,2:3]
+
+Mtable_ysa = floor(Mtable_ya/10)*10
+```
+
+```{r}
+lappend <- function (lst, ...){
+    lst <- c(lst, list(...))
+    return(lst)
+}
+
+member_list = list()
+for(i in 1:nrow(Mtable_ysa)){
+  if(is.na(Mtable_ysa[i,1])){
+    time_inter = c()
+    member_list = lappend(member_list, time_inter)
+  }else{
+    ts = Mtable_ysa[i,1]
+    te = Mtable_ysa[i,2]
+    print(c(ts, te))
+    time_inter = seq(from=ts, to=te, by=10)
+    member_list = lappend(member_list, time_inter)
+  } 
+}
+t = timeFill_ysa$time_list
+time_matrix = matrix(data = 0, nrow = nrow(Mtable_ysa), ncol = length(t))
+rownames(time_matrix) = rownames(df)
+colnames(time_matrix) = t
+for(i in 1:nrow(Mtable_ysa)){
+  tlist = timeFill_ysa$member_list[[i]]
+  if(length(tlist)==0){
+    time_matrix[i,1]=0
+  }else{
+    for(ti in 1:length(t)){
+      for(tj in 1:length(tlist)){
+        if(t[ti]==tlist[tj]){
+        time_matrix[i, ti]=1
+        }
+      }
+    }
+  }
+  
+}
+
+timeFill_ysa = time_fill(Mtable_ysa)
+ysa_ohen = oh_encoding_time(Mtable_ysa)
+M_ysa = ysa_ohen$time_matrix
+```
+

@@ -1,47 +1,62 @@
-Yi-Hsin Lu [ August 11, 2022, 14:02 ]
- -Next meeting[ August 19, 2022, 10:10 ]
+Yi-Hsin Lu [ August 22, 2022,  21:35 ]
+ -Next meeting[ September 2, 2022, 10:10 ]
 
 Discussion
 
-* 1. Explain why use product of each value in two matrices for combination with jaccard
-	+ Jaccard: vector with many "0"
-	+ Other method: vector without any "0"
-	+ Mixed two kind of methods
-* 2. Data Matrices
+* 1. Data Matrices
+
 	+ genre
-	+ yearsActive
- 	+ recordLabel
-* 3. Main Plot
+	+ recordLabel
 
+* 2. Visualization: PCA vs t-SNE
 
+	+ some groups in t-SNE become a point in PCA
+
+* 3. Main plots
+
+	+ entire combination
+		- X_entire ->X
+		- merge
+	+ zoom-in
+	+ weight for instrument and yearsActive
+		- yearsActive_start
 
 To-do
 
 * 1. Data matrices
-	+ genre
-		- classes in PCA
-		- color
-	+ recordLabel
-		- classes in PCA
-		- color
 
-* 2. Paper work
-	+ visualization method
-		- PCA/MDS
-		- t-SNE
-	+ Plot
-		- main plot: combind instrument, genre, recordLabel, yearsActive
-		- weight on instrument
-		- weight on genre
-		- weight on recordLabel
-		- weight on yearsActive
-		- zoom-in for the main plot
+	+ genre and recordLabel
+		- clean
+		- combined similar words into one column
+		- hand pick
+
+* 2. Summarize PCA vs t-SNE
+
+* 3. Compare the plot of: 
+	+ t-SNE zoom-in
+	+ linked jazz
+	+ music map
+	+ Spotify
+	+ youtube
+	+ other
+
+* 3. Paperwork
+
+	+ write technical part
+
+* 4. YearsActive
+
+	+ collect start and end
+	+ fill the years between start and end
+	+ multivalue 
+
 
 Link/References
+
 * 1. [Similarity functions](hhttps://github.com/YiHsinLu/Similarity_function)
 * 2. A state-of-the-art survey on recommendation systems and prospective extensions (https://www.sciencedirect.com/science/article/abs/pii/S016816992031629X)
 * 3. A Review of Movie Recommendation System: Limitations, Survey, and Challenges
-(https://ddd.uab.cat/record/232276)
+     (https://ddd.uab.cat/record/232276)
 * 4. Recommendation Systems: A Review (https://towardsdatascience.com/recommendation-systems-a-review-d4592b6caf4b)
 * 5. Combinations of Jaccard with Numerical Measures for Collaborative Filtering
-Enhancement: Current Work and Future Proposal (https://arxiv.org/pdf/2111.12202.pdf)
+     Enhancement: Current Work and Future Proposal (https://arxiv.org/pdf/2111.12202.pdf)

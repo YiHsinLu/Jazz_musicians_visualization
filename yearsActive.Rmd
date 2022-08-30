@@ -17,6 +17,7 @@ YA_matrix = YA_matrix %>% select(sort(colnames(YA_matrix)))
 YsA = YA_nu
 
 YsA = floor(YsA/10)*10
+write.csv(YsA, 'D:/jazz_visual/csv/yearsActive.csv', na = "")
 ```
 
 # yearsActive
@@ -119,3 +120,4 @@ hchart(visualTsne_YA, 'scatter', hcaes(x=tsne1, y=tsne2, group = years))
 ```{r}
 write.csv(YsA_matrix, 'D:/jazz_visual/csv/matrix_yearsActive.csv', na="")
 ```
+
