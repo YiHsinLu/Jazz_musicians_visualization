@@ -155,3 +155,70 @@ for(i in 1:nrow(M_genreHP)){
   }
 }
 ```
+
+#0913
+```{r}
+M_genreHP = read.csv("D:/jazz_visual/csv/matrix_genre1hp.csv", row.names = 1)
+M_genre = read.csv("D:/jazz_visual/csv/matrix_genre1.csv", row.names = 1)
+musicians = rownames(M_genre)
+genres = colnames(M_genre)
+genresHP = colnames(M_genreHP)
+```
+
+```{r}
+Jac_genre.t = dis_jac(t(M_genre))
+Jac_genreHP.t = dis_jac(t(M_genreHP))
+```
+
+```{r}
+PCA_genre = prcomp(Jac_genre.t, center = TRUE, scale. = TRUE)
+PCA_genreHP = prcomp(Jac_genreHP.t, center = TRUE, scale. = TRUE)
+```
+
+```{r}
+plot(PCA_genreHP$rotation[,1],PCA_genreHP$rotation[,2],type="n",xlab="PC1",ylab="PC2",main="Jazz Genres",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(PCA_genreHP$rotation[,1],PCA_genreHP$rotation[,2],genresHP)
+abline(h=0,v=0,lwd=1.2)
+```
+
+```{r}
+plot(PCA_genre$rotation[,1],PCA_genre$rotation[,2],type="n",xlab="PC1",ylab="PC2",main="Genres",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(PCA_genre$rotation[,1],PCA_genre$rotation[,2],genres)
+abline(h=0,v=0,lwd=1.2)
+```
+
+```{r}
+
+genreclasslist = list(c1=c(1,2,3), c2=c(5,13,19), c3=c(4,11,18), c4=c(6,7,9,17,20),  c5=c(8,10,12,14,15,16,21))
+
+M_genre5class = c()
+for(i in 1:5){
+  classvalue = matrix(data=rep.int(0,time=229), ncol = 1,nrow = 229)
+  genrelisti = genreclasslist[[i]]
+  for(j in 1:length(genrelisti)){
+    classvalue = classvalue+M_genreHP[,genrelisti[j]]
+  }
+  M_genre5class = cbind(M_genre5class, classvalue)
+}
+
+M_genre5class = ifelse(M_genre5class>=1, 1, 0)
+M_genre5class = as.data.frame(M_genre5class)
+rownames(M_genre5class) = musicians
+```
+
+```{r}
+M_genre3class = M_genre5class
+
+M_genre3class$V1 = M_genre3class$V1+M_genre3class$V2+M_genre3class$V3
+M_genre3class = M_genre3class %>%select(V1,V4,V5)
+M_genre3class = ifelse(M_genre3class>=1, 1, 0)
+M_genre3class = as.data.frame(M_genre3class)
+rownames(M_genre3class) = musicians
+```
+
+```{r}
+M_genrecolor = cbind(1-M_genre3class, rgb(1-M_genre3class))
+M_genrecolorSqrt = cbind((1-M_genre3class)^2, rgb((1-M_genre3class)^2))
+write.csv(M_genrecolor, 'D:/jazz_visual/csv/color_genreclass.csv')
+write.csv(M_genrecolorSqrt, 'D:/jazz_visual/csv/color_genreclass_sqrt.csv')
+```

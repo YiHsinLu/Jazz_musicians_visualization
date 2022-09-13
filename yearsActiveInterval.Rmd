@@ -1,6 +1,6 @@
 ```{r}
 Mtable_ya = read.csv("D:/jazz_visual/csv/Mtable_yearsActive.csv", row.names = 1)[,2:3]
-
+musicians = rownames(Mtable_ya)
 Mtable_ysa = floor(Mtable_ya/10)*10
 ```
 
@@ -18,11 +18,14 @@ for(i in 1:nrow(Mtable_ysa)){
   }else{
     ts = Mtable_ysa[i,1]
     te = Mtable_ysa[i,2]
-    print(c(ts, te))
     time_inter = seq(from=ts, to=te, by=10)
     member_list = lappend(member_list, time_inter)
   } 
 }
+
+timeFill_ysa = time_fill(Mtable_ysa)
+ysa_ohen = oh_encoding_time(Mtable_ysa)
+M_ysa = ysa_ohen$time_matrix
 t = timeFill_ysa$time_list
 time_matrix = matrix(data = 0, nrow = nrow(Mtable_ysa), ncol = length(t))
 rownames(time_matrix) = rownames(df)
@@ -43,8 +46,50 @@ for(i in 1:nrow(Mtable_ysa)){
   
 }
 
-timeFill_ysa = time_fill(Mtable_ysa)
-ysa_ohen = oh_encoding_time(Mtable_ysa)
-M_ysa = ysa_ohen$time_matrix
+Mtable_ysa.i = time_matrix
+Mtable_ysa.i = as.data.frame(Mtable_ysa.i)
+rownames(Mtable_ysa.i) = musicians
+years = colnames(Mtable_ysa.i)
+write.csv(Mtable_ysa.i, "D:/jazz_visual/csv/matrix_yearsActive_i.csv")
 ```
 
+```{r}
+Jac_yearsActive.t = dis_jac(t(Mtable_ysa.i))
+```
+
+
+```{r}
+PCA_yearsActive = prcomp(Jac_yearsActive.t, center = TRUE, scale. = TRUE)
+```
+
+```{r}
+plot(PCA_yearsActive$rotation[,1],PCA_yearsActive$rotation[,2],type="n",xlab="PC1",ylab="PC2",main="Active years interval ",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(PCA_yearsActive$rotation[,1],PCA_yearsActive$rotation[,2],years)
+abline(h=0,v=0,lwd=1.2)
+```
+
+```{r}
+
+yearsclasslist = list(c1=c(1:3), c2=c(4:7), c3=c(8:12))
+
+M_ysa3class = c()
+for(i in 1:3){
+  classvalue = matrix(data=rep.int(0,time=229), ncol = 1,nrow = 229)
+  yearslisti = yearsclasslist[[i]]
+  for(j in 1:length(yearslisti)){
+    classvalue = classvalue+Mtable_ysa.i[,yearslisti[j]]
+  }
+  M_ysa3class = cbind(M_ysa3class, classvalue)
+}
+
+M_ysa3class = ifelse(M_ysa3class>=1, 1, 0)
+M_ysa3class = as.data.frame(M_ysa3class)
+rownames(M_ysa3class) = musicians
+```
+
+```{r}
+M_yearscolor = cbind(1-M_ysa3class, rgb(1-M_ysa3class))
+M_yearscolorSqrt = cbind((1-M_ysa3class)^2, rgb((1-M_ysa3class)^2))
+write.csv(M_yearscolor, 'D:/jazz_visual/csv/color_yearsclass.csv')
+write.csv(M_yearscolorSqrt, 'D:/jazz_visual/csv/color_yearsclass_sqrt.csv')
+```
