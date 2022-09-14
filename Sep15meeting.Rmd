@@ -45,11 +45,36 @@ load("D:/jazz_visual/0913.RData")
 
 ****
 
-# **1 Data Matrices**
+# **1. All**
+
+```{r echo=FALSE}
+ggplot(visualTsne_all, aes(x=tsne1, y=tsne2, label=name))+
+  geom_point() +geom_text(hjust=0, vjust=0)
+
+hchart(visualTsne_all, 'scatter', hcaes(x=tsne1, y=tsne2, group=name))
+```
 
 ****
 
-## 1.1 Genres
+# 2. **Instruments**
+
+```{r echo=FALSE}
+visualpca_plot.inst+visualTsne_plot.inst
+```
+
+****
+
+# 2. **Genres**{.tabset}
+
+## Visualization
+
+```{r echo=FALSE}
+visualpca_plot.genre+visualTsne_plot.genre
+```
+
+****
+
+## PCA for information
 
 * Jaccard before PCA
 * the 3 classes
@@ -62,54 +87,25 @@ abline(h=0,v=0,lwd=1.2)
 
 ****
 
-## 1.2 Active years
+# 2. **Active Years**{.tabset}
+
+## Visualization
+
+```{r echo=FALSE}
+visualpca_plot.ysa+visualTsne_plot.ysa
+```
+
+****
+
+## PCA for information
 
 * Jaccard before PCA
-* the 3 time intervals 
+* the 3 time intervals
 
 ```{r echo=FALSE}
 plot(PCA_yearsActive$rotation[,1],PCA_yearsActive$rotation[,2],type="n",xlab="PC1",ylab="PC2",main="Active years interval ",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
 text(PCA_yearsActive$rotation[,1],PCA_yearsActive$rotation[,2],years)
 abline(h=0,v=0,lwd=1.2)
-```
-
-****
-
-# **2. visualization**
-
-****
-
-## 2.1 All
-
-```{r echo=FALSE}
-ggplot(visualTsne_all, aes(x=tsne1, y=tsne2, label=name))+
-  geom_point() +geom_text(hjust=0, vjust=0)
-
-hchart(visualTsne_all, 'scatter', hcaes(x=tsne1, y=tsne2, group=name))
-```
-
-****
-
-## 2.2 Instruments
-
-```{r echo=FALSE}
-visualpca_plot.inst+visualTsne_plot.inst
-```
-
-****
-
-## 2.3 Genres
-
-```{r echo=FALSE}
-visualpca_plot.genre+visualTsne_plot.genre
-```
-
-****
-
-## 2.4 Active Years
-
-```{r echo=FALSE}
-visualpca_plot.ysa+visualTsne_plot.ysa
 ```
 
 ****
