@@ -81,10 +81,9 @@ for(i in 1:3){
   }
   M_ysa3class = cbind(M_ysa3class, classvalue)
 }
-
-M_ysa3class = ifelse(M_ysa3class>=1, 1, 0)
 M_ysa3class = as.data.frame(M_ysa3class)
 rownames(M_ysa3class) = musicians
+M_ysa3class = comper(M_ysa3class)
 ```
 
 ```{r}

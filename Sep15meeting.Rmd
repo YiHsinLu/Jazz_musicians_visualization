@@ -110,8 +110,8 @@ abline(h=0,v=0,lwd=1.2)
 
 ****
 
-# 3. Remark and Discussion
+# **3. Remark and Discussion**
 
-* How to classify record labels?
 * Cluster for genres and active years
 * Color on active years
+* Singal-value and Multi-value

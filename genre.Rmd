@@ -201,7 +201,6 @@ for(i in 1:5){
   M_genre5class = cbind(M_genre5class, classvalue)
 }
 
-M_genre5class = ifelse(M_genre5class>=1, 1, 0)
 M_genre5class = as.data.frame(M_genre5class)
 rownames(M_genre5class) = musicians
 ```
@@ -211,9 +210,9 @@ M_genre3class = M_genre5class
 
 M_genre3class$V1 = M_genre3class$V1+M_genre3class$V2+M_genre3class$V3
 M_genre3class = M_genre3class %>%select(V1,V4,V5)
-M_genre3class = ifelse(M_genre3class>=1, 1, 0)
 M_genre3class = as.data.frame(M_genre3class)
 rownames(M_genre3class) = musicians
+M_genre3class = comper(M_genre3class)
 ```
 
 ```{r}
