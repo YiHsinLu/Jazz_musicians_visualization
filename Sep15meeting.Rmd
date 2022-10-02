@@ -16,6 +16,10 @@ output:
   * Complete the data matrices of active years, genre and record label
   
 ```{r include=FALSE}
+library("imputeTS")
+library(viridis)
+library(mltools)
+library(data.table)
 library(knitr)
 library(dplyr)
 library(flextable)

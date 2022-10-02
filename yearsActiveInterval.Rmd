@@ -55,14 +55,9 @@ write.csv(Mtable_ysa.i, "D:/jazz_visual/csv/matrix_yearsActive_i.csv")
 
 ```{r}
 Jac_yearsActive.t = dis_jac(t(Mtable_ysa.i))
-```
 
-
-```{r}
 PCA_yearsActive = prcomp(Jac_yearsActive.t, center = TRUE, scale. = TRUE)
-```
 
-```{r}
 plot(PCA_yearsActive$rotation[,1],PCA_yearsActive$rotation[,2],type="n",xlab="PC1",ylab="PC2",main="Active years interval ",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
 text(PCA_yearsActive$rotation[,1],PCA_yearsActive$rotation[,2],years)
 abline(h=0,v=0,lwd=1.2)
@@ -91,4 +86,178 @@ M_yearscolor = cbind(1-M_ysa3class, rgb(1-M_ysa3class))
 M_yearscolorSqrt = cbind((1-M_ysa3class)^2, rgb((1-M_ysa3class)^2))
 write.csv(M_yearscolor, 'D:/jazz_visual/csv/color_yearsclass.csv')
 write.csv(M_yearscolorSqrt, 'D:/jazz_visual/csv/color_yearsclass_sqrt.csv')
+```
+
+
+```{r}
+for(i in 1:ncol(Mtable_ysa.i)){
+  print(c(i, sum(Mtable_ysa.i[,i])))
+}
+```
+
+```{r}
+Jac_yearsActive.t = dis_jac(t(Mtable_ysa.i[,7:12]))
+
+PCA_yearsActive = prcomp(Jac_yearsActive.t, center = TRUE, scale. = TRUE)
+
+plot(PCA_yearsActive$rotation[,1],PCA_yearsActive$rotation[,2],type="n",xlab="PC1",ylab="PC2",main="Active years interval ",cex.axis=1.2,cex.lab=1.2,cex.main=1.6)
+text(PCA_yearsActive$rotation[,1],PCA_yearsActive$rotation[,2],colnames(Jac_yearsActive.t))
+abline(h=0,v=0,lwd=1.2)
+```
+
+```{r}
+len_years = c()
+for(i in 1:nrow(Mtable_ysa.i)){
+  len = sum(Mtable_ysa.i[i,])
+  len_years = rbind(len_years, len)
+}
+
+len_years = arrdf(len_years, colname = 'n', rowname = musicians)
+len_years
+```
+
+```{r}
+hist(len_years$n, breaks = 13, main = "Length")
+hist(Mtable_yamidna$middle, breaks = 20, main = "Middle")
+```
+```{r}
+library(viridis)
+library(mltools)
+library(data.table)
+M_lenyears = ohe(len_years)
+
+Jac_LenyearsActive = dis_jac(M_lenyears)
+PCA_LenyearsActive = prcomp(Jac_LenyearsActive, center = TRUE, scale. = TRUE)
+# Gradient color
+
+PCA_len = cbind(PCA_LenyearsActive$rotation[,1], PCA_LenyearsActive$rotation[,2], len_years$n)
+
+PCA_len = arrdf(PCA_len, colname = c('pc1', 'pc2', 'n'), rowname = musicians)
+
+ggplot(PCA_len, aes(pc1, pc2))+
+  geom_point(aes(color = n)) +
+  scale_color_viridis(option = "D")
+```
+```{r}
+Mtable_yamid = as.data.frame((Mtable_ya[,1]+Mtable_ya[,2])/2)
+colnames(Mtable_yamid) = 'middle'
+Mtable_yamid = floor(Mtable_yamid/10)*10
+
+library("imputeTS")
+Mtable_yamidna = Mtable_yamid
+Mtable_yamid = na.replace(Mtable_yamid,0)
+
+M_yamid = ohe(Mtable_yamid)[,-1]
+
+Jac_MidyearsActive = dis_jac(M_yamid)
+```
+
+# Combined middle of years and length of years' interval
+
+```{r}
+Jac_yearcom2 = sqrt((Jac_LenyearsActive^2+Jac_MidyearsActive^2)/2)
+
+PCA_yaCom2 = prcomp(Jac_yearcom2, center = TRUE, scale. = TRUE)
+# Gradient color
+
+PCA_ysacomMid2 = cbind(PCA_yaCom2$rotation[,1], PCA_yaCom2$rotation[,2], Mtable_yamidna$middle)
+
+PCA_ysacomMid2 = arrdf(PCA_ysacomMid2, colname = c('pc1', 'pc2', 'years'), rowname = musicians)
+
+vis_pca2mid = ggplot(PCA_ysacomMid2, aes(pc1, pc2))+
+  geom_point(aes(color = years)) +
+  scale_color_viridis(option = "D")
+vis_pca2mid
+
+PCA_ysacomlen2 = cbind(PCA_yaCom2$rotation[,1], PCA_yaCom2$rotation[,2], len_years$n)
+
+PCA_ysacomlen2 = arrdf(PCA_ysacomlen2, colname = c('pc1', 'pc2', 'n'), rowname = musicians)
+
+vis_pca2len = ggplot(PCA_ysacomlen2, aes(pc1, pc2))+
+  geom_point(aes(color = n)) +
+  scale_color_viridis(option = "E")
+vis_pca2len
+```
+
+```{r}
+Jac_yearcom = sqrt((Jac_LenyearsActive^2+Jac_MidyearsActive^2+Jac_yearsActive^2)/3)
+
+PCA_yaCom = prcomp(Jac_yearcom, center = TRUE, scale. = TRUE)
+# Gradient color
+
+PCA_ysacomMid = cbind(PCA_yaCom$rotation[,1], PCA_yaCom$rotation[,2], Mtable_yamidna$middle)
+
+PCA_ysacomMid = arrdf(PCA_ysacomMid, colname = c('pc1', 'pc2', 'years'), rowname = musicians)
+
+vis_pca3mid = ggplot(PCA_ysacomMid, aes(pc1, pc2))+
+  geom_point(aes(color = years)) +
+  scale_color_viridis(option = "D")
+vis_pca3mid
+
+PCA_ysacomlen = cbind(PCA_yaCom$rotation[,1], PCA_yaCom$rotation[,2], len_years$n)
+
+PCA_ysacomlen = arrdf(PCA_ysacomlen, colname = c('pc1', 'pc2', 'n'), rowname = musicians)
+
+vis_pca3len = ggplot(PCA_ysacomlen, aes(pc1, pc2))+
+  geom_point(aes(color = n)) +
+  scale_color_viridis(option = "E")
+vis_pca3len
+```
+
+
+```{r}
+Mtable_ya2 = Mtable_ya^2
+hist(Mtable_ya2$activeYearsStartYear)
+hist(Mtable_ya2$activeYearsEndYear)
+```
+
+
+## t-SNE
+```{r}
+Jac_yearcom2 = sqrt((Jac_LenyearsActive^2+Jac_MidyearsActive^2)/2)
+
+tsne_yaCom2 = Rtsne(Jac_yearcom2, check_duplicates = FALSE)
+# Gradient color
+
+tsne_ysacomMid2 = cbind(tsne_yaCom2$Y[,1], tsne_yaCom2$Y[,2], Mtable_yamidna$middle)
+
+tsne_ysacomMid2 = arrdf(tsne_ysacomMid2, colname = c('tsne1', 'tsne2', 'years'), rowname = musicians)
+
+vis_tsne2mid = ggplot(tsne_ysacomMid2, aes(tsne1, tsne2))+
+  geom_point(aes(color = years)) +
+  scale_color_viridis(option = "D")
+
+
+tsne_ysacomlen2 = cbind(tsne_yaCom2$Y[,1], tsne_yaCom2$Y[,2], len_years$n)
+
+tsne_ysacomlen2 = arrdf(tsne_ysacomlen2, colname = c('tsne1', 'tsne2', 'n'), rowname = musicians)
+
+vis_tsne2len = ggplot(tsne_ysacomlen2, aes(tsne1, tsne2))+
+  geom_point(aes(color = n)) +
+  scale_color_viridis(option = "E")
+```
+
+```{r}
+Jac_yearcom = sqrt((Jac_LenyearsActive^2+Jac_MidyearsActive^2+Jac_yearsActive^2)/3)
+
+tsne_yaCom = Rtsne(Jac_yearcom, check_duplicates = FALSE)
+# Gradient color
+
+tsne_ysacomMid = cbind(tsne_yaCom$Y[,1], tsne_yaCom$Y[,2], Mtable_yamidna$middle)
+
+tsne_ysacomMid = arrdf(tsne_ysacomMid, colname = c('tsne1', 'tsne2', 'years'), rowname = musicians)
+
+vis_tsne3mid = ggplot(tsne_ysacomMid, aes(tsne1, tsne2))+
+  geom_point(aes(color = years)) +
+  scale_color_viridis(option = "D")
+vis_tsne3mid
+
+tsne_ysacomlen = cbind(tsne_yaCom$Y[,1], tsne_yaCom$Y[,2], len_years$n)
+
+tsne_ysacomlen = arrdf(tsne_ysacomlen, colname = c('tsne1', 'tsne2', 'n'), rowname = musicians)
+
+vis_tsne3len = ggplot(tsne_ysacomlen, aes(tsne1, tsne2))+
+  geom_point(aes(color = n)) +
+  scale_color_viridis(option = "E")
+vis_tsne3len
 ```

@@ -1,0 +1,121 @@
+---
+title: "**【Visualizing for Jazz Musicians】**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+**$\mathcal{YiHsin}\;\mathcal{Lu}$**
+
+****
+
+  
+```{r include=FALSE}
+library(imputeTS)
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+library(lsa)
+library(patchwork)
+load("D:/jazz_visual/1002.RData")
+```
+
+
+# **1 Active Years**
+
+* middle
+* length
+* mixture
+* color
+
+## **1.1 Data**{.tabset}
+
+### Years
+
+```{r echo=FALSE}
+Mtable_ysa.i
+```
+
+### Length
+
+```{r echo=FALSE}
+hist(len_years$n, breaks = 13, main = "Length")
+```
+
+```{r echo=FALSE}
+len_years
+```
+
+### Length (one-hot encoding)
+
+```{r echo=FALSE}
+M_lenyears
+```
+
+### Start and the End
+
+```{r echo=FALSE}
+Mtable_ya
+```
+
+### Middle
+
+```{r echo=FALSE}
+hist(Mtable_yamidna$middle, breaks = 20, main = "Middle")
+```
+
+```{r echo=FALSE}
+Mtable_yamidna
+```
+
+### Middle (one-hot encoding)
+
+```{r echo=FALSE}
+M_yamid
+```
+
+## **1.2 Visualization**{.tabset}
+
+### Middle+Length (Middle)
+
+```{r echo=FALSE}
+vis_pca2mid+vis_tsne2mid
+```
+
+### Middle+Length (Length)
+
+```{r echo=FALSE}
+vis_pca2len+vis_tsne2len
+```
+
+### Middle+Length+Years (Middle)
+
+```{r echo=FALSE}
+vis_pca3mid+vis_tsne3mid
+```
+
+### Middle+Length+Years (Length)
+
+```{r echo=FALSE}
+vis_pca3len+vis_tsne3mid
+```
