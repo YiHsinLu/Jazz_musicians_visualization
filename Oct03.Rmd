@@ -117,5 +117,11 @@ vis_pca3mid+vis_tsne3mid
 ### Middle+Length+Years (Length)
 
 ```{r echo=FALSE}
-vis_pca3len+vis_tsne3mid
+vis_pca3len+vis_tsne3len
 ```
+
+# **2 Discussion**
+
+* combined information
+* power transformation
+* LDA alternative Jaccard
