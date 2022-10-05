@@ -54,7 +54,7 @@
       - Record Labels
       - Genres
 
-* 6  Conclusions -- Review and Remark
+* 5  Conclusions -- Review and Remark
 
 * References
 
