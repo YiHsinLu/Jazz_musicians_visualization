@@ -1,0 +1,64 @@
+```{r}
+M_genre = read.csv("D:/jazz_visual/csv/matrix_genre1hp.csv", row.names = 1)
+musicians = rownames(M_genre)
+
+M_ysa = read.csv("D:/jazz_visual/csv/matrix_yearsActive_i.csv", row.names = 1)
+M_ysamid = read.csv("D:/jazz_visual/csv/matrix_yearsActive_mid.csv", row.names = 1)
+M_ysalen = read.csv("D:/jazz_visual/csv/matrix_yearsActive_len.csv", row.names = 1)
+
+M_rl = read.csv("D:/jazz_visual/csv/matrix_recordLabel.csv", row.names = 1)
+
+M_inst = read.csv("D:/jazz_visual/csv/matrix_instrument.csv", row.names = 1)
+Jac_ysa = dis_jac(M_ysa)
+Jac_ysamid = dis_jac(M_ysamid)
+Jac_ysalen = dis_jac(M_ysalen)
+Jac_genre = dis_jac(M_genre)
+Jac_rl = dis_jac(M_rl)
+Jac_inst = dis_jac(M_inst)
+
+# new version
+con=1
+Jacc_ysa = dis_jac.c(M_ysa, C=con)
+Jacc_ysamid = dis_jac.c(M_ysamid, C=con)
+Jacc_ysalen = dis_jac.c(M_ysalen, C=con)
+Jacc_genre = dis_jac.c(M_genre, C=con)
+Jacc_rl = dis_jac.c(M_rl, C=con)
+Jacc_inst = dis_jac.c(M_inst, C=con)
+```
+
+# combined all
+
+```{r}
+Jac_all = sqrt((0.3*Jac_ysa^2+0.3*Jac_ysamid^2+0.3*Jac_ysalen^2+Jac_genre^2+Jac_rl^2+Jac_inst^2))
+
+Jac_all.ysamid = sqrt((0.3*Jac_ysa^2+2*Jac_ysamid^2+0.3*Jac_ysalen^2+Jac_genre^2+Jac_rl^2+Jac_inst^2))
+
+Jac_all.ysalen = sqrt((0.3*Jac_ysa^2+0.3*Jac_ysamid^2+2*Jac_ysalen^2+Jac_genre^2+Jac_rl^2+Jac_inst^2))
+
+Jac_all.genre = sqrt((0.3*Jac_ysa^2+0.3*Jac_ysamid^2+0.3*Jac_ysalen^2+8*Jac_genre^2+Jac_rl^2+Jac_inst^2))
+
+Jac_all.rl = sqrt((0.3*Jac_ysa^2+0.3*Jac_ysamid^2+0.3*Jac_ysalen^2+Jac_genre^2+8*Jac_rl^2+Jac_inst^2))
+
+Jac_all.inst = sqrt((0.3*Jac_ysa^2+0.3*Jac_ysamid^2+0.3*Jac_ysalen^2+Jac_genre^2+Jac_rl^2+8*Jac_inst^2))
+
+# new version
+Jacc_all = sqrt((0.3*Jacc_ysa^2+0.3*Jacc_ysamid^2+0.3*Jacc_ysalen^2+Jacc_genre^2+Jacc_rl^2+Jacc_inst^2))
+
+Jacc_all.ysamid = sqrt((0.3*Jacc_ysa^2+2*Jacc_ysamid^2+0.3*Jacc_ysalen^2+Jacc_genre^2+Jacc_rl^2+Jacc_inst^2))
+
+Jacc_all.ysalen = sqrt((0.3*Jacc_ysa^2+0.3*Jacc_ysamid^2+2*Jacc_ysalen^2+Jacc_genre^2+Jacc_rl^2+Jacc_inst^2))
+
+Jacc_all.genre = sqrt((0.3*Jacc_ysa^2+0.3*Jacc_ysamid^2+0.3*Jacc_ysalen^2+8*Jacc_genre^2+Jacc_rl^2+Jacc_inst^2))
+
+Jacc_all.rl = sqrt((0.3*Jacc_ysa^2+0.3*Jacc_ysamid^2+0.3*Jacc_ysalen^2+Jacc_genre^2+8*Jacc_rl^2+Jacc_inst^2))
+
+Jacc_all.inst = sqrt((0.3*Jacc_ysa^2+0.3*Jacc_ysamid^2+0.3*Jacc_ysalen^2+Jacc_genre^2+Jacc_rl^2+8*Jacc_inst^2))
+```
+
+```{r}
+ls()
+```
+
+```{r}
+rm(list = ls()[c(1:3, 10:15, 22:34)])
+```

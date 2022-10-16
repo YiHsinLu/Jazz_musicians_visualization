@@ -1,0 +1,59 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+
+## Table of Contents
+
+* 1  Introduction
+
+  + 1.1 Motivation
+
+  + 1.2 Jazz Musicians
+
+* 2  The Data
+  
+  + 2.1 Collection
+  + 2.2 Text-Mining 
+  + 2.3 One Hot Encoding
+  + 2.4 The Data
+  
+* 3  Formulations
+
+  + 3.1 The Data Matrices
+
+  + 3.2 Multi-value Classification
+    - 3.2.1 Cluster
+    - 3.2.2 Three Primary Colors
+  + 3.3 Affinity Matrix
+    + 3.3.1 Jaccard
+    + 3.3.2 LDA
+  + 3.4 Dimension Reduction
+    + PCA
+    + t-SNE
+
+* 4  Results and Discussions
+
+  + 4.1 Visualizing
+    - Main Plot
+    - Zoom-in
+    - Weight
+      - Instruments
+      - Active Years
+      - Record Labels
+      - Genres
+
+* 5  Conclusions -- Review and Remark
+
+* References
+
+* Appendix 
+
+  * Python Code
+
+  * R Code
+
+  * Combination with Jaccard
