@@ -170,7 +170,8 @@ Miles
 
 # **4 Remarks**
 
+* Complete the data matrices
 * No significant clusters in PCA map
 * Multi-value classification problem
-* Complete the data matrices
+
 

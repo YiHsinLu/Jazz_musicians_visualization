@@ -1,56 +1,28 @@
-Yi-Hsin Lu [ August 22, 2022,  21:35 ]
- -Next meeting[ September 2, 2022, 10:10 ]
+Yi-Hsin Lu [ September 2, 2022, 10:10 ]
+ -Next meeting[ September 16, 2022, 10:10 ]
 
 Discussion
 
-* 1. Data Matrices
-
-	+ genre
-	+ recordLabel
-
-* 2. Visualization: PCA vs t-SNE
-
-	+ some groups in t-SNE become a point in PCA
-
-* 3. Main plots
-
-	+ entire combination
-		- X_entire ->X
-		- merge
-	+ zoom-in
-	+ weight for instrument and yearsActive
-		- yearsActive_start
+* 1. Condense Matrix of genre and record label, then Showed their PCA map
+* 2. Matrix of active years including the start and the end years
+* 3. Banchmarking with linked jazz and music map
+* 4. Discuss the table of contents for thesis
 
 To-do
 
-* 1. Data matrices
-
-	+ genre and recordLabel
-		- clean
-		- combined similar words into one column
-		- hand pick
-
-* 2. Summarize PCA vs t-SNE
-
-* 3. Compare the plot of: 
-	+ t-SNE zoom-in
-	+ linked jazz
-	+ music map
-	+ Spotify
-	+ youtube
-	+ other
-
-* 3. Paperwork
-
-	+ write technical part
-
-* 4. YearsActive
-
-	+ collect start and end
-	+ fill the years between start and end
-	+ multivalue 
+* 1. Genre and record label
+	+ jaccard before PCA
+	+ classify similar genres into same class
+	+ other information
+* 2. Active years
+	+ PCA, jaccard+PCA
+	+ think how to color
+* 3. Compare Linked jazz with Network plot without tuning
+* 4. LDA as the method that alternative jaccard
+* 5. 0.6 version thesis
 
 
+* 1. 
 Link/References
 
 * 1. [Similarity functions](hhttps://github.com/YiHsinLu/Similarity_function)
