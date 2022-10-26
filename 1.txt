@@ -1,34 +1,20 @@
-Yi-Hsin Lu [ September 2, 2022, 10:10 ]
- -Next meeting[ September 16, 2022, 10:10 ]
+Yi-Hsin Lu [ Oct 24, 2022, 15:24 ]
+ -Next meeting[ Oct 26, 2022, 13:10 ]
 
 Discussion
 
-* 1. Condense Matrix of genre and record label, then Showed their PCA map
-* 2. Matrix of active years including the start and the end years
-* 3. Banchmarking with linked jazz and music map
-* 4. Discuss the table of contents for thesis
+* 1. Discuss about the R shiny version of visualization
+* 2. Online/Offline in R shiny
+* 3. Jaccard with a constant
 
 To-do
 
-* 1. Genre and record label
-	+ jaccard before PCA
-	+ classify similar genres into same class
-	+ other information
-* 2. Active years
-	+ PCA, jaccard+PCA
-	+ think how to color
-* 3. Compare Linked jazz with Network plot without tuning
-* 4. LDA as the method that alternative jaccard
-* 5. 0.6 version thesis
+* 1. R shiny version visualization
+	+ pick a constant before the shiny app
+	+ zoom in part
+* 2. Network polt by our data without tuning
+* 3. Based on the paper proving 1-Jac(x,y) is a kind of distance method, we could use a similar progrss on the new version of Jaccard
 
-
-* 1. 
 Link/References
 
-* 1. [Similarity functions](hhttps://github.com/YiHsinLu/Similarity_function)
-* 2. A state-of-the-art survey on recommendation systems and prospective extensions (https://www.sciencedirect.com/science/article/abs/pii/S016816992031629X)
-* 3. A Review of Movie Recommendation System: Limitations, Survey, and Challenges
-     (https://ddd.uab.cat/record/232276)
-* 4. Recommendation Systems: A Review (https://towardsdatascience.com/recommendation-systems-a-review-d4592b6caf4b)
-* 5. Combinations of Jaccard with Numerical Measures for Collaborative Filtering
-     Enhancement: Current Work and Future Proposal (https://arxiv.org/pdf/2111.12202.pdf)
+* 1. [A note on the triangle inequality for the Jaccard distance](https://arxiv.org/pdf/1612.02696.pdf)

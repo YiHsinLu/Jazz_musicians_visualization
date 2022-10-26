@@ -50,7 +50,7 @@ Mtable_ysa.i = time_matrix
 Mtable_ysa.i = as.data.frame(Mtable_ysa.i)
 rownames(Mtable_ysa.i) = musicians
 years = colnames(Mtable_ysa.i)
-write.csv(Mtable_ysa.i, "D:/jazz_visual/csv/matrix_yearsActive_i.csv")
+#write.csv(Mtable_ysa.i, "D:/jazz_visual/csv/matrix_yearsActive_i.csv")
 ```
 
 ```{r}
@@ -138,6 +138,7 @@ ggplot(PCA_len, aes(pc1, pc2))+
   geom_point(aes(color = n)) +
   scale_color_viridis(option = "D")
 ```
+
 ```{r}
 Mtable_yamid = as.data.frame((Mtable_ya[,1]+Mtable_ya[,2])/2)
 colnames(Mtable_yamid) = 'middle'
@@ -148,8 +149,17 @@ Mtable_yamidna = Mtable_yamid
 Mtable_yamid = na.replace(Mtable_yamid,0)
 
 M_yamid = ohe(Mtable_yamid)[,-1]
+rownames(M_yamid) = musicians
 
-Jac_MidyearsActive = dis_jac(M_yamid)
+Jac_MidyearsActive = dis_jac.c(M_yamid, C=1)
+
+
+
+write.csv(M_yamid, 'D:/jazz_visual/csv/matrix_yearsActive_mid.csv')
+write.csv(M_lenyears, 'D:/jazz_visual/csv/matrix_yearsActive_len.csv')
+
+write.csv(Mtable_yamidna, 'D:/jazz_visual/csv/yearsActive_midna.csv')
+write.csv(len_years, 'D:/jazz_visual/csv/yearsActive_len.csv')
 ```
 
 # Combined middle of years and length of years' interval

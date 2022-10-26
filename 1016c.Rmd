@@ -187,5 +187,6 @@ visualpca_plot.ysamidc
 ```
 
 ```{r}
-ls()
+rm(list = ls()[c(1:40,49:58,67:72)])
+
 ```
