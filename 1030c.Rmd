@@ -1,0 +1,192 @@
+```{r}
+library(imputeTS)
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+library(lsa)
+library(patchwork)
+load("D:/jazz_visual/affinity_matrix_com.RData")
+```
+
+```{r}
+set.seed(19970608)
+tsne_allc = Rtsne(Jacc_all, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+pca_allc = prcomp(Jacc_all, scale = TRUE,
+                center = TRUE, retx = T)
+
+visualTsne_allc = cbind(tsne_allc$Y, musicians)
+
+colnames(visualTsne_allc) = c('tsne1', 'tsne2', 'name')
+rownames(visualTsne_allc) = musicians
+visualTsne_allc = as.data.frame(visualTsne_allc)
+
+visualTsne_allc = transform(visualTsne_allc, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+ggplot(visualTsne_allc, aes(x=tsne1, y=tsne2, label=name))+
+  geom_point() +geom_text(hjust=0, vjust=0)
+
+hchart(visualTsne_allc, 'scatter', hcaes(x=tsne1, y=tsne2, group=name))
+```
+
+#inst
+```{r}
+set.seed(19970608)
+tsne_instc = Rtsne(Jacc_all.inst, check_duplicates = FALSE)
+
+pca_instc = prcomp(Jacc_all.inst, scale = TRUE,
+                center = TRUE, retx = T)
+
+color_inst = read.csv("D:/jazz_visual/csv/color_instclass_sqrt.csv", row.names = 1)
+visualTsne_instc = cbind(tsne_instc$Y, color_inst$hex)
+
+colnames(visualTsne_instc) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_instc) = musicians
+visualTsne_instc = as.data.frame(visualTsne_instc)
+visualTsne_instc = transform(visualTsne_instc, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+
+visualpca_instc = cbind(pca_instc$rotation[,1:2], color_inst$hex)
+
+colnames(visualpca_instc) = c('pc1', 'pc2', 'hex')
+rownames(visualpca_instc) = musicians
+visualpca_instc = as.data.frame(visualpca_instc)
+
+visualpca_instc = transform(visualpca_instc, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2))
+
+visualTsne_plot.instc = ggplot(visualTsne_instc, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_instc$hex)
+visualTsne_plot.instc
+
+visualpca_plot.instc = ggplot(visualpca_instc, aes(x=pc1, y=pc2)) +
+  geom_point(color = visualpca_instc$hex)
+visualpca_plot.instc
+```
+
+# genre
+```{r}
+set.seed(19970608)
+tsne_genrec = Rtsne(Jacc_all.genre, check_duplicates = FALSE)
+
+pca_genrec = prcomp(Jacc_all.genre, scale = TRUE,
+                center = TRUE, retx = T)
+
+color_genre = read.csv("D:/jazz_visual/csv/color_genreclass.csv", row.names = 1)
+visualTsne_genrec = cbind(tsne_genrec$Y, color_genre[,4])
+
+colnames(visualTsne_genrec) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_genrec) = musicians
+visualTsne_genrec = as.data.frame(visualTsne_genrec)
+visualTsne_genrec = transform(visualTsne_genrec, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+
+visualpca_genrec = cbind(pca_genrec$rotation[,1:2], color_genre[,4])
+
+colnames(visualpca_genrec) = c('pc1', 'pc2', 'hex')
+rownames(visualpca_genrec) = musicians
+visualpca_genrec = as.data.frame(visualpca_genrec)
+
+visualpca_genrec = transform(visualpca_genrec, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2))
+
+visualTsne_plot.genrec = ggplot(visualTsne_genrec, aes(x=tsne1, y=tsne2)) +
+  geom_point(color = visualTsne_genrec$hex)
+visualTsne_plot.genrec
+
+visualpca_plot.genrec = ggplot(visualpca_genrec, aes(x=pc1, y=pc2)) +
+  geom_point(color = visualpca_genrec$hex)
+visualpca_plot.genrec
+```
+
+# yearsActivelen
+```{r}
+set.seed(19970608)
+tsne_ysalenc = Rtsne(Jacc_all.ysalen, check_duplicates = FALSE)
+
+pca_ysalenc = prcomp(Jacc_all.ysalen, scale = TRUE,
+                center = TRUE, retx = T)
+
+ysa_len = read.csv("D:/jazz_visual/csv/yearsActive_len.csv", row.names = 1)
+
+###
+
+visualTsne_ysalenc = cbind(tsne_ysalenc$Y[,1], tsne_ysalenc$Y[,2], ysa_len$n)
+visualTsne_ysalenc = arrdf(visualTsne_ysalenc, colname = c('tsne1', 'tsne2', 'n'), rowname = musicians)
+
+
+visualpca_ysalenc = cbind(pca_ysalenc$rotation[,1], pca_ysalenc$rotation[,2], ysa_len$n)
+visualpca_ysalenc = arrdf(visualpca_ysalenc, colname = c('pc1', 'pc2', 'n'), rowname = musicians)
+
+###
+
+
+visualpca_ysalenc = transform(visualpca_ysalenc, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2))
+
+visualTsne_plot.ysalenc = ggplot(visualTsne_ysalenc, aes(tsne1, tsne2))+
+  geom_point(aes(color = n)) +
+  scale_color_viridis(option = "E")
+visualTsne_plot.ysalenc
+
+visualpca_plot.ysalenc = ggplot(visualpca_ysalenc, aes(pc1, pc2))+
+  geom_point(aes(color = n)) +
+  scale_color_viridis(option = "E")
+visualpca_plot.ysalenc
+```
+
+# yearsActivemid
+```{r}
+set.seed(19970608)
+tsne_ysamidc = Rtsne(Jacc_all.ysamid, check_duplicates = FALSE)
+
+pca_ysamidc = prcomp(Jacc_all.ysamid, scale = TRUE,
+                center = TRUE, retx = T)
+
+ysa_mid = read.csv("D:/jazz_visual/csv/yearsActive_midna.csv", row.names = 1)
+
+###
+
+visualTsne_ysamidc = cbind(tsne_ysamidc$Y[,1], tsne_ysamidc$Y[,2], ysa_mid$middle)
+visualTsne_ysamidc = arrdf(visualTsne_ysamidc, colname = c('tsne1', 'tsne2', 'years'), rowname = musicians)
+
+
+visualpca_ysamidc = cbind(pca_ysamidc$rotation[,1], pca_ysamidc$rotation[,2], ysa_mid$middle)
+visualpca_ysamidc = arrdf(visualpca_ysamidc, colname = c('pc1', 'pc2', 'years'), rowname = musicians)
+
+###
+
+
+visualpca_ysamidc = transform(visualpca_ysamidc, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2))
+
+visualTsne_plot.ysamidc = ggplot(visualTsne_ysamidc, aes(tsne1, tsne2))+
+  geom_point(aes(color = years)) +
+  scale_color_viridis(option = "D")
+visualTsne_plot.ysamidc
+
+visualpca_plot.ysamidc = ggplot(visualpca_ysamidc, aes(pc1, pc2))+
+  geom_point(aes(color = years)) +
+  scale_color_viridis(option = "D")
+visualpca_plot.ysamidc
+
+```
+
+```{r}
+rm(list = ls()[c(1:40,49:58,67:72)])
+
+```

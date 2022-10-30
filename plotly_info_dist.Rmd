@@ -1,0 +1,201 @@
+```{r}
+library(imputeTS)
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+library(lsa)
+library(patchwork)
+library(plotly)
+
+```
+
+```{r}
+set.seed(19970608)
+tsne_alld = Rtsne(Distc_all, perplexity = 30, eta = 1000, max_iter = 5000, check_duplicates = FALSE)
+
+pca_alld = prcomp(Distc_all, scale = TRUE,
+                center = TRUE, retx = T)
+
+visualTsne_alld = cbind(tsne_alld$Y, musicians)
+
+colnames(visualTsne_alld) = c('tsne1', 'tsne2', 'name')
+rownames(visualTsne_alld) = musicians
+visualTsne_alld = as.data.frame(visualTsne_alld)
+
+visualTsne_alld = transform(visualTsne_alld, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+visualTsne_ggplot.alld = ggplot(visualTsne_alld, aes(x=tsne1, y=tsne2, label=name))+
+  geom_point() +geom_text(hjust=0, vjust=0)
+
+visualTsne_ggplot.alld
+
+visualTsne_hchart.alld = hchart(visualTsne_alld, 'scatter', hcaes(x=tsne1, y=tsne2, group=name))
+
+visualTsne_hchart.alld
+
+visualTsne_plotly.alld = plot_ly(visualTsne_alld, x = ~tsne1, y = ~tsne2, text = musicians)
+
+visualTsne_plotly.alld
+
+```
+
+#inst
+```{r}
+set.seed(19970608)
+tsne_instd = Rtsne(Distc_all.inst, check_duplicates = FALSE)
+
+pca_instd = prcomp(Distc_all.inst, scale = TRUE,
+                center = TRUE, retx = T)
+
+color_inst = read.csv("D:/jazz_visual/csv/color_instclass_sqrt.csv", row.names = 1)
+visualTsne_instd = cbind(tsne_instd$Y, color_inst$hex)
+
+colnames(visualTsne_instd) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_instd) = musicians
+visualTsne_instd = as.data.frame(visualTsne_instd)
+visualTsne_instd = transform(visualTsne_instd, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+
+visualpca_instd = cbind(pca_instd$rotation[,1:2], color_inst$hex)
+
+colnames(visualpca_instd) = c('pc1', 'pc2', 'hex')
+rownames(visualpca_instd) = musicians
+visualpca_instd = as.data.frame(visualpca_instd)
+
+visualpca_instd = transform(visualpca_instd, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2))
+
+visualTsne_plot.instd = plot_ly(visualTsne_instd, x = ~tsne1, y = ~tsne2,marker = list(color = visualTsne_instd$hex), text = musicians)
+visualTsne_plot.instd
+
+visualpca_plot.instd = plot_ly(visualpca_instd, x = ~pc1, y = ~pc2, marker = list(color = visualpca_instd$hex), text = musicians)
+visualpca_plot.instd
+```
+
+# genre
+```{r}
+set.seed(19970608)
+tsne_genred = Rtsne(Distc_all.genre, check_duplicates = FALSE)
+
+pca_genred = prcomp(Distc_all.genre, scale = TRUE,
+                center = TRUE, retx = T)
+
+color_genre = read.csv("D:/jazz_visual/csv/color_genreclass.csv", row.names = 1)
+visualTsne_genred = cbind(tsne_genred$Y, tolower(color_genre[,4]))
+
+colnames(visualTsne_genred) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_genred) = musicians
+visualTsne_genred = as.data.frame(visualTsne_genred)
+visualTsne_genred = transform(visualTsne_genred, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+
+visualpca_genred = cbind(pca_genred$rotation[,1:2], tolower(color_genre[,4]))
+
+colnames(visualpca_genred) = c('pc1', 'pc2', 'hex')
+rownames(visualpca_genred) = musicians
+visualpca_genred = as.data.frame(visualpca_genred)
+
+visualpca_genred = transform(visualpca_genred, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2), hex = tolower(hex))
+
+visualTsne_plot.genred = plot_ly(visualTsne_genred, x = ~tsne1, y = ~tsne2, marker = list(color = visualTsne_genred$hex), text = musicians)
+visualTsne_plot.genred%>%layout(title = "PCA",     plot_bgcolor='#e5ecf6')
+
+visualpca_plot.genred = plot_ly(visualpca_genred, x = ~pc1, y = ~pc2, marker = list(color = visualpca_genred$hex), text = musicians)
+visualpca_plot.genred%>%layout(title = "PCA",     plot_bgcolor='#e5ecf6')
+```
+
+# yearsActivelen
+```{r}
+set.seed(19970608)
+tsne_ysalend = Rtsne(Distc_all.ysalen, check_duplicates = FALSE)
+
+pca_ysalend = prcomp(Distc_all.ysalen, scale = TRUE,
+                center = TRUE, retx = T)
+
+ysa_len = read.csv("D:/jazz_visual/csv/yearsActive_len.csv", row.names = 1)
+
+###
+
+visualTsne_ysalend = cbind(tsne_ysalend$Y[,1], tsne_ysalend$Y[,2], ysa_len$n)
+
+# Arrange to data frame with row name and column name
+arrdf = function(df, colname = c(1:ncol(df)), rowname = c(1:nrow(df))){
+  df = as.data.frame(df)
+  colnames(df) = colname
+  rownames(df) = rowname
+  return(df)
+}
+
+visualTsne_ysalend = arrdf(visualTsne_ysalend, colname = c('tsne1', 'tsne2', 'n'), rowname = musicians)
+
+
+visualpca_ysalend = cbind(pca_ysalend$rotation[,1], pca_ysalend$rotation[,2], ysa_len$n)
+visualpca_ysalend = arrdf(visualpca_ysalend, colname = c('pc1', 'pc2', 'n'), rowname = musicians)
+
+###
+
+
+visualpca_ysalend = transform(visualpca_ysalend, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2))
+
+visualTsne_plot.ysalend = plot_ly(visualTsne_ysalend, x = ~tsne1, y = ~tsne2, color = ~n, text = musicians)
+
+visualTsne_plot.ysalend
+
+visualpca_plot.ysalend = plot_ly(visualpca_ysalend, x = ~pc1, y = ~pc2, color = ~n, text = musicians)
+
+visualpca_plot.ysalend
+```
+
+# yearsActivemid
+```{r}
+set.seed(19970608)
+tsne_ysamidd = Rtsne(Distc_all.ysamid, check_duplicates = FALSE)
+
+pca_ysamidd = prcomp(Distc_all.ysamid, scale = TRUE,
+                center = TRUE, retx = T)
+
+ysa_mid = read.csv("D:/jazz_visual/csv/yearsActive_midna.csv", row.names = 1)
+
+###
+
+visualTsne_ysamidd = cbind(tsne_ysamidd$Y[,1], tsne_ysamidd$Y[,2], ysa_mid$middle)
+visualTsne_ysamidd = arrdf(visualTsne_ysamidd, colname = c('tsne1', 'tsne2', 'years'), rowname = musicians)
+
+
+visualpca_ysamidd = cbind(pca_ysamidd$rotation[,1], pca_ysamidd$rotation[,2], ysa_mid$middle)
+visualpca_ysamidd = arrdf(visualpca_ysamidd, colname = c('pc1', 'pc2', 'years'), rowname = musicians)
+
+###
+
+
+visualpca_ysamidd = transform(visualpca_ysamidd, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2))
+
+visualTsne_plot.ysamidd = plot_ly(visualTsne_ysamidd, x = ~tsne1, y = ~tsne2, color = ~years, text = musicians)
+visualTsne_plot.ysamidd
+
+visualpca_plot.ysamidd = plot_ly(visualpca_ysamidd, x = ~pc1, y = ~pc2, color = ~years, text = musicians)
+visualpca_plot.ysamidd
+
+```
+
+```{r}
+rm(list = ls()[c(1:22,27:30,33,39:42)])
+
+```

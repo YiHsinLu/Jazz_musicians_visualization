@@ -1,0 +1,123 @@
+---
+title: "**【Visualizing for Jazz Musicians】**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+**$\mathcal{YiHsin}\;\mathcal{Lu}$**
+
+****
+
+  
+```{r include=FALSE}
+library(imputeTS)
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+library(lsa)
+library(patchwork)
+library(plotly)
+load("D:/jazz_visual/visualization_plot_affi.RData")
+load("D:/jazz_visual/visualization_plot_dist.RData")
+```
+
+
+
+### **Now**
+
+* Distance vs Affinity
+
+## **1 Instruments**{.tabset}
+
+### **PCA**
+
+```{r echo=FALSE, message=FALSE}
+visualpca_plot.instd
+visualpca_plot.instc
+```
+
+### **t-SNE**
+
+```{r echo=FALSE, message=FALSE}
+visualTsne_plot.instd
+visualTsne_plot.instc
+```
+
+****
+
+## **2 Genres**{.tabset}
+
+### **PCA**
+
+```{r echo=FALSE, message=FALSE}
+visualpca_plot.genred
+visualpca_plot.genrec
+```
+
+### **t-SNE**
+
+```{r echo=FALSE, message=FALSE}
+visualTsne_plot.genred
+visualTsne_plot.genrec
+```
+
+****
+
+## **3 Length of active years**{.tabset}
+
+### **PCA**
+
+```{r echo=FALSE, message=FALSE}
+visualpca_plot.ysalend
+visualpca_plot.ysalenc
+```
+
+### **t-SNE**
+
+```{r echo=FALSE, message=FALSE}
+visualTsne_plot.ysalend
+visualTsne_plot.ysalenc
+```
+
+****
+
+## **3 Middle of active years**{.tabset}
+
+### **PCA**
+
+```{r echo=FALSE, message=FALSE}
+visualpca_plot.ysamidd
+visualpca_plot.ysamidc
+```
+
+### **t-SNE**
+
+```{r echo=FALSE, message=FALSE}
+visualTsne_plot.ysamidd
+visualTsne_plot.ysamidc
+```
+
+****
+
+## **4 Remark and Discussion**

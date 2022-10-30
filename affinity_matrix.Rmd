@@ -40,7 +40,9 @@ Jac_all.genre = sqrt((0.3*Jac_ysa^2+0.3*Jac_ysamid^2+0.3*Jac_ysalen^2+8*Jac_genr
 Jac_all.rl = sqrt((0.3*Jac_ysa^2+0.3*Jac_ysamid^2+0.3*Jac_ysalen^2+Jac_genre^2+8*Jac_rl^2+Jac_inst^2))
 
 Jac_all.inst = sqrt((0.3*Jac_ysa^2+0.3*Jac_ysamid^2+0.3*Jac_ysalen^2+Jac_genre^2+Jac_rl^2+8*Jac_inst^2))
+```
 
+```{r}
 # new version
 Jacc_all = sqrt((0.3*Jacc_ysa^2+0.3*Jacc_ysamid^2+0.3*Jacc_ysalen^2+Jacc_genre^2+Jacc_rl^2+Jacc_inst^2))
 

@@ -1,0 +1,37 @@
+```{r}
+set.seed(19970608)
+tsne_instc = Rtsne(Jacc_all.inst, check_duplicates = FALSE)
+
+pca_instc = prcomp(Jacc_all.inst, scale = TRUE,
+                center = TRUE, retx = T)
+
+color_inst = read.csv("D:/jazz_visual/csv/color_instclass_sqrt.csv", row.names = 1)
+visualTsne_instc = cbind(tsne_instc$Y, color_inst$hex)
+
+colnames(visualTsne_instc) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_instc) = musicians
+visualTsne_instc = as.data.frame(visualTsne_instc)
+visualTsne_instc = transform(visualTsne_instc, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+
+
+visualpca_instc = cbind(pca_instc$rotation[,1:2], color_inst$hex)
+
+colnames(visualpca_instc) = c('pc1', 'pc2', 'hex')
+rownames(visualpca_instc) = musicians
+visualpca_instc = as.data.frame(visualpca_instc)
+
+visualpca_instc = transform(visualpca_instc, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2))
+
+```
+
+```{r}
+library(plotly)
+```
+
+```{r}
+plot_ly(visualpca_instc, x = ~pc1, y = ~pc2, color = ~hex, colors = visualpca_instc$hex, text = musicians)
+```
+
+```{r}
+plot_ly(visualTsne_instc, x = ~tsne1, y = ~tsne2, color = ~hex, colors = visualTsne_instc$hex, text = musicians)
+```
