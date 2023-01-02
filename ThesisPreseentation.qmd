@@ -1,0 +1,121 @@
+---
+title: "**Visualization for Jazz Musicians**"
+format:
+  revealjs:
+    incremental: true
+    theme: moon
+author: "*Yi-Hsin Lu*"
+date: "Jan. 10th, 2023"
+---
+
+## Outline
+
+-   **Introduction**
+
+-   **The Data**
+
+-   **Formulation**
+
+-   **Results**
+
+-   **Conclusions**
+
+# Introduction
+
+## Visualization
+
+-   Why is visualization so important?
+
+## Jazz Musician
+
+-   Why we chose jazz musicians?
+
+## Dataset
+
+-   DBpedia
+
+# Data
+
+## Database
+
+## Collection
+
+## Text Mining
+
+## Data Matrix
+
+# Formulations
+
+## Flow Chart
+
+# Instruments
+
+## Encoding
+
+## Jaccard
+
+# Genres
+
+## Encoding
+
+## Jaccard
+
+# Active Years
+
+-   The Start of Active Years
+
+-   The End of Active Years
+
+-   Active Years Interval
+
+-   Length of Active Years
+
+-   Middle of Active Years
+
+## Encoding
+
+## Jaccard
+
+# Multi-value Classification
+
+-   Instruments
+
+-   Genres
+
+## Principle Component Analysis (PCA)
+
+## Groups
+
+## Coloring
+
+# Combination
+
+-   Affinity matrices
+
+    -   Instruments
+
+    -   Genres
+
+    -   Active Years
+
+    -   Length of Active Years
+
+    -   Middle of Active Years
+
+## Distance/Similarity
+
+## Tuning
+
+# Results
+
+# Visualization
+
+-   Dimensionality Reduction
+
+-   **P**rinciple **C**omponent **A**nalysis (PCA)
+
+-   **t**-distributed **S**tochastic **N**eighbor **E**mbedding (t-SNE)
+
+# Conclusions
+
+# References

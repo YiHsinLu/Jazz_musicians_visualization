@@ -1,19 +1,22 @@
-Yi-Hsin Lu [ Oct 24, 2022, 15:24 ]
- -Next meeting[ Oct 26, 2022, 13:10 ]
+Yi-Hsin Lu [ Oct 31, 2022, 17:57 ]
+ -Next meeting[ Nov 02, 2022, 13:10 ]
 
 Discussion
 
-* 1. Discuss about the R shiny version of visualization
-* 2. Online/Offline in R shiny
-* 3. Jaccard with a constant
+* 1. Update R shiny visualization
+	+ add musicians search (zoom in)
+	+ use Plotly for visualizing
+* 2. distance vs affinity matrix
+	+ not much different
+	+ affinity puts single-value information together
+
 
 To-do
 
 * 1. R shiny version visualization
-	+ pick a constant before the shiny app
-	+ zoom in part
+	+ weights tuning
 * 2. Network polt by our data without tuning
-* 3. Based on the paper proving 1-Jac(x,y) is a kind of distance method, we could use a similar progrss on the new version of Jaccard
+* 3. Based on the paper proving 1-Jac(x,y) is a kind of distance method, we could use a similar progress on the new version of Jaccard
 
 Link/References
 
