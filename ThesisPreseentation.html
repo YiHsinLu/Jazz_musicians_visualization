@@ -318,6 +318,9 @@
       margin-right: 0; 
     }
   </style>
+  
+  <script src="ThesisPreseentation_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="ThesisPreseentation_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -372,6 +375,81 @@
 </section>
 <section id="collection" class="slide level2">
 <h2>Collection</h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-paper lightable-striped table lightable-material-dark" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; font-size: 18px; margin-left: auto; margin-right: auto; font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;font-weight: bold;font-size: 24px;position: sticky; top:0; background-color: #FFFFFF;">   </th>
+   <th style="text-align:left;font-weight: bold;font-size: 24px;position: sticky; top:0; background-color: #FFFFFF;"> instrument </th>
+   <th style="text-align:left;font-weight: bold;font-size: 24px;position: sticky; top:0; background-color: #FFFFFF;"> genre </th>
+   <th style="text-align:left;font-weight: bold;font-size: 24px;position: sticky; top:0; background-color: #FFFFFF;"> activeYearsStart </th>
+   <th style="text-align:left;font-weight: bold;font-size: 24px;position: sticky; top:0; background-color: #FFFFFF;"> activeYearsEnd </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Wynton_Marsalis </td>
+   <td style="text-align:left;"> Trumpet </td>
+   <td style="text-align:left;"> Dixieland,Jazz,Classical_music </td>
+   <td style="text-align:left;"> 1980 </td>
+   <td style="text-align:left;"> 2022 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Roy_Hargrove </td>
+   <td style="text-align:left;"> Trumpet, flugelhorn, vocals </td>
+   <td style="text-align:left;"> Jazz, Latin jazz, M_Base, soul </td>
+   <td style="text-align:left;"> 1987 </td>
+   <td style="text-align:left;"> 2018 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Ahmed_Abdul_Malik </td>
+   <td style="text-align:left;"> Oud,Double_bass </td>
+   <td style="text-align:left;"> Jazz </td>
+   <td style="text-align:left;"> 1950 </td>
+   <td style="text-align:left;"> 1960 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Benny_Golson </td>
+   <td style="text-align:left;"> Tenor_saxophone </td>
+   <td style="text-align:left;"> Jazz,Bebop,Hard_bop </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Joe_Henderson </td>
+   <td style="text-align:left;"> Saxophone </td>
+   <td style="text-align:left;"> Jazz   ,jazz fusion ,soul jazz </td>
+   <td style="text-align:left;"> 1955 </td>
+   <td style="text-align:left;"> 1955 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Arturo_Sandoval </td>
+   <td style="text-align:left;"> Piano,Trumpet,Timbales </td>
+   <td style="text-align:left;"> Jazz,Latin_jazz,Afro_Cubans </td>
+   <td style="text-align:left;"> 1977 </td>
+   <td style="text-align:left;"> 2022 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Joe_Morris_(trumpeter) </td>
+   <td style="text-align:left;"> Trumpet </td>
+   <td style="text-align:left;"> Jazz,Rhythm_and_blues </td>
+   <td style="text-align:left;"> 1942 </td>
+   <td style="text-align:left;"> 1958 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Kenny_Garrett </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> Post_bop,Jazz,Jazz_fusion </td>
+   <td style="text-align:left;"> 1978 </td>
+   <td style="text-align:left;"> 2022 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </section>
 <section id="text-mining" class="slide level2">
 <h2>Text Mining</h2>
@@ -434,8 +512,8 @@
 <li class="fragment"><p>Genres</p></li>
 </ul>
 </section>
-<section id="principle-component-analysis-pca" class="slide level2">
-<h2>Principle Component Analysis (PCA)</h2>
+<section id="principle-component-analysis" class="slide level2">
+<h2>Principle Component Analysis</h2>
 </section>
 <section id="groups" class="slide level2">
 <h2>Groups</h2>
@@ -699,6 +777,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

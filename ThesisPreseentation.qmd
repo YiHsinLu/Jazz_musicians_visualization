@@ -40,6 +40,17 @@ date: "Jan. 10th, 2023"
 
 ## Collection
 
+```{r echo=FALSE}
+library(kableExtra)
+load("ThesisP_dataset.RData")
+kbl(JazzMusiciansData[c(178,90,1:6),],align = "l", row.names = T) %>%
+  kable_paper("striped", full_width = F) %>%
+  row_spec(0, bold = T, font_size = 24)%>%
+  kable_styling(fixed_thead = T, font_size = 18)%>%
+  kable_material_dark()
+rm(list = ls())
+```
+
 ## Text Mining
 
 ## Data Matrix
@@ -82,7 +93,7 @@ date: "Jan. 10th, 2023"
 
 -   Genres
 
-## Principle Component Analysis (PCA)
+## Principle Component Analysis
 
 ## Groups
 
