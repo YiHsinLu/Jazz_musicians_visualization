@@ -30,9 +30,12 @@
     }
   </style>
   <link rel="stylesheet" href="ThesisPreseentation_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="styles.css">
   <link href="ThesisPreseentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="ThesisPreseentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="ThesisPreseentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="ThesisPreseentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="ThesisPreseentation_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="ThesisPreseentation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -350,17 +353,34 @@
 <section id="visualization" class="slide level2">
 <h2>Visualization</h2>
 <ul>
-<li class="fragment">Why is visualization so important?</li>
+<li class="fragment">Why is visualization so important?
+<ul>
+<li class="fragment"><p>More information</p></li>
+<li class="fragment"><p>Easier and Quicker</p></li>
+<li class="fragment"><p>The data to the <strong>plot/graph</strong></p></li>
+</ul></li>
 </ul>
+</section>
+<section id="visualization-1" class="slide level2">
+<h2>Visualization</h2>
+<ul>
+<li class="fragment">“<strong>Flavor network and the principles of food pairing</strong>”, Y.-Y. Ahn, S. E. Ahnert, J. P. Bagrow, and A.-L. Barabási</li>
+</ul>
+<p><img data-src="flavorNetwork.jpg" class="absolute fragment" style="top: 220px; right: 120px; width: 800px; "></p>
 </section>
 <section id="jazz-musician" class="slide level2">
 <h2>Jazz Musician</h2>
 <ul>
-<li class="fragment">Why we chose jazz musicians?</li>
+<li class="fragment">Why we chose jazz musicians?
+<ul>
+<li class="fragment"><p>Music topic and interest</p></li>
+<li class="fragment"><p>Easy to collect</p></li>
+<li class="fragment"><p><a href="https://linkedjazz.org/network/">Linked Jazz</a></p></li>
+</ul></li>
 </ul>
 </section>
-<section id="dataset" class="slide level2">
-<h2>Dataset</h2>
+<section id="data-set" class="slide level2">
+<h2>Data set</h2>
 <ul>
 <li class="fragment">DBpedia</li>
 </ul>
@@ -546,7 +566,7 @@
 
 </section>
 
-<section id="visualization-1" class="title-slide slide level1 center">
+<section id="visualization-2" class="title-slide slide level1 center">
 <h1>Visualization</h1>
 <ul>
 <li class="fragment"><p>Dimensionality Reduction</p></li>
@@ -576,6 +596,7 @@
   <script src="ThesisPreseentation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="ThesisPreseentation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="ThesisPreseentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="ThesisPreseentation_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="ThesisPreseentation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -591,13 +612,14 @@
       // https://revealjs.com/config/
       Reveal.initialize({
 'controlsAuto': true,
-'previewLinksAuto': false,
+'previewLinksAuto': true,
 'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":false},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -618,7 +640,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -768,7 +790,7 @@
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,

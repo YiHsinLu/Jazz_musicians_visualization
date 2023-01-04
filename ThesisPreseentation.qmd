@@ -4,6 +4,11 @@ format:
   revealjs:
     incremental: true
     theme: moon
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    css: styles.css
 author: "*Yi-Hsin Lu*"
 date: "Jan. 10th, 2023"
 ---
@@ -25,12 +30,28 @@ date: "Jan. 10th, 2023"
 ## Visualization
 
 -   Why is visualization so important?
+    -   More information
+
+    -   Easier and Quicker
+
+    -   The data to the **plot/graph**
+
+## Visualization
+
+-   "**Flavor network and the principles of food pairing**", Y.-Y. Ahn, S. E. Ahnert, J. P. Bagrow, and A.-L. Barabási
+
+![](flavorNetwork.jpg){.absolute .fragment top="220" right="120" width="800"}
 
 ## Jazz Musician
 
 -   Why we chose jazz musicians?
+    -   Music topic and interest
 
-## Dataset
+    -   Easy to collect
+
+    -   [Linked Jazz](https://linkedjazz.org/network/)
+
+## Data set
 
 -   DBpedia
 
