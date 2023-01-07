@@ -1,11 +1,10 @@
 ```{r}
-Mtable = read.csv("D:/Jazz_visual/csv/Mtable229.csv", row.names = 1)
+Mtable = read.csv("D:/Jazz_visual/csv/Mtable229.csv")
 ```
 
 ```{r}
-genre = as.data.frame(Mtable$genre)
-colnames(genre) = 'genre_cat'
-rownames(genre) = rownames(Mtable)
+genre = data.frame(mu_name = Mtable$X, genres = Mtable$genre)
+rownames(genre) = Mtable$X
 ```
 
 # Genre
@@ -188,7 +187,8 @@ abline(h=0,v=0,lwd=1.2)
 ```
 
 ```{r}
-
+M_genreHP = read.csv("csv/matrix_genre1hp.csv", header = T, row.names = 1)
+musicians = rownames(M_genreHP)
 genreclasslist = list(c1=c(1,2,3), c2=c(5,13,19), c3=c(4,11,18), c4=c(6,7,9,17,20),  c5=c(8,10,12,14,15,16,21))
 
 M_genre5class = c()
@@ -212,7 +212,8 @@ M_genre3class$V1 = M_genre3class$V1+M_genre3class$V2+M_genre3class$V3
 M_genre3class = M_genre3class %>%select(V1,V4,V5)
 M_genre3class = as.data.frame(M_genre3class)
 rownames(M_genre3class) = musicians
-M_genre3class = comper(M_genre3class)
+colnames(M_genre3class) = c("genre1", "genre2", "genre3")
+#M_genre3class = comper(M_genre3class)
 ```
 
 ```{r}
@@ -220,4 +221,5 @@ M_genrecolor = cbind(1-M_genre3class, rgb(1-M_genre3class))
 M_genrecolorSqrt = cbind((1-M_genre3class)^2, rgb((1-M_genre3class)^2))
 write.csv(M_genrecolor, 'D:/jazz_visual/csv/color_genreclass.csv')
 write.csv(M_genrecolorSqrt, 'D:/jazz_visual/csv/color_genreclass_sqrt.csv')
+rm(list=setdiff(ls(), "M_genre3class"))
 ```

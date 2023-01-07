@@ -213,7 +213,7 @@ ggplot(ins_PC, aes(x=PC1, y=PC3)) +
 ### Instrument
 
 ```{r echo=FALSE}
-plot(w[,1],-w[,2],type="n",xlab="W[,1]",ylab="W[,2]",main="Instrument",cex.axis=1.2,cex.lab=1.2,cex.main=1.6,xlim=c(-0.5,1),ylim=c(-0.5,1))
+plot(w[,1],-w[,2],type="n",xlab="PC1",ylab="PC2",main="Instrument",cex.axis=1.2,cex.lab=1.2,cex.main=1.6,xlim=c(-0.5,1),ylim=c(-0.5,1))
 text(w[,1],-w[,2],namew,xpd=NA)
 abline(h=0,v=0,lwd=1.2)
 ```

@@ -3,12 +3,11 @@ title: "**Visualization for Jazz Musicians**"
 format:
   revealjs:
     incremental: true
-    theme: moon
     slide-number: true
     chalkboard: 
       buttons: false
     preview-links: auto
-    css: styles.css
+    theme: simple
 author: "*Yi-Hsin Lu*"
 date: "Jan. 10th, 2023"
 ---
@@ -27,20 +26,20 @@ date: "Jan. 10th, 2023"
 
 # Introduction
 
+-   Visualization
+
+-   Jazz Musicians
+
 ## Visualization
 
 -   Why is visualization so important?
-    -   More information
-
-    -   Easier and Quicker
-
-    -   The data to the **plot/graph**
+    -   More information by the **plot** and **graph**
 
 ## Visualization
 
--   "**Flavor network and the principles of food pairing**", Y.-Y. Ahn, S. E. Ahnert, J. P. Bagrow, and A.-L. Barabási
+-   **Flavor network and the principles of food pairing**, Y.-Y. Ahn, S. E. Ahnert, J. P. Bagrow, and A.-L. Barabási
 
-![](flavorNetwork.jpg){.absolute .fragment top="220" right="120" width="800"}
+![](fig/flavorNetwork.jpg){.absolute .fragment top="220" right="120" width="800"}
 
 ## Jazz Musician
 
@@ -49,17 +48,43 @@ date: "Jan. 10th, 2023"
 
     -   Easy to collect
 
-    -   [Linked Jazz](https://linkedjazz.org/network/)
+    -   [Linked Jazz](https://linkedjazz.org/)
 
-## Data set
+## [Linked Jazz Network Graph](https://linkedjazz.org/network/)
 
--   DBpedia
+![](fig/linkedjazz.jpg){width="100%"}
 
-# Data
+::: footer
+[Linked Jazz](https://linkedjazz.org/)
+:::
 
-## Database
+## Jazz Musician
+
+[**Wynton Marsalis**](https://dbpedia.org/page/Wynton_Marsalis) and [**Roy Hargrove**](https://dbpedia.org/page/Roy_Hargrove) , Personal suggestion of Prof. Guang-Hao Wei
+
+::: {#fig layout-ncol="2"}
+![Wynton Marsalis](fig/Wynton.jpg){#fig width="674"}
+
+![Roy Hargrove](fig/Roy.jpg){#fig width="802"}
+:::
+
+# The Data
+
+## Database {.smaller .scrollable}
+
+![](fig/DB_wynton.jpg){width="100%"} ![](fig/DB_wynton2.jpg){width="100%"} ![](fig/DB_wynton3.jpg){width="100%"} ![](fig/DB_wynton4.jpg){width="100%"}
+
+::: footer
+[DBpedia: Wynton_Marsalis](https://dbpedia.org/page/Wynton_Marsalis)
+:::
 
 ## Collection
+
+* URL: "https://dbpedia.org/page/"+"musicians' name"
+* Musicians' name list
+* [Python crawler](https://github.com/YiHsinLu/Jazz.io/blob/main/musician_data.ipynb)
+
+## Data Matrix
 
 ```{r echo=FALSE}
 library(kableExtra)
@@ -72,73 +97,199 @@ kbl(JazzMusiciansData[c(178,90,1:6),],align = "l", row.names = T) %>%
 rm(list = ls())
 ```
 
-## Text Mining
-
-## Data Matrix
-
 # Formulations
 
-## Flow Chart
+## Flow Chart for Data Matrices {.smaller .scrollable}
 
-# Instruments
+::: panel-tabset
 
-## Encoding
+### Instrument
 
-## Jaccard
+![](fig/tm_ohe_inst.jpg){width="100%"}
 
-# Genres
+### Genre
 
-## Encoding
+![](fig/tm_ohe_genre.jpg){width="100%"}
 
-## Jaccard
+### Active years
 
-# Active Years
+![](fig/AYs.jpg){width="100%"}
 
--   The Start of Active Years
+:::
 
--   The End of Active Years
+## Data Matrices {.smaller .scrollable}
 
--   Active Years Interval
+::: panel-tabset
+```{r include=FALSE}
+load("D:/jazz_visual/thesispresentation/dataMatrices.RData")
+```
+### Instrument
 
--   Length of Active Years
+```{r echo=FALSE}
+library(kableExtra)
+kbl(inst) %>%
+  kable_paper() %>%
+  scroll_box(width = "1000px", height = "500px")
+```
 
--   Middle of Active Years
+### Genre
+```{r echo=FALSE}
+library(kableExtra)
+kbl(gen) %>%
+  kable_paper() %>%
+  scroll_box(width = "1000px", height = "500px")
+```
 
-## Encoding
+### Active Years (interval)
 
-## Jaccard
+```{r echo=FALSE}
+library(kableExtra)
+kbl(aysi) %>%
+  kable_paper() %>%
+  scroll_box(width = "1000px", height = "500px")
+```
+
+### Length
+
+```{r echo=FALSE}
+library(kableExtra)
+kbl(len) %>%
+  kable_paper() %>%
+  scroll_box(width = "1000px", height = "500px")
+```
+
+### Middle
+
+```{r echo=FALSE}
+library(kableExtra)
+kbl(mid) %>%
+  kable_paper() %>%
+  scroll_box(width = "1000px", height = "500px")
+rm(list = ls())
+```
+:::
+
+## Jaccard.C
+
+Definition: 
+$$
+Jaccard.C(x,y) = \frac{|x\cap y|+C}{|x\cup y|+C}, for \;C:\;constant
+$$
+
+* Jaccard with a constant C
+* Affinity matrix
+* Pairwise similarity
+
+## Visualization: t-SNE
+
+* **t**-distrubuted **S**tochastic **N**eighbor **E**mbedding
+* [**Visualizing Data using t-SNE**](https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf), L. Van der Maaten and G. Hinton
+* Dimensionality reduction
+* Visualization method
+
+::: footer
+[t-SNE - Laurens van der Maaten](https://lvdmaaten.github.io/tsne/)
+:::
 
 # Multi-value Classification
 
--   Instruments
+-   Instrument
 
--   Genres
+-   Genre
 
-## Principle Component Analysis
+## PCA
 
-## Groups
+* **P**rinciple **C**omponent **A**nalysis 
+* Dimensionality reduction
+* [**Applied Multivariate Statistical Analysis**](https://hastie.su.domains/ElemStatLearn/), W. K. Härdle and L. Simar
+
+## PCA {.smaller}
+::: panel-tabset
+
+### Instrument
+![](fig/PCA_inst.png){width="80%"}
+
+### Genre
+![](fig/PCA_gen.png){width="80%"}
+:::
+
+## Groups {.smaller}
+
+```{r}
+load("thesispresentation/PCA_features.RData")
+```
+
+::: panel-tabset
+### Instrument
+
+```{r echo=FALSE}
+kbl(M_inst3class) %>%
+  kable_paper() %>%
+  scroll_box(height = "500px")
+```
+
+### Genre
+
+```{r echo=FALSE}
+kbl(M_genre3class) %>%
+  kable_paper() %>%
+  scroll_box(height = "500px")
+rm(list = ls())
+```
+
+:::
 
 ## Coloring
 
-# Combination
+![](fig/coloring.jpg){width="100%"}
+
+# Results
+
+## Flow chart
+
+![](fig/visualization.jpg){width="100%"}
+
+## Combination {.smaller}
+
+$$
+\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{3}}
+$$
 
 -   Affinity matrices
 
-    -   Instruments
+    -   Instruments ($\mathcal{M}_{inst}$)
 
-    -   Genres
+    -   Genres ($\mathcal{M}_{gen}$)
 
-    -   Active Years
+    -   Active Years ($\mathcal{M}_{ayi}$)
 
-    -   Length of Active Years
+    -   Length of Active Years ($\mathcal{M}_{ayl}$)
 
-    -   Middle of Active Years
+    -   Middle of Active Years ($\mathcal{M}_{aym}$)
 
-## Distance/Similarity
+## Tuning {.smaller .scrollable}
 
-## Tuning
+#### Instrument:
 
-# Results
+$$
+\small{\mathcal{M}_{ij}=\sqrt{\frac{8(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{10}}}
+$$
+
+#### Genre:
+$$
+\small{\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+8(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{10}}}
+$$
+
+#### Length of active years:
+$$
+\small{\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{3.7}}}
+$$
+
+#### Middle of active years:
+$$
+\small{\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+(\mathcal{M}_{aym})_{ij}^2}{3.7}}}
+$$
+
 
 # Visualization
 
@@ -148,6 +299,76 @@ rm(list = ls())
 
 -   **t**-distributed **S**tochastic **N**eighbor **E**mbedding (t-SNE)
 
+## Instrument{.smaller .scrollable}
+
+```{r include=FALSE}
+load("D:/jazz_visual/visualization_plot_affi.RData")
+```
+
+::: panel-tabset
+
+### PCA
+```{r echo=FALSE}
+visualpca_plot.instc
+```
+
+### t-SNE
+```{r echo=FALSE}
+visualTsne_plot.instc
+```
+:::
+
+## Genre{.smaller .scrollable}
+
+::: panel-tabset
+
+### PCA
+```{r echo=FALSE}
+visualpca_plot.genrec
+```
+
+### t-SNE
+```{r echo=FALSE}
+visualTsne_plot.genrec
+```
+:::
+
+## Length of active years{.smaller .scrollable}
+
+::: panel-tabset
+
+### PCA
+```{r echo=FALSE}
+visualpca_plot.ysalenc
+```
+
+### t-SNE
+```{r echo=FALSE}
+visualTsne_plot.ysalenc
+```
+:::
+
+## Middle of active years{.smaller .scrollable}
+
+::: panel-tabset
+
+### PCA
+```{r echo=FALSE}
+visualpca_plot.ysamidc
+```
+
+### t-SNE
+```{r echo=FALSE}
+visualTsne_plot.ysamidc
+rm(list = ls())
+```
+:::
+
 # Conclusions
 
-# References
+* Visualizing methods: PCA and t-SNE
+* CMYK color system
+* Jaccard with a constant C
+* Multi-value classification problem
+
+# Thank You for Your Attention！
