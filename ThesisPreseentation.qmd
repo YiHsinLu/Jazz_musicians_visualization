@@ -37,7 +37,7 @@ date: "Jan. 10th, 2023"
 
 ## Visualization
 
--   **Flavor network and the principles of food pairing**, Y.-Y. Ahn, S. E. Ahnert, J. P. Bagrow, and A.-L. Barabási
+-   **Flavor network and the principles of food pairing**, Y.-Y. Ahn, S. E. Ahnert, J. P. Bagrow, and A.-L. BarabC!si
 
 ![](fig/flavorNetwork.jpg){.absolute .fragment top="220" right="120" width="800"}
 
@@ -60,7 +60,7 @@ date: "Jan. 10th, 2023"
 
 ## Jazz Musician
 
-[**Wynton Marsalis**](https://dbpedia.org/page/Wynton_Marsalis) and [**Roy Hargrove**](https://dbpedia.org/page/Roy_Hargrove) , Personal suggestion of Prof. Guang-Hao Wei
+[**Wynton Marsalis**](https://dbpedia.org/page/Wynton_Marsalis) and [**Roy Hargrove**](https://dbpedia.org/page/Roy_Hargrove) , personal suggestion of Prof. Guang-Hao Wei
 
 ::: {#fig layout-ncol="2"}
 ![Wynton Marsalis](fig/Wynton.jpg){#fig width="674"}
@@ -176,9 +176,10 @@ $$
 Jaccard.C(x,y) = \frac{|x\cap y|+C}{|x\cup y|+C}, for \;C:\;constant
 $$
 
-* Jaccard with a constant C
-* Affinity matrix
+* [Jaccard with a constant C](https://yihsinlu.github.io/Jazz.io/1017.html)
 * Pairwise similarity
+* Affinity matrix
+
 
 ## Visualization: t-SNE
 
@@ -201,7 +202,7 @@ $$
 
 * **P**rinciple **C**omponent **A**nalysis 
 * Dimensionality reduction
-* [**Applied Multivariate Statistical Analysis**](https://hastie.su.domains/ElemStatLearn/), W. K. Härdle and L. Simar
+* [**Applied Multivariate Statistical Analysis**](https://hastie.su.domains/ElemStatLearn/), W. K. HC$rdle and L. Simar
 
 ## PCA {.smaller}
 ::: panel-tabset
@@ -250,6 +251,8 @@ rm(list = ls())
 ![](fig/visualization.jpg){width="100%"}
 
 ## Combination {.smaller}
+
+### [Distance vs Similarity](https://yihsinlu.github.io/Jazz.io/1031.html)
 
 $$
 \mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{3}}
@@ -368,7 +371,7 @@ rm(list = ls())
 
 * Visualizing methods: PCA and t-SNE
 * CMYK color system
-* Jaccard with a constant C
+* [Jaccard with a constant C](https://yihsinlu.github.io/Jazz.io/1017.html)
 * Multi-value classification problem
 
-# Thank You for Your Attention！
+# Thank You for Your Attention!
