@@ -1,0 +1,16 @@
+```{r}
+load("D:/jazz_visual/visualization_plot_affi.RData")
+```
+
+```{r}
+print(ls())
+
+```
+
+```{r}
+ #[1] "visualpca_ggplot.instc"  "visualpca_hchart.instc" 
+ #[3] "visualpca_plot.genrec"   "visualpca_plot.instc"   
+ #[5] "visualpca_plot.ysalenc"  "visualpca_plot.ysamidc" 
+ #[7] "visualTsne_plot.genrec"  "visualTsne_plot.instc"  
+ #[9] "visualTsne_plot.ysalenc" "visualTsne_plot.ysamidc"
+```
