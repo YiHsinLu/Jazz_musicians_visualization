@@ -40,21 +40,25 @@ visualpca_all = as.data.frame(visualpca_all)
 
 visualpca_all = transform(visualpca_all, pc1 = as.numeric(pc1), pc2 = as.numeric(pc2))
 
-ggplot(visualpca_all, aes(x=pc1, y=pc2, label=name))+geom_point() +geom_text(hjust=0, vjust=0)
+ggplot(visualpca_all, aes(x=pc1, y=pc2))+geom_point()
 
 ##
 visualTsne_allc = cbind(tsne_allc$Y[],1, musicians)
-
-colnames(visualTsne_allc) = c('tsne1', 'tsne2', 'name')
-rownames(visualTsne_allc) = musicians
 visualTsne_allc = as.data.frame(visualTsne_allc)
+colnames(visualTsne_allc) = c('tsne1', 'tsne2')
+rownames(visualTsne_allc) = musicians
+
 
 visualTsne_allc = transform(visualTsne_allc, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
 
-ggplot(visualTsne_allc, aes(x=tsne1, y=tsne2, label=name))+
-  geom_point() +geom_text(hjust=0, vjust=0)
+ggplot(visualTsne_allc, aes(x=tsne1, y=tsne2))+
+  geom_point()
 
 visualpca_hchart.instc = hchart(visualTsne_allc, 'scatter', hcaes(x=tsne1, y=tsne2, group=name))
+```
+
+```{r}
+first_map = plot_ly(visualTsne_allc, x = ~tsne1, y = ~tsne2, text = musicians)
 ```
 
 #inst
@@ -112,7 +116,7 @@ visualTsne_plot.genrec = plot_ly(visualTsne_genrec, x = ~tsne1, y = ~tsne2, mark
 visualTsne_plot.genrec%>%layout(title = "PCA",     plot_bgcolor='#e5ecf6')
 
 visualpca_plot.genrec = plot_ly(visualpca_genrec, x = ~pc1, y = ~pc2, marker = list(color = visualpca_genrec$hex), text = musicians)
-visualpca_plot.genrec%>%layout(title = "PCA",     plot_bgcolor='#e5ecf6')
+visualpca_plot.genrec%>%layout(plot_bgcolor='#e5ecf6')
 ```
 
 # yearsActivelen

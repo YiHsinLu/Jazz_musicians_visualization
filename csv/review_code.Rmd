@@ -1,0 +1,155 @@
+```{r}
+library(imputeTS)
+library(knitr)
+library(dplyr)
+library(flextable)
+library(magrittr)
+library(kableExtra)
+library(tidytext)
+library(tidyverse)
+library(plot.matrix)
+library(stringr)
+library(ggpubr)
+library(highcharter)
+library(ggpubr)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+library(viridisLite)
+library(Rtsne)
+library(qvalue)
+library(jaccard)
+library(lsa)
+library(patchwork)
+library(plotly)
+mi = read.csv("matrix_instrument.csv", row.names = 1)
+im = as.data.frame(t(mi))
+jacinst = dis_jac.c(im,C=1)
+pca_inst = prcomp(jacinst, scale. = TRUE, center = TRUE, retx = T)
+```
+
+```{r}
+summary(pca_inst)
+```
+
+```{r}
+
+inst = c("composer",
+"singer",
+"drummer",
+"pianist",
+"saxophonist",
+"bassist",
+"songwriter",
+"trumpeter",
+"guitarist",
+"producer",
+"vocalist",
+"percussionist",
+"hornist",
+"keyboardist",
+"trombonist",
+"flutist")
+
+col_inst = c("magenta", "yellow", "cyan", "magenta", "magenta", "cyan", "yellow", "magenta", "yellow", "yellow", "yellow", "cyan", "magenta", "cyan", "magenta", "magenta")
+#inst_ma = w
+pca_inst = as.data.frame(pca_inst$rotation[,1:2])
+ggplot(pca_inst, aes(x=PC1, y=PC2, label = inst))+
+  geom_text(color = c("magenta", "yellow", "cyan", "magenta", "magenta", "cyan", "yellow", "magenta", "yellow", "yellow", "yellow", "cyan", "magenta", "cyan", "magenta", "magenta"), size = 7, vjust = "inward", hjust = "inward")
+```
+
+```{r}
+# Jaccard function
+dis_jac.c = function(M, C=0){
+  M = as.matrix(M)
+  library("jaccard")
+  n = nrow(M)
+  # n*n matrix
+  jaccard.c = function (x, y, c=0, center = FALSE, px = NULL, py = NULL) 
+  {
+    if (length(x) != length(y)) {
+      stop("Two fingerprints (x and y) must be of the same length.")
+    }
+    if (is.null(px) | is.null(py)) {
+      px <- mean(x)
+      py <- mean(y)
+    }
+    sumxy <- sum(x & y)+c
+    unionxy <- sum(x) + sum(y) - sumxy+2*c
+    if (unionxy == 0) {
+      j <- (px * py)/(px + py - px * py)
+    }
+    else {
+      j <- sumxy/unionxy
+    }
+    if (center == FALSE) {
+      return(j)
+    }
+    else {
+      return(j - (px * py)/(px + py - px * py))
+    }
+  }
+  af_matrix = matrix(data = 1, nrow = n, ncol = n)
+  for(i in 1:(n-1)){
+    for(j in (i+1):n){
+      if(sum(M[i,])==0&sum(M[j,])==0){
+        jac = 0
+        af_matrix[i,j] = af_matrix[j,i] = jac
+      }else{
+        jac = jaccard.c(M[i,],M[j,], c=C)
+        af_matrix[i,j] = af_matrix[j,i] = jac
+      }
+    }
+  }
+  colnames(af_matrix) = rownames(af_matrix) = rownames(M)
+  return(as.data.frame(af_matrix))
+}
+
+
+jaccard.c = function (x, y, c=0, center = FALSE, px = NULL, py = NULL) 
+{
+  if (length(x) != length(y)) {
+    stop("Two fingerprints (x and y) must be of the same length.")
+  }
+  if (is.null(px) | is.null(py)) {
+    px <- mean(x)
+    py <- mean(y)
+  }
+  sumxy <- sum(x & y)+c
+  unionxy <- sum(x) + sum(y) - sumxy+2*c
+  if (unionxy == 0) {
+    j <- (px * py)/(px + py - px * py)
+  }
+  else {
+    j <- sumxy/unionxy
+  }
+  if (center == FALSE) {
+    return(j)
+  }
+  else {
+    return(j - (px * py)/(px + py - px * py))
+  }
+}
+```
+
+
+#1
+```{r}
+mg = read.csv("matrix_genre1hp.csv", row.names = 1)
+mg = dis_jac.c(t(mg), C=1)
+pca_gen = prcomp(mg, scale. = TRUE, center = TRUE, retx = T)
+
+summary(pca_gen)
+
+gen = colnames(mg)
+
+col_gen = c("cyan", "cyan", "cyan", "cyan", "cyan", "magenta", "magenta", "yellow", "magenta", "yellow", "cyan", "yellow", "cyan", "yellow", "yellow", "yellow", "magenta", "cyan", "cyan", "magenta", "yellow")
+#inst_ma = w
+pca_gen = as.data.frame(pca_gen$rotation[,1:2])
+colnames(pca_gen) = c("PC1", "PC2")
+ggplot(pca_gen, aes(x=PC1, y=PC2, label = gen))+
+  geom_text(color = col_gen, size = 7, vjust = "upward", hjust = "upward")+
+  xlim(-0.5, 0.3)
+```

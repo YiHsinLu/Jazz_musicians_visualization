@@ -16,9 +16,9 @@ date: "Jan. 10th, 2023"
 
 -   **Introduction**
 
--   **The Data**
+-   **Data**
 
--   **Formulation**
+-   **Methods**
 
 -   **Results**
 
@@ -80,9 +80,9 @@ date: "Jan. 10th, 2023"
 
 ## Collection
 
-* URL: "https://dbpedia.org/page/"+"musicians' name"
-* Musicians' name list
-* [Python crawler](https://github.com/YiHsinLu/Jazz.io/blob/main/musician_data.ipynb)
+-   URL: "https://dbpedia.org/page/"+"musicians' name"
+-   Musicians' name list
+-   [Python crawler](https://github.com/YiHsinLu/Jazz.io/blob/main/musician_data.ipynb)
 
 ## Data Matrix
 
@@ -102,7 +102,6 @@ rm(list = ls())
 ## Flow Chart for Data Matrices {.smaller .scrollable}
 
 ::: panel-tabset
-
 ### Instrument
 
 ![](fig/tm_ohe_inst.jpg){width="100%"}
@@ -114,7 +113,6 @@ rm(list = ls())
 ### Active years
 
 ![](fig/AYs.jpg){width="100%"}
-
 :::
 
 ## Data Matrices {.smaller .scrollable}
@@ -123,6 +121,7 @@ rm(list = ls())
 ```{r include=FALSE}
 load("D:/jazz_visual/thesispresentation/dataMatrices.RData")
 ```
+
 ### Instrument
 
 ```{r echo=FALSE}
@@ -133,6 +132,7 @@ kbl(inst) %>%
 ```
 
 ### Genre
+
 ```{r echo=FALSE}
 library(kableExtra)
 kbl(gen) %>%
@@ -171,22 +171,20 @@ rm(list = ls())
 
 ## Jaccard.C
 
-Definition: 
-$$
+Definition: $$
 Jaccard.C(x,y) = \frac{|x\cap y|+C}{|x\cup y|+C}, for \;C:\;constant
 $$
 
-* [Jaccard with a constant C](https://yihsinlu.github.io/Jazz.io/1017.html)
-* Pairwise similarity
-* Affinity matrix
-
+-   [Jaccard with a constant C](https://yihsinlu.github.io/Jazz.io/1017.html)
+-   Pairwise similarity
+-   Affinity matrix
 
 ## Visualization: t-SNE
 
-* **t**-distrubuted **S**tochastic **N**eighbor **E**mbedding
-* [**Visualizing Data using t-SNE**](https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf), L. Van der Maaten and G. Hinton
-* Dimensionality reduction
-* Visualization method
+-   **t**-distrubuted **S**tochastic **N**eighbor **E**mbedding
+-   [**Visualizing Data using t-SNE**](https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf), L. Van der Maaten and G. Hinton
+-   Dimensionality reduction
+-   Visualization method
 
 ::: footer
 [t-SNE - Laurens van der Maaten](https://lvdmaaten.github.io/tsne/)
@@ -200,17 +198,19 @@ $$
 
 ## PCA
 
-* **P**rinciple **C**omponent **A**nalysis 
-* Dimensionality reduction
-* [**Applied Multivariate Statistical Analysis**](https://hastie.su.domains/ElemStatLearn/), W. K. HC$rdle and L. Simar
+-   **P**rinciple **C**omponent **A**nalysis
+-   Dimensionality reduction
+-   [**Applied Multivariate Statistical Analysis**](https://hastie.su.domains/ElemStatLearn/), W. K. HC\$rdle and L. Simar
 
 ## PCA {.smaller}
-::: panel-tabset
 
+::: panel-tabset
 ### Instrument
+
 ![](fig/PCA_inst.png){width="80%"}
 
 ### Genre
+
 ![](fig/PCA_gen.png){width="80%"}
 :::
 
@@ -237,7 +237,6 @@ kbl(M_genre3class) %>%
   scroll_box(height = "500px")
 rm(list = ls())
 ```
-
 :::
 
 ## Coloring
@@ -279,20 +278,22 @@ $$
 $$
 
 #### Genre:
+
 $$
 \small{\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+8(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{10}}}
 $$
 
 #### Length of active years:
+
 $$
 \small{\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{3.7}}}
 $$
 
 #### Middle of active years:
+
 $$
 \small{\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+(\mathcal{M}_{aym})_{ij}^2}{3.7}}}
 $$
-
 
 # Visualization
 
@@ -302,65 +303,69 @@ $$
 
 -   **t**-distributed **S**tochastic **N**eighbor **E**mbedding (t-SNE)
 
-## Instrument{.smaller .scrollable}
+## Instrument {.smaller .scrollable}
 
 ```{r include=FALSE}
 load("D:/jazz_visual/visualization_plot_affi.RData")
 ```
 
 ::: panel-tabset
-
 ### PCA
+
 ```{r echo=FALSE}
 visualpca_plot.instc
 ```
 
 ### t-SNE
+
 ```{r echo=FALSE}
 visualTsne_plot.instc
 ```
 :::
 
-## Genre{.smaller .scrollable}
+## Genre {.smaller .scrollable}
 
 ::: panel-tabset
-
 ### PCA
+
 ```{r echo=FALSE}
 visualpca_plot.genrec
 ```
 
 ### t-SNE
+
 ```{r echo=FALSE}
 visualTsne_plot.genrec
 ```
 :::
 
-## Length of active years{.smaller .scrollable}
+## Length of active years {.smaller .scrollable}
 
 ::: panel-tabset
-
 ### PCA
+
 ```{r echo=FALSE}
 visualpca_plot.ysalenc
 ```
 
 ### t-SNE
+
 ```{r echo=FALSE}
 visualTsne_plot.ysalenc
 ```
 :::
 
-## Middle of active years{.smaller .scrollable}
+## Middle of active years {.smaller .scrollable}
 
 ::: panel-tabset
-
 ### PCA
+
 ```{r echo=FALSE}
 visualpca_plot.ysamidc
 ```
 
 ### t-SNE
+
 ```{r echo=FALSE}
 visualTsne_plot.ysamidc
 rm(list = ls())
@@ -369,9 +374,9 @@ rm(list = ls())
 
 # Conclusions
 
-* Visualizing methods: PCA and t-SNE
-* CMYK color system
-* [Jaccard with a constant C](https://yihsinlu.github.io/Jazz.io/1017.html)
-* Multi-value classification problem
+-   Visualizing methods: PCA and t-SNE
+-   CMYK color system
+-   [Jaccard with a constant C](https://yihsinlu.github.io/Jazz.io/1017.html)
+-   Multi-value classification problem
 
 # Thank You for Your Attention!
