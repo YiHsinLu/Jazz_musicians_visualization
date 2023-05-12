@@ -7,7 +7,7 @@ format:
     chalkboard: 
       buttons: false
     preview-links: auto
-    theme: simple
+    theme: simple  
 author: "*Yi-Hsin Lu*"
 date: "2023-06-13"
 ---
@@ -38,11 +38,11 @@ date: "2023-06-13"
     -   Data
     -   Graphics
 
-## Visualization
+## What?
 
--   [**Hand book of data visualization**](https://books.google.com.tw/books?hl=zh-TW&lr=&id=zzCiSJoohuQC&oi=fnd&pg=PA4&dq=Hand+Book+of+Data+Visualization&ots=hyMBTc_h97&sig=fQ9meiATlqt4Edf_tgiNo6Hpoic&redir_esc=y#v=onepage&q=Hand%20Book%20of%20Data%20Visualization&f=false)
--   [**How visualization can change your life?**](https://www.youtube.com/watch?v=E8k6LcYO_Vg)
--   [**Flavor network graph**](https://www.nature.com/articles/srep00196)
+-   [**Hand book of data visualization** (2007)](https://books.google.com.tw/books?hl=zh-TW&lr=&id=zzCiSJoohuQC&oi=fnd&pg=PA4&dq=Hand+Book+of+Data+Visualization&ots=hyMBTc_h97&sig=fQ9meiATlqt4Edf_tgiNo6Hpoic&redir_esc=y#v=onepage&q=Hand%20Book%20of%20Data%20Visualization&f=false)
+-   [**How visualization can change your life?** (2020)](https://www.youtube.com/watch?v=E8k6LcYO_Vg)
+-   [**Flavor network graph** (2011)](https://www.nature.com/articles/srep00196)
 
 
 ![](fig/flavorNetwork.jpg){.absolute .fragment top="100" right="50" width="1200"}
@@ -56,11 +56,11 @@ date: "2023-06-13"
 [Linked Jazz](https://linkedjazz.org/)
 :::
 
-## What we want to do?
+## What?
 
 -   Jazz Musician Maps
 
-## What we want to do?
+## What?
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 load("defence_data/1intro_jazzmap.RData")
@@ -78,19 +78,16 @@ rm(list = ls())
 
 # Data
 
-## Original Data Table
+## Original Data Table {.smaller .scrollable}
 
 ```{r echo=FALSE}
+library(dplyr)
+library(kableExtra)
 load("defence_data/2data_table.RData")
-kable(JazzMusiciansData[c(178,148,156,223,90,9,132),],align = "l", row.names = T)%>%
-  kable_styling(font_size = 18)
+odt
 rm(list = ls())
 ```
 
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-load("map.RData")
-```
 
 ## Database {.smaller .scrollable}
 
@@ -102,10 +99,8 @@ load("map.RData")
 
 ## Collection
 
--   **Wynton Marsalis** and **Roy Hargrove**
--   "1-degree" and "2-degree" Circle
--   Musicians List
--   Features
+-   Wynton Marsalis and Roy Hargrove -> `Musicians List`
+-   `Features`
     -   instruments
     -   genres
     -   active years
@@ -120,268 +115,240 @@ load("map.RData")
 
 :::
 
-## Data Matrices {.smaller .scrollable}
+## Working Data Matrices {.smaller .scrollable}
 
 ::: panel-tabset
 ```{r include=FALSE}
-load("D:/jazz_visual/thesispresentation/dataMatrices.RData")
+library(kableExtra)
+load("defence_data/3data_matrices.RData")
 ```
 
-### Instrument
+### Instruments
 
 ```{r echo=FALSE}
-library(kableExtra)
-kbl(inst) %>%
-  kable_paper() %>%
-  scroll_box(width = "1000px", height = "500px")
+inst
 ```
 
-### Genre
+### Genres
 
 ```{r echo=FALSE}
-library(kableExtra)
-kbl(gen) %>%
-  kable_paper() %>%
-  scroll_box(width = "1000px", height = "500px")
+gen
 ```
 
-### Active Years (interval)
+### Active
 
 ```{r echo=FALSE}
-library(kableExtra)
-kbl(aysi) %>%
-  kable_paper() %>%
-  scroll_box(width = "1000px", height = "500px")
+aysi
 ```
 
-### Length
+### Number
 
 ```{r echo=FALSE}
-library(kableExtra)
-kbl(len) %>%
-  kable_paper() %>%
-  scroll_box(width = "1000px", height = "500px")
+len
 ```
 
 ### Middle
 
 ```{r echo=FALSE}
-library(kableExtra)
-kbl(mid) %>%
-  kable_paper() %>%
-  scroll_box(width = "1000px", height = "500px")
+mid
 rm(list = ls())
 ```
 :::
 
-## Jaccard.C
+## Jaccard.c
 
-Definition: $$
-Jaccard.C(x,y) = \frac{|x\cap y|+C}{|x\cup y|+C}, for \;C:\;constant
+$$
+Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c\in\mathbb{Q^+}
 $$
 
--   [Jaccard with a constant C](https://yihsinlu.github.io/Jazz.io/1017.html)
--   Pairwise similarity
--   Affinity matrix
-
-## Visualization: t-SNE
-
--   **t**-distrubuted **S**tochastic **N**eighbor **E**mbedding
--   [**Visualizing Data using t-SNE**](https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf), L. Van der Maaten and G. Hinton
--   Dimensionality reduction
--   Visualization method
+-   remove "0-item"
 
 ::: footer
-[t-SNE - Laurens van der Maaten](https://lvdmaaten.github.io/tsne/)
+[Jaccard.c](https://yihsinlu.github.io/Jazz.io/1017.html)
 :::
 
-# Multi-value Classification
+## Combinations
 
--   Instrument
+-   Affinity Matrices
 
--   Genre
+    -   $\scriptsize{\mathcal{M}_{ins} = \{ins_{ij}\}_{i,j=1}^{229}}$
+    
+    -   $\scriptsize{\mathcal{M}_{gen} = \{gen_{ij}\}_{i,j=1}^{229}}$
+    
+    -   $\scriptsize{\mathcal{M}_{ay} = \{ay_{ij}\}_{i,j=1}^{229}}$
+    
+    -   $\scriptsize{\mathcal{M}_{num} = \{num_{ij}\}_{i,j=1}^{229}}$
+    
+    -   $\scriptsize{\mathcal{M}_{mid} = \{mid_{ij}\}_{i,j=1}^{229}}$
 
-## PCA
 
--   **P**rinciple **C**omponent **A**nalysis
--   Dimensionality reduction
--   [**Applied Multivariate Statistical Analysis**](https://hastie.su.domains/ElemStatLearn/), W. K. HC\$rdle and L. Simar
-
-## PCA {.smaller}
-
-::: panel-tabset
-### Instrument
-
-![](fig/PCA_inst.png){width="80%"}
-
-### Genre
-
-![](fig/PCA_gen.png){width="80%"}
+:::footer
+[Distance vs Similarity](https://yihsinlu.github.io/Jazz.io/1031.html)
 :::
 
-## Groups {.smaller}
+## Combinations {.smaller .scrollable}
 
-```{r}
-load("thesispresentation/PCA_features.RData")
-```
+#### All:
 
-::: panel-tabset
-### Instrument
+$$
+\scriptsize{\mathcal{M}(all)^{*}_{ij}=\sqrt{\cfrac{1}{3}\bigg((ins_{ij})^2+(gen_{ij})^2+0.4(ay_{ij})^2+0.3(num_{ij})^2+0.3(mid_{ij})^2\bigg)}}
+$$
 
-```{r echo=FALSE}
-kbl(M_inst3class) %>%
-  kable_paper() %>%
-  scroll_box(height = "500px")
-```
+#### Instruments:
+$$
+\scriptsize{\mathcal{M}(ins)_{ij}=\sqrt{\cfrac{1}{10}\bigg(8(ins_{ij})^2+(gen_{ij})^2+0.4(ay_{ij})^2+0.3(num_{ij})^2+0.3(mid_{ij})^2\bigg)}}
+$$
 
-### Genre
+#### Genres:
+$$
+\scriptsize{\mathcal{M}(gen)_{ij}=\sqrt{\cfrac{1}{10}\bigg((ins_{ij})^2+8(gen_{ij})^2+0.4(ay_{ij})^2+0.3(num_{ij})^2+0.3(mid_{ij})^2\bigg)}}
+$$
 
-```{r echo=FALSE}
-kbl(M_genre3class) %>%
-  kable_paper() %>%
-  scroll_box(height = "500px")
-rm(list = ls())
-```
+#### Number of Active Decades:
+$$
+\scriptsize{\mathcal{M}(num)_{ij}=\sqrt{\cfrac{1}{3.7}\bigg((ins_{ij})^2+(gen_{ij})^2+0.4(ay_{ij})^2+(num_{ij})^2+0.3(mid_{ij})^2\bigg)}}
+$$
+
+#### Middle of Active Years:
+$$
+\scriptsize{\mathcal{M}(mid)_{ij}=\sqrt{\cfrac{1}{3.7}\bigg((ins_{ij})^2+(gen_{ij})^2+0.4(ay_{ij})^2+0.3(num_{ij})^2+(mid_{ij})^2\bigg)}}
+$$
+
+
+## Dimension Reduction
+
+-   `PCA`
+-   `t-SNE`
+    -   L. Van der Maaten and G. Hinton (2008)
+    -   Visualizing
+
+::: footer
+[PCA](https://hastie.su.domains/ElemStatLearn/)
+**|**
+[t-SNE](https://lvdmaaten.github.io/tsne/)
 :::
 
 ## Coloring
 
-![](fig/coloring.jpg){width="100%"}
+- Multi-value Variables
+    -   Instruments
+    -   Genres
 
-# Results
+## PCA {.smaller .scrollable}
 
-## Flow chart
+::: panel-tabset
+### Instruments
 
-![](fig/visualization.jpg){width="100%"}
+![](fig/MVCP_PCA/PCA_instg.png){width="80%"}
 
-## Combination {.smaller}
+### Genres
 
-### [Distance vs Similarity](https://yihsinlu.github.io/Jazz.io/1031.html)
+![](fig/MVCP_PCA/PCA_geng.png){width="80%"}
+:::
 
-$$
-\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{3}}
-$$
+## Grouping {.smaller}
 
--   Affinity matrices
-
-    -   Instruments ($\mathcal{M}_{inst}$)
-
-    -   Genres ($\mathcal{M}_{gen}$)
-
-    -   Active Years ($\mathcal{M}_{ayi}$)
-
-    -   Length of Active Years ($\mathcal{M}_{ayl}$)
-
-    -   Middle of Active Years ($\mathcal{M}_{aym}$)
-
-## Tuning {.smaller .scrollable}
-
-#### Instrument:
-
-$$
-\small{\mathcal{M}_{ij}=\sqrt{\frac{8(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{10}}}
-$$
-
-#### Genre:
-
-$$
-\small{\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+8(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{10}}}
-$$
-
-#### Length of active years:
-
-$$
-\small{\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+(\mathcal{M}_{ayl})_{ij}^2+0.3(\mathcal{M}_{aym})_{ij}^2}{3.7}}}
-$$
-
-#### Middle of active years:
-
-$$
-\small{\mathcal{M}_{ij}=\sqrt{\frac{(\mathcal{M}_{inst})_{ij}^2+(\mathcal{M}_{gen})_{ij}^2+0.4(\mathcal{M}_{ayi})_{ij}^2+0.3(\mathcal{M}_{ayl})_{ij}^2+(\mathcal{M}_{aym})_{ij}^2}{3.7}}}
-$$
-
-# Visualization
-
--   Dimensionality Reduction
-
--   **P**rinciple **C**omponent **A**nalysis (PCA)
-
--   **t**-distributed **S**tochastic **N**eighbor **E**mbedding (t-SNE)
-
-## Instrument {.smaller .scrollable}
-
-```{r include=FALSE}
-load("D:/jazz_visual/visualization_plot_affi.RData")
+```{r}
+load("defence_data/3pca_features.RData")
 ```
 
 ::: panel-tabset
-### PCA
+### Instruments
 
 ```{r echo=FALSE}
-visualpca_plot.instc
+M_inst3class
 ```
 
-### t-SNE
+### Genres
+
+```{r echo=FALSE}
+M_genre3class
+rm(list = ls())
+```
+:::
+
+## Tuning {.smaller}
+
+::: panel-tabset
+
+### Working Matrix
+
+```{r echo=FALSE}
+load("defence_data/3color.RData")
+wdm
+```
+
+### Grouping
+
+```{r echo=FALSE}
+gdm
+```
+
+### Three Primary Colors
+
+```{r echo=FALSE}
+tpc
+```
+
+### Colors
+
+```{r}
+cm
+rm(list = ls())
+```
+
+
+:::
+
+# Results
+
+## Jazz Musician Map {.smaller .scrollable}
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+load("defence_data/4JazzMaps.RData")
+```
+
+```{r echo=FALSE}
+first_map
+```
+
+## Instruments {.smaller .scrollable}
 
 ```{r echo=FALSE}
 visualTsne_plot.instc
 ```
-:::
 
-## Genre {.smaller .scrollable}
-
-::: panel-tabset
-### PCA
+## Genres {.smaller .scrollable}
 
 ```{r echo=FALSE}
 visualpca_plot.genrec
 ```
 
-### t-SNE
-
-```{r echo=FALSE}
-visualTsne_plot.genrec
-```
-:::
-
-## Length of active years {.smaller .scrollable}
-
-::: panel-tabset
-### PCA
-
-```{r echo=FALSE}
-visualpca_plot.ysalenc
-```
-
-### t-SNE
+## Number of Active Decades {.smaller .scrollable}
 
 ```{r echo=FALSE}
 visualTsne_plot.ysalenc
 ```
-:::
 
-## Middle of active years {.smaller .scrollable}
 
-::: panel-tabset
-### PCA
-
-```{r echo=FALSE}
-visualpca_plot.ysamidc
-```
-
-### t-SNE
+## Middle of Active Years {.smaller .scrollable}
 
 ```{r echo=FALSE}
 visualTsne_plot.ysamidc
 rm(list = ls())
 ```
+
+## Comparing {.smaller .scrollable}
+
+:::{.scrolling}
+![](fig/LinkedJazz_229.jpg){width=100%}
+![](fig/main_plot/4PCA_instruments_color.png){width=100%}
 :::
 
 # Conclusions
 
--   Visualizing methods: PCA and t-SNE
--   CMYK color system
--   [Jaccard with a constant C](https://yihsinlu.github.io/Jazz.io/1017.html)
--   Multi-value classification problem
+-   Similarity $\Longleftrightarrow$ Distance
+-   Relationship
+-   Color for `Multi-value`
 
 # Thank You for Your Attention!
