@@ -322,7 +322,7 @@ visualTsne_plot.instc
 ## Genres {.smaller .scrollable}
 
 ```{r echo=FALSE}
-visualpca_plot.genrec%>%layout(title = "PCA",     plot_bgcolor='#e5ecf6')
+visualpca_plot.genrec%>%layout(plot_bgcolor='#e5ecf6')
 ```
 
 ## Number of Active Decades {.smaller .scrollable}
