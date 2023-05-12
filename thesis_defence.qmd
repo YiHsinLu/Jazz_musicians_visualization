@@ -305,6 +305,7 @@ rm(list = ls())
 ## Jazz Musician Map {.smaller .scrollable}
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
 load("defence_data/4JazzMaps.RData")
 ```
 
@@ -321,7 +322,7 @@ visualTsne_plot.instc
 ## Genres {.smaller .scrollable}
 
 ```{r echo=FALSE}
-visualpca_plot.genrec
+visualpca_plot.genrec%>%layout(title = "PCA",     plot_bgcolor='#e5ecf6')
 ```
 
 ## Number of Active Decades {.smaller .scrollable}
