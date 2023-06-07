@@ -1,0 +1,456 @@
+---
+title: "**Visualization for Jazz Musicians**"
+format:
+  revealjs:
+    incremental: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    theme: simple  
+author: "*Yi-Hsin Lu*, *C. Andy Tsao* *"
+date: "2023-06-13"
+---
+
+
+## Outline
+
+-   **Introduction**
+
+-   **Jazz Musicians Maps**
+
+-   **Methods**
+
+-   **Conclusions**
+
+## Introduction
+
+![](fig/oralExam/visual_jazzmus.png){.absolute .fragment top="0" left="0" width="1600"}
+
+## Why?
+
+::: {#fig layout-ncol="3"}
+![](fig/oralExam/graphs.png)
+
+![](fig/oralExam/time.png)
+
+![](fig/oralExam/data.png)
+
+:::
+
+## Why?
+
+![](fig/oralExam/powerbi-001.jpg){.absolute .fragment top="100" right="50" width="1200"}
+
+::: footer
+[Power BI](https://powerbi.microsoft.com/en-us/)
+:::
+
+## What?
+
+-   [**Flavor Network Graph** (2011)](https://www.nature.com/articles/srep00196)
+
+
+![](fig/flavorNetwork.jpg){.absolute .fragment top="100" right="50" width="1200"}
+
+## What?
+-   [**Linked Jazz**](https://linkedjazz.org/network/)
+
+![](fig/linkedjazz.jpg){.absolute .fragment top="100" right="50" width="1200"}
+
+::: footer
+[Linked Jazz](https://linkedjazz.org/)
+:::
+
+## Jazz Musicians
+
+::: {#fig layout-ncol="2"}
+![Wynton Marsalis](fig/Wynton.jpg){#fig width="674"}
+
+![Roy Hargrove](fig/Roy.jpg){#fig width="802"}
+:::
+
+::: footer
+[Wynton Marsalis](https://www.primoartists.com/news/wynton-marsalis-social-upheaval) **|** [Roy Hargrove](https://www.npr.org/2018/11/03/663895387/roy-hargrove-grammy-winning-jazz-trumpeter-dies-at-49)
+:::
+
+## Marsalis Family
+
+![](fig/MarsalisFamily2.jpg){.absolute .fragment top="250" left="0" width="600"}
+
+![](fig/MarsalisFamily.jpg){.absolute .fragment top="50" right="0" width="400"}
+
+## Jazz Musicians
+
+::: {#fig layout-ncol="2"}
+![Dizzy Gillespie](fig/oralExam/Dizzy_Gillespie.png){#fig width="677"}
+
+![Miles Davis](fig/oralExam/Miles_Davis.png){#fig width="636"}
+:::
+
+::: footer
+[Dizzy Gillespie](https://www.britannica.com/biography/Dizzy-Gillespie) **|** [Miles Davis](https://www.britannica.com/biography/Miles-Davis)
+:::
+
+# Jazz Musician Maps
+
+## Jazz Musician Map {.smaller .scrollable}
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
+load("defence_data/4JazzMaps.RData")
+```
+
+```{r echo=FALSE}
+first_map
+```
+
+## Instruments
+
+![](fig/main_plot/4tSNE_instruments_color.png){.absolute .fragment top="100" right="50" width="1200"}
+
+## Instruments {.smaller .scrollable}
+
+```{r echo=FALSE}
+visualTsne_plot.instc
+```
+
+## Genres
+
+![](fig/main_plot/4PCA_genres_color.png){.absolute .fragment top="100" right="50" width="1200"}
+
+## Genres {.smaller .scrollable}
+
+```{r echo=FALSE}
+visualpca_plot.genrec%>%layout(plot_bgcolor='lightgray')
+```
+
+## Number of Active Decades {.smaller .scrollable}
+
+```{r echo=FALSE}
+visualTsne_plot.ysalenc
+```
+
+
+## Middle of Active Years {.smaller .scrollable}
+
+```{r echo=FALSE}
+visualTsne_plot.ysamidc
+rm(list = ls())
+```
+
+## Comparing {.smaller .scrollable}
+
+:::{.scrolling}
+![](fig/LinkedJazz_229.jpg){width=100%}
+![](fig/main_plot/4PCA_instruments_color.png){width=100%}
+:::
+
+# Methods
+
+-   Data 🠊 Maps
+
+## Original Data Table {.smaller .scrollable}
+
+```{r echo=FALSE}
+library(dplyr)
+library(kableExtra)
+load("defence_data/2data_table.RData")
+kbl(JazzMusiciansData)  %>%
+  row_spec(1:10, color = "black")%>%
+  kable_styling(bootstrap_options = c("striped", "hover"),
+                font_size = 18)
+rm(list = ls())
+```
+
+::: footer
+[Source Code](https://github.com/YiHsinLu/jazz_visual/blob/main/musician_data.ipynb)
+:::
+
+## Data 🠊 Maps {.smaller .scrollable}
+
+::: panel-tabset
+
+### $1$
+
+::: {#fig layout-ncol="5"}
+![](fig/oralExam/ins_icon.png)
+
+![](fig/oralExam/gen_icon.png)
+
+![](fig/oralExam/act_icon.png)
+
+:::
+
+### $2$
+
+::: {#fig layout-ncol="5"}
+![](fig/oralExam/ins_icon.png)
+
+![](fig/oralExam/gen_icon.png)
+
+![](fig/oralExam/act_icon.png)
+
+![](fig/oralExam/num_icon.png)
+
+![](fig/oralExam/mid_icon.png)
+:::
+
+
+### $3$
+
+![](fig/oralExam/Jaccard.png){width="600"}
+
+
+### $4$
+::: {#fig layout-ncol="5"}
+![](fig/oralExam/ins_aff.png)
+
+![](fig/oralExam/gen_aff.png)
+
+![](fig/oralExam/act_aff.png)
+
+![](fig/oralExam/num_aff.png)
+
+![](fig/oralExam/mid_aff.png)
+:::
+
+### $5$
+
+
+![](fig/oralExam/conmbine.png){width="600"}
+
+
+### $6$
+
+
+![](fig/oralExam/aff_all.png){width="600"}
+
+
+### $7$
+
+![](fig/oralExam/visual.png){width="600"}
+
+
+:::
+
+## Working Data Matrices {.smaller .scrollable}
+
+::: panel-tabset
+```{r include=FALSE}
+library(kableExtra)
+load("defence_data/matrix.RData")
+```
+
+### Instruments
+
+```{r echo=FALSE}
+ins
+```
+
+### Genres
+
+```{r echo=FALSE}
+gen
+```
+
+### Active
+
+```{r echo=FALSE}
+act
+```
+
+### Number
+
+```{r echo=FALSE}
+num
+```
+
+### Middle
+
+```{r echo=FALSE}
+mid
+rm(list = ls())
+```
+:::
+
+## Jaccard.c
+
+$$
+Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c>0
+$$
+
+
+::: footer
+[Jaccard.c](https://yihsinlu.github.io/Jazz.io/1017.html)
+:::
+
+## Affinity Matrices {.smaller .scrollable}
+
+::: panel-tabset
+```{r include=FALSE}
+library(kableExtra)
+load("defence_data/matrix.RData")
+```
+
+### $\scriptsize\mathcal{M}_{ins}$
+
+```{r echo=FALSE}
+ins_aff
+```
+
+### $\scriptsize\mathcal{M}_{gen}$
+
+```{r echo=FALSE}
+gen_aff
+```
+
+### $\scriptsize\mathcal{M}_{act}$
+
+```{r echo=FALSE}
+act_aff
+```
+
+### $\scriptsize\mathcal{M}_{num}$
+
+```{r echo=FALSE}
+num_aff
+```
+
+### $\scriptsize\mathcal{M}_{mid}$
+
+```{r echo=FALSE}
+mid_aff
+rm(list = ls())
+```
+:::
+
+## Combinations {.smaller .scrollable}
+
+#### All:
+
+$$
+\scriptsize{\mathcal{M}(all)^{*}_{ij}=\sqrt{\cfrac{1}{3}\bigg((ins_{ij})^2+(gen_{ij})^2+0.4(ay_{ij})^2+0.3(num_{ij})^2+0.3(mid_{ij})^2\bigg)}}
+$$
+
+#### Instruments:
+$$
+\scriptsize{\mathcal{M}(ins)_{ij}=\sqrt{\cfrac{1}{10}\bigg(8(ins_{ij})^2+(gen_{ij})^2+0.4(ay_{ij})^2+0.3(num_{ij})^2+0.3(mid_{ij})^2\bigg)}}
+$$
+
+#### Genres:
+$$
+\scriptsize{\mathcal{M}(gen)_{ij}=\sqrt{\cfrac{1}{10}\bigg((ins_{ij})^2+8(gen_{ij})^2+0.4(ay_{ij})^2+0.3(num_{ij})^2+0.3(mid_{ij})^2\bigg)}}
+$$
+
+#### Number of Active Decades:
+$$
+\scriptsize{\mathcal{M}(num)_{ij}=\sqrt{\cfrac{1}{3.7}\bigg((ins_{ij})^2+(gen_{ij})^2+0.4(ay_{ij})^2+(num_{ij})^2+0.3(mid_{ij})^2\bigg)}}
+$$
+
+#### Middle of Active Years:
+$$
+\scriptsize{\mathcal{M}(mid)_{ij}=\sqrt{\cfrac{1}{3.7}\bigg((ins_{ij})^2+(gen_{ij})^2+0.4(ay_{ij})^2+0.3(num_{ij})^2+(mid_{ij})^2\bigg)}}
+$$
+
+:::footer
+[Distance vs Similarity](https://yihsinlu.github.io/Jazz.io/1031.html)
+:::
+
+## Dimension Reduction
+
+-   `PCA`
+-   `t-SNE`
+    -   L. Van der Maaten and G. Hinton (2008)
+    -   Visualizing
+
+::: footer
+[PCA](https://hastie.su.domains/ElemStatLearn/)
+**|**
+[t-SNE](https://lvdmaaten.github.io/tsne/)
+:::
+
+## Coloring
+
+- Multi-value Variables
+    -   Instruments
+    -   Genres
+
+## PCA {.smaller .scrollable}
+
+::: panel-tabset
+### Instruments
+
+![](fig/MVCP_PCA/PCA_instg.png){width="80%"}
+
+### Genres
+
+![](fig/MVCP_PCA/PCA_geng.png){width="80%"}
+:::
+
+## Grouping {.smaller}
+
+```{r}
+load("defence_data/3pca_features.RData")
+```
+
+::: panel-tabset
+### Instruments
+
+```{r echo=FALSE}
+M_inst3class
+```
+
+### Genres
+
+```{r echo=FALSE}
+M_genre3class
+rm(list = ls())
+```
+:::
+
+## Tuning {.smaller}
+
+::: panel-tabset
+
+### Working Matrix
+
+```{r echo=FALSE}
+load("defence_data/3color.RData")
+wdm
+```
+
+### Grouping
+
+```{r echo=FALSE}
+gdm
+```
+
+### Three Primary Colors
+
+```{r echo=FALSE}
+tpc
+```
+
+### Colors
+
+```{r}
+cm
+rm(list = ls())
+```
+
+
+:::
+
+## Review
+
+![](fig/main_plot/4tSNE_instruments_color.png){.absolute .fragment top="100" right="50" width="1200"}
+
+# Conclusions
+
+-   Great Maps
+-   Similarity $\Longleftrightarrow$ Distance
+-   Relationship
+-   Color for `Multi-value`
+
+# Thank You for Your Attention!

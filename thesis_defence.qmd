@@ -33,21 +33,29 @@ date: "2023-06-13"
 
 ## Visualization
 
--   Why important?
+-   Why?
+-   What?
+-   What?
+-   How?
+
+## Why?
+    
+-   [**Hand book of data visualization** (2007)](https://books.google.com.tw/books?hl=zh-TW&lr=&id=zzCiSJoohuQC&oi=fnd&pg=PA4&dq=Hand+Book+of+Data+Visualization&ots=hyMBTc_h97&sig=fQ9meiATlqt4Edf_tgiNo6Hpoic&redir_esc=y#v=onepage&q=Hand%20Book%20of%20Data%20Visualization&f=false)
+-   [**How visualization can change your life?** (2020)](https://www.youtube.com/watch?v=E8k6LcYO_Vg)
+
+-   Importance
     -   Time
     -   Data
     -   Graphics
 
 ## What?
 
--   [**Hand book of data visualization** (2007)](https://books.google.com.tw/books?hl=zh-TW&lr=&id=zzCiSJoohuQC&oi=fnd&pg=PA4&dq=Hand+Book+of+Data+Visualization&ots=hyMBTc_h97&sig=fQ9meiATlqt4Edf_tgiNo6Hpoic&redir_esc=y#v=onepage&q=Hand%20Book%20of%20Data%20Visualization&f=false)
--   [**How visualization can change your life?** (2020)](https://www.youtube.com/watch?v=E8k6LcYO_Vg)
 -   [**Flavor network graph** (2011)](https://www.nature.com/articles/srep00196)
 
 
 ![](fig/flavorNetwork.jpg){.absolute .fragment top="100" right="50" width="1200"}
 
-## Visualization
+## What?
 -   [**Linked Jazz**](https://linkedjazz.org/network/)
 
 ![](fig/linkedjazz.jpg){.absolute .fragment top="100" right="50" width="1200"}
@@ -76,6 +84,15 @@ rm(list = ls())
 ![Roy Hargrove](fig/Roy.jpg){#fig width="802"}
 :::
 
+## Jazz Musicians
+
+-   Marsalis Family
+-   The First
+
+![](fig/MarsalisFamily2.jpg){.absolute .fragment top="250" left="0" width="600"}
+
+![](fig/MarsalisFamily.jpg){.absolute .fragment top="50" right="0" width="400"}
+
 # Data
 
 ## Original Data Table {.smaller .scrollable}
@@ -84,7 +101,10 @@ rm(list = ls())
 library(dplyr)
 library(kableExtra)
 load("defence_data/2data_table.RData")
-odt
+kbl(JazzMusiciansData)  %>%
+  row_spec(1:10, color = "black")%>%
+  kable_styling(bootstrap_options = c("striped", "hover"),
+                font_size = 18)
 rm(list = ls())
 ```
 
@@ -101,9 +121,13 @@ rm(list = ls())
 
 -   Wynton Marsalis and Roy Hargrove -> `Musicians List`
 -   `Features`
-    -   instruments
-    -   genres
-    -   active years
+    -   Instruments
+    -   Genres
+    -   Active years
+
+::: footer
+[Source Code](https://github.com/YiHsinLu/jazz_visual/blob/main/musician_data.ipynb)
+:::
 
 
 # Methods
@@ -158,7 +182,7 @@ rm(list = ls())
 ## Jaccard.c
 
 $$
-Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c\in\mathbb{Q^+}
+Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c>0
 $$
 
 -   remove "0-item"

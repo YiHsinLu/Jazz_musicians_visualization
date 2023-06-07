@@ -1,0 +1,164 @@
+```{r}
+ins = read.csv("csv/matrix_instrument.csv", header = T, row.names = 1)
+gen = read.csv("csv/matrix_genre1hp.csv", header = T, row.names = 1)
+act = read.csv("csv/matrix_yearsActive.csv", header = T, row.names = 1, check.names=FALSE)
+num = read.csv("csv/matrix_yearsActive_len.csv", header = T, row.names = 1, check.names=FALSE)
+mid = read.csv("csv/matrix_yearsActive_mid.csv", header = T, row.names = 1, check.names=FALSE)
+```
+
+```{r}
+# Jaccard function
+dis_jac.c = function(M, C=0){
+  M = as.matrix(M)
+  library("jaccard")
+  n = nrow(M)
+  # n*n matrix
+  jaccard.c = function (x, y, c=0, center = FALSE, px = NULL, py = NULL) 
+  {
+    if (length(x) != length(y)) {
+      stop("Two fingerprints (x and y) must be of the same length.")
+    }
+    if (is.null(px) | is.null(py)) {
+      px <- mean(x)
+      py <- mean(y)
+    }
+    sumxy <- sum(x & y)+c
+    unionxy <- sum(x) + sum(y) - sumxy+2*c
+    if (unionxy == 0) {
+      j <- (px * py)/(px + py - px * py)
+    }
+    else {
+      j <- sumxy/unionxy
+    }
+    if (center == FALSE) {
+      return(j)
+    }
+    else {
+      return(j - (px * py)/(px + py - px * py))
+    }
+  }
+  af_matrix = matrix(data = 1, nrow = n, ncol = n)
+  for(i in 1:(n-1)){
+    for(j in (i+1):n){
+      if(sum(M[i,])==0&sum(M[j,])==0){
+        jac = 0
+        af_matrix[i,j] = af_matrix[j,i] = jac
+      }else{
+        jac = jaccard.c(M[i,],M[j,], c=C)
+        af_matrix[i,j] = af_matrix[j,i] = jac
+      }
+    }
+  }
+  colnames(af_matrix) = rownames(af_matrix) = rownames(M)
+  return(as.data.frame(af_matrix))
+}
+
+
+jaccard.c = function (x, y, c=0, center = FALSE, px = NULL, py = NULL) 
+{
+  if (length(x) != length(y)) {
+    stop("Two fingerprints (x and y) must be of the same length.")
+  }
+  if (is.null(px) | is.null(py)) {
+    px <- mean(x)
+    py <- mean(y)
+  }
+  sumxy <- sum(x & y)+c
+  unionxy <- sum(x) + sum(y) - sumxy+2*c
+  if (unionxy == 0) {
+    j <- (px * py)/(px + py - px * py)
+  }
+  else {
+    j <- sumxy/unionxy
+  }
+  if (center == FALSE) {
+    return(j)
+  }
+  else {
+    return(j - (px * py)/(px + py - px * py))
+  }
+}
+```
+
+```{r}
+ins_aff = dis_jac.c(ins, C=1)
+gen_aff = dis_jac.c(gen, C=1)
+act_aff = dis_jac.c(act, C=1)
+num_aff = dis_jac.c(num, C=1)
+mid_aff = dis_jac.c(mid, C=1)
+```
+
+```{r}
+kbl(ins_aff,align = "l", row.names = T) %>%
+  kable_paper("striped", full_width = T)%>%
+  scroll_box(width = "1000px", height = "500px")%>%
+  kable_styling(font_size = 14)
+```
+```{r}
+ins = kbl(ins[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
+  kable_paper("striped") %>%
+  scroll_box(width = "1100px")%>%
+  kable_styling(font_size = 20)
+
+
+gen = kbl(gen[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
+  kable_paper("striped") %>%
+  scroll_box(width = "1100px")%>%
+  kable_styling(font_size = 20)
+
+
+act = kbl(act[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
+  kable_paper("striped") %>%
+  scroll_box(width = "1100px")%>%
+  kable_styling(font_size = 20)
+
+
+num = kbl(num[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
+  kable_paper("striped") %>%
+  scroll_box(width = "1100px")%>%
+  kable_styling(font_size = 20)
+
+
+mid = kbl(mid[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
+  kable_paper("striped") %>%
+  scroll_box(width = "1100px")%>%
+  kable_styling(font_size = 20)
+```
+
+
+```{r}
+
+
+ins_aff = kbl(ins_aff) %>%
+  kable_paper("striped") %>%
+  scroll_box(height = "500px")%>%
+  kable_styling(font_size = 20)
+
+
+gen_aff = kbl(gen_aff) %>%
+  kable_paper("striped") %>%
+  scroll_box(height = "500px")%>%
+  kable_styling(font_size = 20)
+
+
+act_aff = kbl(act_aff) %>%
+  kable_paper("striped") %>%
+  scroll_box(height = "500px")%>%
+  kable_styling(font_size = 20)
+
+
+num_aff = kbl(num_aff) %>%
+  kable_paper("striped") %>%
+  scroll_box(height = "500px")%>%
+  kable_styling(font_size = 20)
+
+
+mid_aff = kbl(mid_aff) %>%
+  kable_paper("striped") %>%
+  scroll_box(height = "500px")%>%
+  kable_styling(font_size = 20)
+```
+
+```{r}
+ins[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]
+```
