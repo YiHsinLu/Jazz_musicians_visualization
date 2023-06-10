@@ -8,7 +8,7 @@ format:
       buttons: false
     preview-links: auto
     theme: simple  
-author: "*Yi-Hsin Lu*, *C. Andy Tsao* *"
+author: "*Yi-Hsin Lu*  and  *C. A. Tsao* *"
 date: "2023-06-13"
 ---
 
@@ -107,7 +107,7 @@ first_map
 
 ## Instruments
 
-![](fig/main_plot/4tSNE_instruments_color.png){.absolute .fragment top="100" right="50" width="1200"}
+![](fig/main_plot/tsne_inst.png){.absolute .fragment top="95" right="45" width="1000"}
 
 ## Instruments {.smaller .scrollable}
 
@@ -117,7 +117,7 @@ visualTsne_plot.instc
 
 ## Genres
 
-![](fig/main_plot/4PCA_genres_color.png){.absolute .fragment top="100" right="50" width="1200"}
+![](fig/main_plot/pca_gen.png){.absolute .fragment top="95" right="90" width="960"}
 
 ## Genres {.smaller .scrollable}
 
@@ -199,7 +199,7 @@ rm(list = ls())
 
 ### $3$
 
-![](fig/oralExam/Jaccard.png){width="600"}
+![Jaccard.c](fig/oralExam/Jaccard.png){width="600"}
 
 
 ### $4$
@@ -277,9 +277,10 @@ rm(list = ls())
 ## Jaccard.c
 
 $$
-Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c>0
+Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\mbox{for some}\;\;c>0
 $$
-
+-   $x,\;y\in\mathbb{R}^n$
+-   $|x\cup y|=\#\{x=1\mbox{ or }y=1\}$
 
 ::: footer
 [Jaccard.c](https://yihsinlu.github.io/Jazz.io/1017.html)
@@ -373,8 +374,6 @@ $$
 ## Coloring
 
 - Multi-value Variables
-    -   Instruments
-    -   Genres
 
 ## PCA {.smaller .scrollable}
 
@@ -442,15 +441,17 @@ rm(list = ls())
 
 :::
 
-## Review
+## Recap
 
-![](fig/main_plot/4tSNE_instruments_color.png){.absolute .fragment top="100" right="50" width="1200"}
+![](fig/main_plot/tsne_inst.png){.absolute .fragment top="100" right="50" width="1200"}
 
 # Conclusions
 
--   Great Maps
--   Similarity $\Longleftrightarrow$ Distance
--   Relationship
+-   Maps
+    -   Similarity $\Longleftrightarrow$ Distance
+    -   Relationship
 -   Color for `Multi-value`
 
 # Thank You for Your Attention!
+
+# Q & A

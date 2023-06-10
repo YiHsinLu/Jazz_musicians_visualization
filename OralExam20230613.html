@@ -5,11 +5,11 @@
 <script src="OralExam20230613_files/libs/quarto-html/popper.min.js"></script>
 <script src="OralExam20230613_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="OralExam20230613_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="OralExam20230613_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="OralExam20230613_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet">
 <link href="OralExam20230613_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.189">
+  <meta name="generator" content="quarto-0.9.649">
 
-  <meta name="author" content="Yi-Hsin Lu, C. Andy Tsao *">
+  <meta name="author" content="Yi-Hsin Lu and C. A. Tsao *">
   <meta name="dcterms.date" content="2023-06-13">
   <title>Visualization for Jazz Musicians</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,15 +20,10 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
   </style>
   <link rel="stylesheet" href="OralExam20230613_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="OralExam20230613_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -333,13 +328,13 @@
   <script src="OralExam20230613_files/libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="OralExam20230613_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
-<body class="quarto-light">
+<body>
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="center">
   <h1 class="title"><strong>Visualization for Jazz Musicians</strong></h1>
-  <p class="author"><em>Yi-Hsin Lu</em>, <em>C. Andy Tsao</em> *</p>
+  <p class="author"><em>Yi-Hsin Lu</em> and <em>C. A. Tsao</em> *</p>
   <p class="date">2023-06-13</p>
 </section>
 
@@ -404,7 +399,7 @@
 <div id="fig" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="fig/Wynton.jpg" width="674"></p>
-<p></p><figcaption>Wynton Marsalis</figcaption><p></p>
+<p></p><figcaption aria-hidden="true">Wynton Marsalis</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -412,7 +407,7 @@
 <div id="fig" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="fig/Roy.jpg" width="802"></p>
-<p></p><figcaption>Roy Hargrove</figcaption><p></p>
+<p></p><figcaption aria-hidden="true">Roy Hargrove</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -435,7 +430,7 @@
 <div id="fig" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="fig/oralExam/Dizzy_Gillespie.png" width="677"></p>
-<p></p><figcaption>Dizzy Gillespie</figcaption><p></p>
+<p></p><figcaption aria-hidden="true">Dizzy Gillespie</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -443,7 +438,7 @@
 <div id="fig" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="fig/oralExam/Miles_Davis.png" width="636"></p>
-<p></p><figcaption>Miles Davis</figcaption><p></p>
+<p></p><figcaption aria-hidden="true">Miles Davis</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -472,7 +467,7 @@
 </section>
 <section id="instruments" class="slide level2">
 <h2>Instruments</h2>
-<p><img data-src="fig/main_plot/4tSNE_instruments_color.png" class="absolute fragment" style="top: 100px; right: 50px; width: 1200px; "></p>
+<p><img data-src="fig/main_plot/tsne_inst.png" class="absolute fragment" style="top: 95px; right: 45px; width: 1000px; "></p>
 </section>
 <section id="instruments-1" class="slide level2 smaller scrollable">
 <h2>Instruments</h2>
@@ -485,7 +480,7 @@
 </section>
 <section id="genres" class="slide level2">
 <h2>Genres</h2>
-<p><img data-src="fig/main_plot/4PCA_genres_color.png" class="absolute fragment" style="top: 100px; right: 50px; width: 1200px; "></p>
+<p><img data-src="fig/main_plot/pca_gen.png" class="absolute fragment" style="top: 95px; right: 90px; width: 960px; "></p>
 </section>
 <section id="genres-1" class="slide level2 smaller scrollable">
 <h2>Genres</h2>
@@ -664,7 +659,12 @@
 </div>
 </div>
 <div id="tabset-1-3">
+<div class="quarto-figure quarto-figure-center">
+<figure>
 <p><img data-src="fig/oralExam/Jaccard.png" width="600"></p>
+<p></p><figcaption aria-hidden="true">Jaccard.c</figcaption><p></p>
+</figure>
+</div>
 </div>
 <div id="tabset-1-4">
 <div id="fig" class="quarto-layout-panel">
@@ -1693,8 +1693,12 @@
 <section id="jaccard.c" class="slide level2">
 <h2>Jaccard.c</h2>
 <p><span class="math display">\[
-Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c&gt;0
+Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\mbox{for some}\;\;c&gt;0
 \]</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(x,\;y\in\mathbb{R}^n\)</span></li>
+<li class="fragment"><span class="math inline">\(|x\cup y|=\#\{x=1\mbox{ or }y=1\}\)</span></li>
+</ul>
 <div class="footer">
 <p><a href="https://yihsinlu.github.io/Jazz.io/1017.html">Jaccard.c</a></p>
 </div>
@@ -2535,11 +2539,7 @@ Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c&gt;0
 <section id="coloring" class="slide level2">
 <h2>Coloring</h2>
 <ul>
-<li class="fragment">Multi-value Variables
-<ul>
-<li class="fragment">Instruments</li>
-<li class="fragment">Genres</li>
-</ul></li>
+<li class="fragment">Multi-value Variables</li>
 </ul>
 </section>
 <section id="pca" class="slide level2 smaller scrollable">
@@ -5674,22 +5674,29 @@ Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c&gt;0
 </div>
 </div>
 </section>
-<section id="review" class="slide level2">
-<h2>Review</h2>
-<p><img data-src="fig/main_plot/4tSNE_instruments_color.png" class="absolute fragment" style="top: 100px; right: 50px; width: 1200px; "></p>
+<section id="recap" class="slide level2">
+<h2>Recap</h2>
+<p><img data-src="fig/main_plot/tsne_inst.png" class="absolute fragment" style="top: 100px; right: 50px; width: 1200px; "></p>
 </section></section>
 <section id="conclusions" class="title-slide slide level1 center">
 <h1>Conclusions</h1>
 <ul>
-<li class="fragment">Great Maps</li>
+<li class="fragment">Maps
+<ul>
 <li class="fragment">Similarity <span class="math inline">\(\Longleftrightarrow\)</span> Distance</li>
 <li class="fragment">Relationship</li>
+</ul></li>
 <li class="fragment">Color for <code>Multi-value</code></li>
 </ul>
 </section>
 
 <section id="thank-you-for-your-attention" class="title-slide slide level1 center">
 <h1>Thank You for Your Attention!</h1>
+
+</section>
+
+<section id="q-a" class="title-slide slide level1 center">
+<h1>Q &amp; A</h1>
 <div class="footer footer-default">
 
 </div>
@@ -5951,24 +5958,6 @@ Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c&gt;0
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
@@ -6017,8 +6006,7 @@ Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\forall\;c&gt;0
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          let href = ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
