@@ -20,6 +20,24 @@ date: "2023-06-13"
 
 ![](fig/yihsin/35197006_1607919505972302_6680421342270980096_n.jpg){.absolute .fragment left="400" width="52.4%"} 
 
+# PCA
+
+## Dimension Reduction
+
+-   $\mathcal{X}=(x_1, x_2,\cdots, x_n)^T\;,\;\forall\;x_i\in\mathbb{R}^p$
+    -   $Var(\mathcal{X}^T)=\Sigma_{p\times p}$: convariance matrix
+
+\
+
+-   $\mathcal{G}=(g_1,\cdots,g_p)$
+    -   $g_j$: $j$-th eigenvector of $\Sigma$
+
+\
+    
+-   $PC_j=\mathcal{X}g_j\;,\;\forall\;j=1,\cdots,p$
+    
+
+
 # t-SNE
 
 ## High-dimensions
