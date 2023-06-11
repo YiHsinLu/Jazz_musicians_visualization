@@ -48,7 +48,7 @@ date: "2023-06-13"
 
 ## What?
 
--   [**Flavor Network Graph** (2011)](https://www.nature.com/articles/srep00196)
+-   [Y.-Y. Ahn, S. E. Ahnert, J. P. Bagrow, and A.-L. Barabási, **“Flavor network and the principles of food pairing”** (2011)](https://www.nature.com/articles/srep00196)
 
 
 ![](fig/flavorNetwork.jpg){.absolute .fragment top="100" right="50" width="1200"}
@@ -451,6 +451,22 @@ rm(list = ls())
     -   Similarity $\Longleftrightarrow$ Distance
     -   Relationship
 -   Color for `Multi-value`
+
+# References{.smaller}
+
+* Y.-Y. Ahn, S. E. Ahnert, J. P. Bagrow, and A.-L. Barabási, “Flavor network and the principles of food pairing,” $Scientific\;Reports$, vol. 1, no. 1, pp. 1–7, 2011.
+
+*   A. Ferrari and M. Russo, Introducing $Microsoft\;Power\;BI$. Microsoft Press, 2016.
+
+*   W. Härdle, L. Simar, et al., $Applied\;Multivariate\;Statistical\;Analysis$. Springer, 2007, vol. 22007.
+
+*   [Linked Jazz](https://linkedjazz.org/network/), Accessed: 2023-03-28.
+
+*   Y.-H. Lu. “[Python Crawler](https://github.com/YiHsinLu/jazz_visual/blob/main/musician_data.ipynb.)”, 2022.
+
+*   L. Van Der Maaten and G. Hinton, “Visualizing data using t-sne.,” $Journal\;of\;Machine\;Learning\;Research$, vol. 9, no. 11, pp. 2579–2605, 2008.
+
+*   G.-H. Wei, “Personal Suggestion for Jazz Musicians,” 2022.
 
 # Thank You for Your Attention!
 

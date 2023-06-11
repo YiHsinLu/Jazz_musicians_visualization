@@ -1,0 +1,106 @@
+---
+title: "**Visualization for Jazz Musicians - Appendix**"
+format:
+  revealjs:
+    incremental: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    theme: simple  
+author: "*Yi-Hsin Lu*  and  *C. A. Tsao* *"
+date: "2023-06-13"
+---
+
+# why we choose this topic?
+
+## Music
+
+![](fig/yihsin/62A59A2C-13AE-4FA7-BB43-D58CC56DE59B.jpg){.absolute .fragment left="0" width="35%"}
+
+![](fig/yihsin/35197006_1607919505972302_6680421342270980096_n.jpg){.absolute .fragment left="400" width="52.4%"} 
+
+# t-SNE
+
+## High-dimensions
+
+-   $p_{j|i}=\cfrac{exp(-||x_i-x_j||^2/2\sigma_{i}^2)}{\sum_{k\neq i}exp(-||x_i-x_k||^2/2\sigma_{i}^2)}$
+
+\
+
+-   $P_i = (p_{1|i},\cdots,p_{n|i}),\forall i=1,\cdots,n.$
+
+\
+
+-   $P = (P_1,\cdots,P_n)^T.$
+
+## 2-dimensions
+
+-   $q_{ij} = \cfrac{(1+\left\|x_i'-x_j'\right\|^2)^{-1}}{\sum_{k\neq i}(1+\left\|x_i'-x_k'\right\|^2)^{-1}}$
+
+\
+
+-   $Q_i = (q_{ij},\cdots,q_{ij}),\forall i=1,\cdots,n.$
+
+\
+
+-   $Q = (Q_1,\cdots,Q_n)^T.$
+
+## Between them
+
+$$
+C = \sum_iKL(P_i||Q_i) = \sum_i\sum_jp_{j|i}log\frac{p_{j|i}}{q_{ij}}
+$$
+
+
+# Distance vs Similarity
+
+## Metric Space
+
+-   $(M,d)$ is a metric space.
+
+\
+
+-   Claim: $(M,1-Jaccard)$ is a metric space.
+
+\
+
+-   $d(x,y)=1-Jaccard(x,y)$
+-   $x,y,z\in M$
+
+## Proof
+
+-   $d(x,x)=1-Jaccard(x,x)=0$.
+
+\
+
+-   If $x\neq y$, then $d(x,y)=1-Jaccard(x,y)>0$.
+
+\
+
+-   $d(x,y) = 1-Jaccard(x,y)=1-Jaccard(y,x)=d(y,x)$
+
+## Triangle Inequality
+
+$$
+d(x,z)\leq d(x,y)+d(y,z)
+$$
+
+$$
+\Rightarrow 1- Jaccard(x,z) \leq 1-Jaccard(x,y)+1-Jaccard(y,z)
+$$
+$$
+\Rightarrow 1- Jaccard(x,z) \leq 2-Jaccard(x,y)+Jaccard(y,z)
+$$
+
+$$
+\Rightarrow Jaccard(x,z)+1 \geq Jaccard(x,y)+Jaccard(y,z)
+$$
+
+$$
+{}^\cdot{}_\cdot{}^\cdot\;Jaccard(x,y)\in[0,1]\;\forall\;x,y\in M
+$$
+
+$$
+{}_\cdot{}^\cdot{}_\cdot\;\mbox{Triangle Inequality holds}.
+$$
