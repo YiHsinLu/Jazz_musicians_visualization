@@ -279,7 +279,8 @@ rm(list = ls())
 $$
 Jaccard.c(x,y) = \frac{|x\cap y|+c}{|x\cup y|+c}\;,\;\mbox{for some}\;\;c>0
 $$
--   $x,\;y\in\mathbb{R}^n$
+
+-   $x,\;y\in\mathbb{R}^p$
 -   $|x\cup y|=\#\{x=1\mbox{ or }y=1\}$
 
 ::: footer

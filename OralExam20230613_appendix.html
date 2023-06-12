@@ -5,9 +5,9 @@
 <script src="OralExam20230613_appendix_files/libs/quarto-html/popper.min.js"></script>
 <script src="OralExam20230613_appendix_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="OralExam20230613_appendix_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="OralExam20230613_appendix_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet">
+<link href="OralExam20230613_appendix_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="OralExam20230613_appendix_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.649">
+  <meta name="generator" content="quarto-1.1.189">
 
   <meta name="author" content="Yi-Hsin Lu and C. A. Tsao *">
   <meta name="dcterms.date" content="2023-06-13">
@@ -20,10 +20,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="OralExam20230613_appendix_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="OralExam20230613_appendix_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -316,8 +321,16 @@
       margin-right: 0; 
     }
   </style>
+  <script src="OralExam20230613_appendix_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+  <script src="OralExam20230613_appendix_files/libs/plotly-binding-4.10.0/plotly.js"></script>
+  <script src="OralExam20230613_appendix_files/libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="OralExam20230613_appendix_files/libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="OralExam20230613_appendix_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+  <script src="OralExam20230613_appendix_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+  <link href="OralExam20230613_appendix_files/libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+  <script src="OralExam20230613_appendix_files/libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 </head>
-<body>
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
@@ -452,8 +465,7 @@ d(x,z)\leq d(x,y)+d(y,z)
 \]</span></p>
 <p><span class="math display">\[
 \Rightarrow 1- Jaccard(x,z) \leq 1-Jaccard(x,y)+1-Jaccard(y,z)
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 \Rightarrow 1- Jaccard(x,z) \leq 2-Jaccard(x,y)+Jaccard(y,z)
 \]</span></p>
 <p><span class="math display">\[
@@ -465,6 +477,20 @@ d(x,z)\leq d(x,y)+d(y,z)
 <p><span class="math display">\[
 {}_\cdot{}^\cdot{}_\cdot\;\mbox{Triangle Inequality holds}.
 \]</span></p>
+</section></section>
+<section>
+<section id="other-visualization-methods" class="title-slide slide level1 center">
+<h1>Other visualization Methods</h1>
+
+</section>
+<section id="isomap" class="slide level2">
+<h2>Isomap</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-31133997cac4570be406" style="width:960px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-31133997cac4570be406">{"x":{"visdat":{"4d6c4da56cb4":["function () ","plotlyVisDat"]},"cur_data":"4d6c4da56cb4","attrs":{"4d6c4da56cb4":{"x":{},"y":{},"marker":{"color":["#00FFFF","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#97972F","#00FFFF","#80804B","#5EFF39","#FF00FF","#FF00FF","#00FFFF","#8D398D","#FF8022","#FF00FF","#FFFF00","#80804B","#2F6CFF","#FF00FF","#4B4BFF","#FF2777","#FFFF00","#FF00FF","#6C974B","#FFFF00","#6C6C6C","#FF00FF","#804B80","#8D398D","#FF9716","#8022FF","#FF4B4B","#6C2FFF","#5E39FF","#8DFF1B","#FFFF00","#FFFF00","#6CFF2F","#FF4B4B","#FF6C2F","#00FFFF","#4BFF4B","#6C2FFF","#8D1BFF","#00FFFF","#6C2FFF","#4B4BFF","#FF00FF","#FF00FF","#FFFF00","#FF00FF","#FFFF00","#9F279F","#6CFF2F","#00FFFF","#FF00FF","#FF4B4B","#4B4BFF","#4B4BFF","#00FFFF","#FFFF00","#8022FF","#6C6C6C","#FF00FF","#6CFF2F","#4B4BFF","#FFFF00","#FFFF00","#4B4BFF","#00FFFF","#FFFF00","#FF00FF","#00FFFF","#FF4B4B","#FF2F6C","#FF00FF","#FF00FF","#FF00FF","#FFFF00","#FF00FF","#00FFFF","#FFFF00","#FF6C2F","#4BFF4B","#FF00FF","#FF00FF","#FF00FF","#FF2280","#8DFF1B","#00FFFF","#FFFF00","#FF2F6C","#FF00FF","#FF4B4B","#FF00FF","#FFFF00","#00FFFF","#395EFF","#FF00FF","#FF6C2F","#FF00FF","#FFFF00","#2FFF6C","#FF00FF","#FF00FF","#2F6CFF","#00FFFF","#FF00FF","#779F3E","#FF00FF","#FF00FF","#6C4B97","#FF4B4B","#00FFFF","#FFFF00","#FF00FF","#5EFF39","#FF00FF","#FF2280","#FF6C2F","#FF00FF","#FFFF00","#FFFF00","#FF2F6C","#FFFF00","#6C2FFF","#FFFF00","#6C2FFF","#00FFFF","#FF2280","#4B4BFF","#4B4BFF","#6C6C6C","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#804B80","#4BFF4B","#8D1BFF","#FF6C2F","#FF00FF","#6C4B97","#FF4B4B","#6C2FFF","#FF00FF","#FF00FF","#97FF16","#9F773E","#00FFFF","#FFFF00","#FF00FF","#FFFF00","#00FFFF","#FF00FF","#97FF16","#FF2F6C","#FF00FF","#FF00FF","#4B4BFF","#8022FF","#4BFF4B","#6C2FFF","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#FF2280","#6C2FFF","#6C2FFF","#FF00FF","#FF00FF","#FF00FF","#FFFF00","#FF00FF","#FF00FF","#FF00FF","#1B8DFF","#FF00FF","#FFFF00","#FF00FF","#FF4B4B","#FF00FF","#FF00FF","#6C41AA","#00FFFF","#80FF22","#FFFF00","#FF00FF","#FF00FF","#FF00FF","#FFFF00","#FFFF00","#6C2FFF","#4BFF4B","#FF00FF","#4BFF4B","#FF00FF","#FF00FF","#4B4BFF","#FF00FF","#4B4BFF","#FF00FF","#4B4BFF","#FF00FF","#2F6CFF","#5E39FF","#FFFF00","#FF00FF","#2280FF","#FFFF00","#FF00FF","#FF00FF","#4B4BFF","#FF00FF","#FF00FF","#00FFFF","#00FFFF","#FF2F6C","#FF00FF","#FF00FF","#00FFFF","#4BFF4B","#804B80","#80A535","#FF00FF","#FFFF00"]},"text":["Ahmed_Abdul_Malik","Benny_Golson","Joe_Henderson","Arturo_Sandoval","Joe_Morris_(trumpeter)","Kenny_Garrett","Frank_Lloyd_(horn_player)","Esperanza_Spalding","Art_Blakey","Sting_(musician)","Karriem_Riggins","Charlie_Barnet","Wayne_Shorter","Shannon_Powell","Mulgrew_Miller","Frank_McComb","Clifford_Brown","Veronica_Swift","Buster_Williams","Elvin_Jones","Maynard_Ferguson","Lionel_Hampton","Count_Basie","Lenny_Kravitz","Victor_Goines","Eric_Clapton","Dianne_Reeves","Terri_Lyne_Carrington","Alexa_Tarantino","Charlie_Haden","Larry_Willis","Gary_Numan","Lee_Morgan","Kevin_Eubanks","Horace_Silver","The_Clayton_Brothers","Gary_Moore","Buddy_Guy","Jackson_Browne","Willie_Nelson","Ray_Charles","Randy_Sandke","Ray_Mantilla","Rodney_Whitaker","Jack_DeJohnette","Duke_Ellington","Winard_Harper","Charles_Mingus","Kenny_Kirkland","Terence_Blanchard","Paul_Bley","Jann_Arden","Richard_Johnson_(pianist)","Flora_Purim","James_Morrison_(jazz_musician)","Keb'_Mo'","Mousey_Alexander","Benny_Green_(pianist)","Natalie_Cressman","Al_Foster","Tony_Williams_(drummer)","Reggie_Workman","Betty_Carter","Saskia_Laroo","Eric_Revis","Oliver_Jones_(pianist)","Dee_Dee_Bridgewater","Robert_M._Rucker","Nine_Inch_Nails","Germaine_Bazzle","Bo_Stief","Doug_Watkins","Jeff_Beck","Jackie_McLean","Bob_Cranshaw","Woody_Herman","Donald_Byrd","Harry_Sokal_(musician)","McCoy_Tyner","Candy_Dulfer","Andreas_Varady","Freddie_Hubbard","Randy_Gelispie","Peter_Bernstein_(guitarist)","Quincy_Jones","Dwayne_Dolphin","Igor_Butman","Don_Friedman","Joshua_Redman","Roy_Hargrove","Paul_Young","Richard_Davis_(bassist)","Orrin_Keepnews","Dizzy_Gillespie","Eddie_Harris","Kenny_Dorham","Oscar_Peterson","B.B._King","Ben_Wolfe","Chick_Corea","Don_Pullen","Bonnie_Raitt","Bobby_Watson","Ed_Cherney","Solomon_Ilori","Darren_Barrett","Hank_Mobley","Percy_Heath","Lewis_Nash","Oliver_Nelson","Richard_Ashcroft","Blue_Mitchell","Joey_Calderazzo","Dayna_Stephens","Grover_Washington_Jr.","Willie_Jones_III","Anton_Kwiatkowski","Wycliffe_Gordon","John_Mayer_Trio","Vincent_Herring","Camille_Thurman","Roman_Miroshnichenko","Aaron_Goldberg","John_Mayer","Vanessa_Rubin","Nat_Adderley","Dr._John","Paul_Chambers","Stevie_Wonder","Billy_Taylor","Tommy_Campbell_(musician)","Clark_Terry","Wessell_Anderson","George_Mraz","Rickey_Minor","Andrew_Hill_(jazz_musician)","Robert_Stewart_(saxophonist)","Art_Pepper","Carla_Bley","Donald_Brown_(musician)","Reuben_Rogers","Yusef_Lateef","Eric_Lewis_(pianist)","Wallace_Roney","Herbie_Hancock","John_Scofield","Johnny_Griffin","Branford_Marsalis","Bobby_Timmons","Don_Henley","Magos_Herrera","Billy_Higgins","Bob_Dylan","Sean_Jones_(trumpeter)","Bee_Gees","Jason_Marsalis","Bill_Graham_(musician)","Raphael_Saadiq","Justin_Kauflin","J._J._Johnson","Keith_Jarrett","Bill_Dowdy","Philip_Harper_(trumpeter)","Ron_Carter","Ben_Wendel","Curtis_Fuller","Bob_Brookmeyer","Erica_von_Kleist","Johnny_Helms","Hugh_Masekela","Paul_Murphy_(musician)","Marcus_Strickland","Stanley_Turrentine","Radovan_Tariska","Booker_Little","Mary_J._Blige","Thelonious_Monk","Wynton_Marsalis","Roger_Ingram","John_Gilmore_(musician)","Hans_Dulfer","Iggy_Pop","Charles_Williams_(musician)","Javon_Jackson","Zach_Brock","Marcus_Roberts","Miles_Davis","Milt_Hinton","Pino_Palladino","Kurt_Rosenwinkel","Ambrose_Akinmusire","Darcy_James_Argue","Arturo_O'Farrill","Ximo_Tebar","Maurice_Hines","Cedar_Walton","The_Rolling_Stones","Jean_Toussaint","Robert_Hurst_(musician)","Pharoah_Sanders","Woody_Shaw","Ali_Jackson_(jazz_drummer)","Lalo_Schifrin","Joe_Temperley","Mark_Turner_(musician)","Sherrie_Maricle","Sullivan_Fortner","Yacub_Addy","Charles_Lloyd_(jazz_musician)","Chalmers_Alford","Thomas_Clausen_(musician)","The_Soultronics","Toots_Thielemans","Fred_Wesley","SFJAZZ_Collective","Herlin_Riley","Gerald_Clayton","Jacky_Terrasson","Cameron_Brown_(musician)","Roger_Humphries","Harry_Connick_Jr.","Milt_Jackson","Ellis_Marsalis_Jr.","Damion_Reid","Ali_Shaheed_Muhammad","Grant_Green","D'Angelo","Bud_Powell","Joss_Stone"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"iso1"},"yaxis":{"domain":[0,1],"automargin":true,"title":"iso2"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[0.119179636191326,-1.11335882424951,0.0458368174772592,-0.617912225216962,-0.306548978517671,-0.343852286476951,0.566704242952846,-0.454958209039345,0.0367912409317761,1.0778013965546,0.00398886703952135,-1.1695585185779,-0.332354740842534,0.535870046474701,0.394973240738736,-0.503836732102512,0.507885933401471,0.955882346317648,-0.844332677723583,0.206344914790793,-0.370985569984519,0.0623495175470414,0.489477451977501,0.668765086010016,-0.743195127120013,0.563330146029217,0.319471729031239,-0.602434134729767,-0.297861841817317,0.0349069308407434,0.320263519525285,0.281993831990346,-1.03712206745127,0.051525959647619,0.735682520673176,0.927942886970571,-1.22757566632981,-0.510898745671101,0.604184472944298,0.44212887969328,0.725441041112966,0.368459887963395,0.156097426946755,0.500996442601733,0.0696576118569518,-0.892633708926766,0.535483865993286,0.266578653057233,0.386277371690162,-0.360693382647145,0.45087200178237,0.292308341324458,-0.485448370287584,0.591368120560288,1.21494975384608,-0.939410887012944,0.543430379064369,0.214999691115996,0.628258851065649,0.442790397365462,-0.224350558458007,-0.150178128395295,-0.194647052003243,-0.379728380725601,0.111094951200717,0.0743353990691502,0.584891428134233,-0.674069863393063,0.505414338016456,0.842462787486752,0.200514107664785,0.11583924075073,-0.504548007485363,-0.432489811017097,0.17383069319714,0.209251957510444,-0.156071095929613,0.423627552402089,-0.648004608108251,-0.144167093420181,0.0258564824143077,0.19311446035787,0.619723032010318,0.22571668191529,-0.264546351203269,0.286424048312409,0.584440461606001,0.220418001420783,-0.356566918196645,-0.0468723260650506,-1.14309388207298,0.192578630896607,0.702422881250332,-0.0309981951484329,-0.92371023908856,-0.100436562055459,-0.0291097001814238,-0.790316404543498,0.373447482413087,-0.533612107925946,-0.479270110229546,-0.495815507912692,-0.964857449152654,0.842462787486752,0.374328534157391,-0.606615002035611,-0.496225658762969,-0.410354711894569,0.535992562727883,-0.722288928988886,0.371585368516721,-0.982263406273927,-0.0218250766263083,0.235713796752875,-0.284228272895641,0.535460186098535,0.706744508076968,0.302142235358078,-0.780925742976554,0.18398867390759,0.174083841711715,-0.201927413122955,0.0651017851448054,0.325759275117951,0.915249895027796,-0.0607948939516122,0.0908645315914892,-0.143320871901056,0.389260495983084,-0.264954604340791,0.607878499501271,-0.322991722970486,0.439951154062716,0.237890984700867,-0.485466452699688,-0.144230480244976,0.0137363138688484,-0.335094303572901,-0.476126605297145,0.417666541525553,0.493806433739398,0.50760351475098,-0.274962152380729,0.282258568717028,0.54498175111345,-0.265301138304571,0.553881223050279,-0.439319342274443,0.142972630400542,-0.110038576543145,-0.181181461942422,0.60787849950127,0.587686422877695,-0.0654330374750765,0.604535071274329,0.607512407809764,0.284763681277868,0.253719229103814,-0.0772435724117798,-0.413262157484069,-0.285941453452757,0.634873509044627,-0.351836725572734,0.279886647933414,0.0439741609541001,0.311420265402486,-0.811777218747492,0.230493087184828,-0.320444891309254,0.294033149645429,-0.720894799681272,-0.380716458918411,-0.608198016476228,-1.08113276662224,-0.655048351747274,0.798982982912695,-0.0973847101050111,-0.354857867906453,-0.704586550678949,-0.136151867652446,-0.223723394716083,0.389260495983084,0.470476112420336,0.282553924803035,-0.199543690977294,-0.79609767970268,0.638173602755139,-0.10452475142783,-0.482575107636857,0.157969838363819,-0.143022533316849,-0.213829253281548,-0.558023527525704,0.810877809666028,0.372383527587932,-1.01136317751627,-1.13388622550315,-0.507222266110783,0.439951154062716,-0.99448768038753,-0.387280269565938,-0.568791849813105,-0.27015967081365,0.196948894606637,0.195712664104614,0.624042578996819,0.0274985795934369,0.331912925520305,0.39706551788277,-0.61032256559936,-0.531474849282058,-0.195445083296214,0.784353329352629,0.0518844601707493,-0.0686314981806696,0.723017099840394,-0.160962036350909,-0.521838451697261,0.173830693197141,0.60787849950127,0.189438244893153,0.45017250580283,0.235864365885225,0.627873964443965,-0.398694589536212,0.163443072506756,-0.532103746956674,-1.04219617748327,0.373615249276447],"y":[0.965682820634159,0.0128916918759506,0.38240140428659,-0.256758014683989,-0.263646651926229,-0.786799734488261,0.619714799719864,0.123170589200995,-0.207299849001516,0.426941693306681,-0.527586682718425,-0.00288107617575916,-0.190941573851783,-0.351552062867432,0.413118206743956,-0.275439062976339,0.499575232124261,-0.460935429670448,-0.237010029305696,0.424847389055279,0.300406322236602,1.05651935969013,0.614034228235631,-0.00302393219066059,-0.452139902138359,-0.0145536306515204,-0.490451105683393,0.802513384706587,0.569435723560142,-0.388365474006185,-0.194401856796642,0.695869286133984,-0.0235211457968867,-0.410857739273227,-0.479420607360274,-0.281892035206294,0.214723550956393,0.640559643418675,-0.328622315884899,-0.187611828205214,-0.17660083521167,0.405612715477744,-0.26391402523426,-0.505763948535243,0.0530409260933273,0.537210696324785,-0.432404077926329,0.208160282664616,0.997985592457139,-0.239066917459936,0.825257398076173,-0.132081748537771,-0.608830939976167,-0.285512138156831,0.404341452002308,-0.171511536482992,0.580067047079718,0.852332039450559,-0.571862042222383,0.510901008896779,0.805457242703062,0.432107510626763,0.264471410626215,0.787770209783439,-0.350374540621519,-0.71355584427925,0.597796294066463,0.533351992748362,0.00251655853249565,-0.0816695446861096,0.250362515333063,0.954883244462889,-0.393185845235343,-0.526292056136593,0.949374161830237,-0.00538420398999238,-0.46489251206884,-0.263920499697767,0.136206315079496,-0.595918516578927,-0.239426255903567,-0.645442597637388,0.495362908161608,-0.412111356385877,0.428173749501663,-0.641685071590852,0.0012763578900911,0.828370824968904,0.528767369749496,-0.393167639959962,0.325713325885648,1.02028239794532,-0.216748680978711,-0.558649721064518,-0.251057633831215,-0.468893458038447,-0.138185507887898,0.0659763941193817,-0.0270794362820987,-0.478446954388446,0.744976030233388,0.114529702020906,0.494035956576353,-0.0816695446861096,-0.154771852244665,-0.28956341004107,0.440417039442973,-0.415549333102359,-0.356074373759619,0.366776301840537,0.165072652517476,-0.0457917872497524,-0.826905036661018,-0.00925154208503999,0.152489637579046,-0.429933378714756,-0.287499449902938,0.14351396751607,-0.109478178188909,-0.30108126419031,-0.436791538733032,0.0933881294092449,0.035045925116443,-0.114732900160061,-0.487697293039644,-0.724075035732839,-0.317368815211904,0.662111252168026,-0.0781306271385988,-0.0536641283654803,0.855693951173025,-0.656642435948656,-0.244404216187213,0.573824121097134,0.760006173024263,-0.266610746806498,-0.495607071624921,0.121019184779137,0.455793147739095,0.468507804253913,-0.577292911444422,-0.196596920750171,-0.318064229124241,-0.394183401133854,0.015328810556855,0.0752765388405818,0.60405610888157,-0.258004670872606,-0.172056433811948,0.413101603450183,0.666997309365094,0.855693951173025,-0.309675954707073,-0.739911974264548,-0.0603879629507075,0.780420168607671,0.71936465798177,0.181103095092202,-0.521232890144442,-0.522688214699609,0.199487544852344,0.555021935950966,0.813516668217754,-0.00485640153715912,0.578887434258027,-0.784741490181707,0.48235198999896,0.247036893233214,0.103129753742054,-0.387498641880527,0.189549368111979,-0.156036766810801,-0.220534511402827,-0.0412992013267706,0.390194387934591,-0.595956822776998,-0.113054119817289,-0.239776439714927,-0.115077911542933,-0.213370719519241,-0.543079686875353,-0.0781306271385989,-0.477280944075622,-0.660886286120518,0.393789202524794,-0.14714567733021,-0.468866965696408,-0.359254353022094,-0.131958896985716,-0.378711215905371,-0.251693603928761,-0.757086170011844,-0.637629867292254,-0.135018808754892,-0.830060775522376,-0.0243148817337299,0.324402168345688,-0.741793520518363,-0.244404216187213,-0.0540384186802608,-0.193300482639739,-0.294475410395194,0.160149877840778,0.649550096218526,-0.668068089263033,0.549315407567625,-0.565172777537854,-0.30070408281658,-0.182580363309885,0.296564556167716,0.19565487298874,0.681811435788156,0.077194185123719,-0.505012600087612,-0.74558637812451,0.0498497659736516,0.249194097361243,-0.629152577161978,0.949374161830237,0.855693951173024,-0.0090382009718703,0.84414813469812,0.0747424688507678,-0.114360006055899,-0.417253780944937,-0.194454628426082,0.0427970168171921,-0.0324127212336806,-0.489618471644513],"marker":{"color":["#00FFFF","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#97972F","#00FFFF","#80804B","#5EFF39","#FF00FF","#FF00FF","#00FFFF","#8D398D","#FF8022","#FF00FF","#FFFF00","#80804B","#2F6CFF","#FF00FF","#4B4BFF","#FF2777","#FFFF00","#FF00FF","#6C974B","#FFFF00","#6C6C6C","#FF00FF","#804B80","#8D398D","#FF9716","#8022FF","#FF4B4B","#6C2FFF","#5E39FF","#8DFF1B","#FFFF00","#FFFF00","#6CFF2F","#FF4B4B","#FF6C2F","#00FFFF","#4BFF4B","#6C2FFF","#8D1BFF","#00FFFF","#6C2FFF","#4B4BFF","#FF00FF","#FF00FF","#FFFF00","#FF00FF","#FFFF00","#9F279F","#6CFF2F","#00FFFF","#FF00FF","#FF4B4B","#4B4BFF","#4B4BFF","#00FFFF","#FFFF00","#8022FF","#6C6C6C","#FF00FF","#6CFF2F","#4B4BFF","#FFFF00","#FFFF00","#4B4BFF","#00FFFF","#FFFF00","#FF00FF","#00FFFF","#FF4B4B","#FF2F6C","#FF00FF","#FF00FF","#FF00FF","#FFFF00","#FF00FF","#00FFFF","#FFFF00","#FF6C2F","#4BFF4B","#FF00FF","#FF00FF","#FF00FF","#FF2280","#8DFF1B","#00FFFF","#FFFF00","#FF2F6C","#FF00FF","#FF4B4B","#FF00FF","#FFFF00","#00FFFF","#395EFF","#FF00FF","#FF6C2F","#FF00FF","#FFFF00","#2FFF6C","#FF00FF","#FF00FF","#2F6CFF","#00FFFF","#FF00FF","#779F3E","#FF00FF","#FF00FF","#6C4B97","#FF4B4B","#00FFFF","#FFFF00","#FF00FF","#5EFF39","#FF00FF","#FF2280","#FF6C2F","#FF00FF","#FFFF00","#FFFF00","#FF2F6C","#FFFF00","#6C2FFF","#FFFF00","#6C2FFF","#00FFFF","#FF2280","#4B4BFF","#4B4BFF","#6C6C6C","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#804B80","#4BFF4B","#8D1BFF","#FF6C2F","#FF00FF","#6C4B97","#FF4B4B","#6C2FFF","#FF00FF","#FF00FF","#97FF16","#9F773E","#00FFFF","#FFFF00","#FF00FF","#FFFF00","#00FFFF","#FF00FF","#97FF16","#FF2F6C","#FF00FF","#FF00FF","#4B4BFF","#8022FF","#4BFF4B","#6C2FFF","#FF00FF","#FF00FF","#FF00FF","#FF00FF","#FF2280","#6C2FFF","#6C2FFF","#FF00FF","#FF00FF","#FF00FF","#FFFF00","#FF00FF","#FF00FF","#FF00FF","#1B8DFF","#FF00FF","#FFFF00","#FF00FF","#FF4B4B","#FF00FF","#FF00FF","#6C41AA","#00FFFF","#80FF22","#FFFF00","#FF00FF","#FF00FF","#FF00FF","#FFFF00","#FFFF00","#6C2FFF","#4BFF4B","#FF00FF","#4BFF4B","#FF00FF","#FF00FF","#4B4BFF","#FF00FF","#4B4BFF","#FF00FF","#4B4BFF","#FF00FF","#2F6CFF","#5E39FF","#FFFF00","#FF00FF","#2280FF","#FFFF00","#FF00FF","#FF00FF","#4B4BFF","#FF00FF","#FF00FF","#00FFFF","#00FFFF","#FF2F6C","#FF00FF","#FF00FF","#00FFFF","#4BFF4B","#804B80","#80A535","#FF00FF","#FFFF00"],"line":{"color":"rgba(31,119,180,1)"}},"text":["Ahmed_Abdul_Malik","Benny_Golson","Joe_Henderson","Arturo_Sandoval","Joe_Morris_(trumpeter)","Kenny_Garrett","Frank_Lloyd_(horn_player)","Esperanza_Spalding","Art_Blakey","Sting_(musician)","Karriem_Riggins","Charlie_Barnet","Wayne_Shorter","Shannon_Powell","Mulgrew_Miller","Frank_McComb","Clifford_Brown","Veronica_Swift","Buster_Williams","Elvin_Jones","Maynard_Ferguson","Lionel_Hampton","Count_Basie","Lenny_Kravitz","Victor_Goines","Eric_Clapton","Dianne_Reeves","Terri_Lyne_Carrington","Alexa_Tarantino","Charlie_Haden","Larry_Willis","Gary_Numan","Lee_Morgan","Kevin_Eubanks","Horace_Silver","The_Clayton_Brothers","Gary_Moore","Buddy_Guy","Jackson_Browne","Willie_Nelson","Ray_Charles","Randy_Sandke","Ray_Mantilla","Rodney_Whitaker","Jack_DeJohnette","Duke_Ellington","Winard_Harper","Charles_Mingus","Kenny_Kirkland","Terence_Blanchard","Paul_Bley","Jann_Arden","Richard_Johnson_(pianist)","Flora_Purim","James_Morrison_(jazz_musician)","Keb'_Mo'","Mousey_Alexander","Benny_Green_(pianist)","Natalie_Cressman","Al_Foster","Tony_Williams_(drummer)","Reggie_Workman","Betty_Carter","Saskia_Laroo","Eric_Revis","Oliver_Jones_(pianist)","Dee_Dee_Bridgewater","Robert_M._Rucker","Nine_Inch_Nails","Germaine_Bazzle","Bo_Stief","Doug_Watkins","Jeff_Beck","Jackie_McLean","Bob_Cranshaw","Woody_Herman","Donald_Byrd","Harry_Sokal_(musician)","McCoy_Tyner","Candy_Dulfer","Andreas_Varady","Freddie_Hubbard","Randy_Gelispie","Peter_Bernstein_(guitarist)","Quincy_Jones","Dwayne_Dolphin","Igor_Butman","Don_Friedman","Joshua_Redman","Roy_Hargrove","Paul_Young","Richard_Davis_(bassist)","Orrin_Keepnews","Dizzy_Gillespie","Eddie_Harris","Kenny_Dorham","Oscar_Peterson","B.B._King","Ben_Wolfe","Chick_Corea","Don_Pullen","Bonnie_Raitt","Bobby_Watson","Ed_Cherney","Solomon_Ilori","Darren_Barrett","Hank_Mobley","Percy_Heath","Lewis_Nash","Oliver_Nelson","Richard_Ashcroft","Blue_Mitchell","Joey_Calderazzo","Dayna_Stephens","Grover_Washington_Jr.","Willie_Jones_III","Anton_Kwiatkowski","Wycliffe_Gordon","John_Mayer_Trio","Vincent_Herring","Camille_Thurman","Roman_Miroshnichenko","Aaron_Goldberg","John_Mayer","Vanessa_Rubin","Nat_Adderley","Dr._John","Paul_Chambers","Stevie_Wonder","Billy_Taylor","Tommy_Campbell_(musician)","Clark_Terry","Wessell_Anderson","George_Mraz","Rickey_Minor","Andrew_Hill_(jazz_musician)","Robert_Stewart_(saxophonist)","Art_Pepper","Carla_Bley","Donald_Brown_(musician)","Reuben_Rogers","Yusef_Lateef","Eric_Lewis_(pianist)","Wallace_Roney","Herbie_Hancock","John_Scofield","Johnny_Griffin","Branford_Marsalis","Bobby_Timmons","Don_Henley","Magos_Herrera","Billy_Higgins","Bob_Dylan","Sean_Jones_(trumpeter)","Bee_Gees","Jason_Marsalis","Bill_Graham_(musician)","Raphael_Saadiq","Justin_Kauflin","J._J._Johnson","Keith_Jarrett","Bill_Dowdy","Philip_Harper_(trumpeter)","Ron_Carter","Ben_Wendel","Curtis_Fuller","Bob_Brookmeyer","Erica_von_Kleist","Johnny_Helms","Hugh_Masekela","Paul_Murphy_(musician)","Marcus_Strickland","Stanley_Turrentine","Radovan_Tariska","Booker_Little","Mary_J._Blige","Thelonious_Monk","Wynton_Marsalis","Roger_Ingram","John_Gilmore_(musician)","Hans_Dulfer","Iggy_Pop","Charles_Williams_(musician)","Javon_Jackson","Zach_Brock","Marcus_Roberts","Miles_Davis","Milt_Hinton","Pino_Palladino","Kurt_Rosenwinkel","Ambrose_Akinmusire","Darcy_James_Argue","Arturo_O'Farrill","Ximo_Tebar","Maurice_Hines","Cedar_Walton","The_Rolling_Stones","Jean_Toussaint","Robert_Hurst_(musician)","Pharoah_Sanders","Woody_Shaw","Ali_Jackson_(jazz_drummer)","Lalo_Schifrin","Joe_Temperley","Mark_Turner_(musician)","Sherrie_Maricle","Sullivan_Fortner","Yacub_Addy","Charles_Lloyd_(jazz_musician)","Chalmers_Alford","Thomas_Clausen_(musician)","The_Soultronics","Toots_Thielemans","Fred_Wesley","SFJAZZ_Collective","Herlin_Riley","Gerald_Clayton","Jacky_Terrasson","Cameron_Brown_(musician)","Roger_Humphries","Harry_Connick_Jr.","Milt_Jackson","Ellis_Marsalis_Jr.","Damion_Reid","Ali_Shaheed_Muhammad","Grant_Green","D'Angelo","Bud_Powell","Joss_Stone"],"type":"scatter","mode":"markers","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
 <div class="footer footer-default">
 
 </div>
@@ -682,8 +708,68 @@ d(x,z)\leq d(x,y)+d(y,z)
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
@@ -732,7 +818,8 @@ d(x,z)\leq d(x,y)+d(y,z)
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);

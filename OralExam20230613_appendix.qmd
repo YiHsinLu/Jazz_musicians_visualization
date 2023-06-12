@@ -122,3 +122,13 @@ $$
 $$
 {}_\cdot{}^\cdot{}_\cdot\;\mbox{Triangle Inequality holds}.
 $$
+
+# Other visualization Methods
+
+## Isomap
+
+```{r}
+library(plotly)
+load("D:/jazz_visual/defence_data/isomap.RData")
+visualiso_inst_plotly
+```
