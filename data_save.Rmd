@@ -1,7 +1,7 @@
 ```{r}
 ins = read.csv("csv/matrix_instrument.csv", header = T, row.names = 1)
 gen = read.csv("csv/matrix_genre1hp.csv", header = T, row.names = 1)
-act = read.csv("csv/matrix_yearsActive.csv", header = T, row.names = 1, check.names=FALSE)
+act = read.csv("csv/matrix_yearsActive_i.csv", header = T, row.names = 1, check.names=FALSE)
 num = read.csv("csv/matrix_yearsActive_len.csv", header = T, row.names = 1, check.names=FALSE)
 mid = read.csv("csv/matrix_yearsActive_mid.csv", header = T, row.names = 1, check.names=FALSE)
 ```
@@ -81,81 +81,124 @@ jaccard.c = function (x, y, c=0, center = FALSE, px = NULL, py = NULL)
 ```
 
 ```{r}
-ins_aff = dis_jac.c(ins, C=1)
-gen_aff = dis_jac.c(gen, C=1)
-act_aff = dis_jac.c(act, C=1)
-num_aff = dis_jac.c(num, C=1)
-mid_aff = dis_jac.c(mid, C=1)
+ins_aff = dis_jac.c(ins, C=1)%>%
+  mutate(across(where(is.numeric), .fns = function(x) {format(round(x, 2), nsmall = 2)}))
+gen_aff = dis_jac.c(gen, C=1)%>%
+  mutate(across(where(is.numeric), .fns = function(x) {format(round(x, 2), nsmall = 2)}))
+act_aff = dis_jac.c(act, C=1)%>%
+  mutate(across(where(is.numeric), .fns = function(x) {format(round(x, 2), nsmall = 2)}))
+num_aff = dis_jac.c(num, C=1)%>%
+  mutate(across(where(is.numeric), .fns = function(x) {format(round(x, 2), nsmall = 2)}))
+mid_aff = dis_jac.c(mid, C=1)%>%
+  mutate(across(where(is.numeric), .fns = function(x) {format(round(x, 2), nsmall = 2)}))
 ```
 
 ```{r}
-kbl(ins_aff,align = "l", row.names = T) %>%
-  kable_paper("striped", full_width = T)%>%
-  scroll_box(width = "1000px", height = "500px")%>%
+diag(ins_aff) = 1
+diag(gen_aff) = 1
+diag(act_aff) = 1
+diag(num_aff) = 1
+diag(mid_aff) = 1
+```
+
+```{r}
+ins_aff[ins_aff >= 1] = "1"
+gen_aff[gen_aff >= 1] = "1"
+act_aff[act_aff >= 1] = "1"
+num_aff[num_aff >= 1] = "1"
+mid_aff[mid_aff >= 1] = "1"
+```
+
+```{r}
+kbl(ins_aff[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187)]) %>%
+  row_spec(1:10, color = "black")%>%
+  scroll_box(width = "1000px", height = "700px")%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 14)
 ```
+
+```{r}
+kbl(ins_aff[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187)]) %>%
+  row_spec(0, angle = -45)%>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
+  kable_styling(font_size = 24)
+```
+
+
 ```{r}
 ins = kbl(ins[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
-  kable_paper("striped") %>%
-  scroll_box(width = "1100px")%>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 20)
 
 
 gen = kbl(gen[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
-  kable_paper("striped") %>%
-  scroll_box(width = "1100px")%>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 20)
 
 
-act = kbl(act[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
-  kable_paper("striped") %>%
-  scroll_box(width = "1100px")%>%
+act = kbl(act[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),])%>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 20)
 
 
 num = kbl(num[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
-  kable_paper("striped") %>%
-  scroll_box(width = "1100px")%>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 20)
 
 
 mid = kbl(mid[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),]) %>%
-  kable_paper("striped") %>%
-  scroll_box(width = "1100px")%>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 20)
 ```
+
 
 
 ```{r}
 
 
-ins_aff = kbl(ins_aff) %>%
-  kable_paper("striped") %>%
-  scroll_box(height = "500px")%>%
+ins_aff = kbl(ins_aff[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187)]) %>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 20)
 
 
-gen_aff = kbl(gen_aff) %>%
-  kable_paper("striped") %>%
-  scroll_box(height = "500px")%>%
+gen_aff = kbl(gen_aff[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187)]) %>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
+  kable_styling(font_size = 20)
+
+act_aff = kbl(act_aff[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187)])%>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 20)
 
 
-act_aff = kbl(act_aff) %>%
-  kable_paper("striped") %>%
-  scroll_box(height = "500px")%>%
+num_aff = kbl(num_aff[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187)]) %>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 20)
 
 
-num_aff = kbl(num_aff) %>%
-  kable_paper("striped") %>%
-  scroll_box(height = "500px")%>%
-  kable_styling(font_size = 20)
-
-
-mid_aff = kbl(mid_aff) %>%
-  kable_paper("striped") %>%
-  scroll_box(height = "500px")%>%
+mid_aff = kbl(mid_aff[c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187),c(178, 148, 156, 223, 90, 9, 160, 132, 94, 187)]) %>%
+  row_spec(1:10, bold = T)%>%
+  column_spec(1:10, bold = T)%>%
+  kable_paper("striped", full_width = F) %>%
   kable_styling(font_size = 20)
 ```
 
