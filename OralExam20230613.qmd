@@ -107,7 +107,7 @@ first_map
 
 ## Instruments
 
-![](fig/main_plot/tsne_inst.png){.absolute .fragment top="95" right="45" width="1000"}
+![](fig/main_plot/tsne_inst1.png){.absolute .fragment top="96.5" left="9.5" width="970"}
 
 ## Instruments {.smaller .scrollable}
 
@@ -117,7 +117,7 @@ visualTsne_plot.instc
 
 ## Genres
 
-![](fig/main_plot/pca_gen.png){.absolute .fragment top="95" right="90" width="960"}
+![](fig/main_plot/pca_gen1.png){.absolute .fragment top="99" left="11" width="942"}
 
 ## Genres {.smaller .scrollable}
 
@@ -143,7 +143,7 @@ rm(list = ls())
 
 :::{.scrolling}
 ![](fig/LinkedJazz_229.jpg){width=100%}
-![](fig/main_plot/4PCA_instruments_color.png){width=100%}
+![](fig/main_plot/tsne_inst1.png){width=100%}
 :::
 
 # Methods
@@ -441,9 +441,37 @@ rm(list = ls())
 
 :::
 
-## Recap
+## Recap {.smaller}
 
-![](fig/main_plot/tsne_inst.png){.absolute .fragment top="100" right="50" width="1200"}
+::: panel-tabset
+
+### Instrumens
+
+![](fig/main_plot/tsne_inst1.png)
+
+### Genres
+
+![](fig/main_plot/pca_gen1.png)
+
+### Number
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
+load("defence_data/4JazzMaps.RData")
+```
+
+```{r echo=FALSE}
+visualTsne_plot.ysalenc
+```
+
+### Middle
+
+```{r echo=FALSE}
+visualTsne_plot.ysamidc
+rm(list = ls())
+```
+
+:::
 
 # Conclusions
 
