@@ -1,0 +1,61 @@
+```{r}
+M_genre = read.csv("C:/Yi-Hsin/jazz_visual/csv/matrix_genre1hp.csv", row.names = 1)
+musicians = rownames(M_genre)
+
+M_ysa = read.csv("C:/Yi-Hsin/jazz_visual/csv/matrix_yearsActive_i.csv", row.names = 1)
+M_ysamid = read.csv("C:/Yi-Hsin/jazz_visual/csv/matrix_yearsActive_mid.csv", row.names = 1)
+M_ysalen = read.csv("C:/Yi-Hsin/jazz_visual/csv/matrix_yearsActive_len.csv", row.names = 1)
+M_inst = read.csv("C:/Yi-Hsin/jazz_visual/csv/matrix_instrument.csv", row.names = 1)
+
+# new version
+con=1
+Jacc_ysa = dis_jac.c(M_ysa, C=con)
+Jacc_ysamid = dis_jac.c(M_ysamid, C=con)
+Jacc_ysalen = dis_jac.c(M_ysalen, C=con)
+Jacc_genre = dis_jac.c(M_genre, C=con)
+Jacc_inst = dis_jac.c(M_inst, C=con)
+
+
+con200 = 200
+Jacc_ysa200 = dis_jac.c(M_ysa[c(1:200),], C=con200)
+Jacc_ysamid200 = dis_jac.c(M_ysamid[c(1:200),], C=con200)
+Jacc_ysalen200 = dis_jac.c(M_ysalen[c(1:200),], C=con200)
+Jacc_genre200 = dis_jac.c(M_genre[c(1:200),], C=con200)
+Jacc_inst200 = dis_jac.c(M_inst[c(1:200),], C=con200)
+```
+
+
+
+```{r}
+Jacc_all.inst200 = sqrt(1/22*(0.4*Jacc_ysa200^2+0.3*Jacc_ysamid200^2+0.3*Jacc_ysalen200^2+Jacc_genre200^2+20*Jacc_inst200^2))
+
+Jacc_all.inst = sqrt(0.1*(0.4*Jacc_ysa^2+0.3*Jacc_ysamid^2+0.3*Jacc_ysalen^2+Jacc_genre^2+8*Jacc_inst^2))
+
+```
+
+```{r}
+set.seed(19970608)
+library(Rtsne)
+library(plotly)
+musicians200 = rownames(Jacc_all.inst200)
+musicians = rownames(Jacc_all.inst)
+
+tsne_instc200 = Rtsne(Jacc_all.inst200, check_duplicates = FALSE)
+color_inst200 = read.csv("C:/Yi-Hsin/jazz_visual/csv/color_instclass_sqrt.csv", row.names = 1)[c(1:200), ]
+visualTsne_instc200 = cbind(tsne_instc200$Y, color_inst200$hex)
+colnames(visualTsne_instc200) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_instc200) = musicians200
+visualTsne_instc200 = as.data.frame(visualTsne_instc200)
+visualTsne_instc200 = transform(visualTsne_instc200, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+plot_ly(visualTsne_instc200, x = ~tsne1, y = ~tsne2,marker = list(color = visualTsne_instc200$hex), text = musicians200)
+
+
+tsne_instc = Rtsne(Jacc_all.inst, check_duplicates = FALSE)
+color_inst = read.csv("C:/Yi-Hsin/jazz_visual/csv/color_instclass_sqrt.csv", row.names = 1)
+visualTsne_instc = cbind(tsne_instc$Y, color_inst$hex)
+colnames(visualTsne_instc) = c('tsne1', 'tsne2', 'hex')
+rownames(visualTsne_instc) = musicians
+visualTsne_instc = as.data.frame(visualTsne_instc)
+visualTsne_instc = transform(visualTsne_instc, tsne1 = as.numeric(tsne1), tsne2 = as.numeric(tsne2))
+plot_ly(visualTsne_instc, x = ~tsne1, y = ~tsne2,marker = list(color = visualTsne_instc$hex), text = musicians)
+```
