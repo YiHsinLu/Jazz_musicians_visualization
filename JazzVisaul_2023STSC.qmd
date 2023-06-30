@@ -23,11 +23,19 @@ date: "2023-06-30"
 
 -   **Conclusions**
 
+::: footer
+[Full Presentation](https://yihsinlu.github.io/Jazz.io/OralExam20230613.html)
+:::
+
 ## Introduction
 
 ![](fig/oralExam/visual_jazzmus.png){.absolute .fragment top="0" left="0" width="1600"}
 
 # Jazz Musician Maps
+
+::: footer
+[Jazz Musician Maps](https://yihsinlu.github.io/Jazz.io/JazzMusicianMaps/JazzMusicianMaps.html)
+:::
 
 ## Jazz Musician Map {.smaller .scrollable}
 
@@ -39,6 +47,7 @@ load("defence_data/4JazzMaps.RData")
 ```{r echo=FALSE}
 first_map
 ```
+
 
 ## Instruments
 
@@ -59,27 +68,6 @@ visualTsne_plot.instc
 ```{r echo=FALSE}
 visualpca_plot.genrec%>%layout(plot_bgcolor='lightgray')
 ```
-
-## Number of Active Decades {.smaller .scrollable}
-
-```{r echo=FALSE}
-visualTsne_plot.ysalenc
-```
-
-
-## Middle of Active Years {.smaller .scrollable}
-
-```{r echo=FALSE}
-visualTsne_plot.ysamidc
-rm(list = ls())
-```
-
-## Comparing {.smaller .scrollable}
-
-:::{.scrolling}
-![](fig/LinkedJazz_229.jpg){width=100%}
-![](fig/main_plot/tsne_inst1.png){width=100%}
-:::
 
 # Methods
 
@@ -166,40 +154,12 @@ rm(list = ls())
 
 ![](fig/oralExam/visual.png){width="600"}
 
-
-:::
-
-## Dimension Reduction
-
 -   `PCA`
 -   `t-SNE`
-    -   L. Van der Maaten and G. Hinton (2008)
-    -   Visualizing
 
-::: footer
-[PCA](https://hastie.su.domains/ElemStatLearn/)
-**|**
-[t-SNE](https://lvdmaaten.github.io/tsne/)
 :::
 
 ## Coloring
-
-- Multi-value Variables
-
-## PCA {.smaller .scrollable}
-
-::: panel-tabset
-### Instruments
-
-![](fig/MVCP_PCA/PCA_instg.png){width="80%"}
-
-### Genres
-
-![](fig/MVCP_PCA/PCA_geng.png){width="80%"}
-:::
-
-
-## Tuning {.smaller}
 
 ::: panel-tabset
 
@@ -243,3 +203,11 @@ rm(list = ls())
 # Thank You for Your Attention!
 
 # Q & A
+
+::: {#fig layout-ncol="2"}
+
+![Presentation](fig/QRcode_Rqurto.png)
+
+![GitHub](fig/github.png)
+
+:::
